@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&display=swap");
+
 /*
   THE PLAYER LAB
   File: css/style.css
@@ -186,58 +188,209 @@ button {
 
   gap: 24px;
 }
-.brand-title-row {
+/* ======================================================
+   PLAYER LAB BRAND WORDMARK
+====================================================== */
+
+.brand-lockup {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
+  width: 54px;
+  height: 54px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 44px;
-
-  color: var(--accent-primary);
+  flex: 0 0 54px;
 }
 
-.brand-icon svg {
+.brand-icon img {
   display: block;
 
-  width: 40px !important;
-  height: 40px !important;
+  width: 50px;
+  height: 50px;
 
-  max-width: 40px;
-  max-height: 40px;
-}
-.brand h1 {
-  margin: 0;
-
-  font-size: 1.65rem;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  object-fit: contain;
 }
 
-.brand p {
-  margin: 6px 0 0;
+
+/* ======================================================
+   WORDMARK STRUCTURE
+====================================================== */
+
+.brand-wordmark {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.brand-eyebrow {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  width: 100%;
+
+  margin-bottom: -2px;
+}
+
+.brand-the {
+  color: #aeb7c2;
+
+  font-family:
+    "Barlow Condensed",
+    sans-serif;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.34em;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.brand-top-rule {
+  flex: 1;
+
+  height: 1px;
+
+  min-width: 70px;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(174, 183, 194, 0.75),
+      rgba(174, 183, 194, 0.08)
+    );
+}
+
+
+/* ======================================================
+   MAIN TITLE
+====================================================== */
+
+.brand-title {
+  display: flex;
+  align-items: baseline;
+
+  gap: 7px;
+
+  font-family:
+    "Barlow Condensed",
+    sans-serif;
+
+  font-size: 2.15rem;
+  font-style: italic;
+  font-weight: 800;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.035em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  filter:
+    drop-shadow(
+      0 2px 1px rgba(0, 0, 0, 0.35)
+    );
+}
+
+
+/* PLAYER */
+
+.brand-player {
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #f4f4f4 45%,
+      #c8cdd2 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+
+/* LAB */
+
+.brand-lab {
+  background:
+    linear-gradient(
+      to bottom,
+      #dfff4f 0%,
+      #b9ef32 50%,
+      #86c91f 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  color: transparent;
+
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+/* ======================================================
+   BOTTOM WORDMARK RULE
+====================================================== */
+
+.brand-bottom-rule {
+  width: 100%;
+  height: 2px;
+
+  margin-top: 4px;
+
+  background:
+    linear-gradient(
+      to right,
+      #aeb7c2 0%,
+      #c6cbd0 45%,
+      #b9ef32 100%
+    );
+
+  opacity: 0.9;
+}
+
+
+/* ======================================================
+   BRAND SUBTITLE
+====================================================== */
+
+.brand-subtitle {
+  margin: 5px 0 0;
 
   color: var(--text-secondary);
 
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-}
+  font-size: 0.72rem;
+  font-weight: 600;
 
-.brand p strong {
-  color: var(--accent-primary);
-  font-weight: 700;
-}
+  letter-spacing: 0.035em;
 
-/* ======================================================
+  line-height: 1.2;
+}/* ======================================================
    MAIN LAYOUT
 ====================================================== */
 
@@ -530,21 +683,40 @@ select {
 }
 
 .randomize-button {
-  border: 1px solid rgba(59, 130, 246, 0.65);
+  border: 1px solid #a7db2a;
 
-  background: rgba(59, 130, 246, 0.08);
-  color: #8ab7ff;
+  background:
+    linear-gradient(
+      to bottom,
+      #d5f94a,
+      #a9dd2c
+    );
+
+  color: #10150c;
+
+  font-weight: 800;
+
+  box-shadow:
+    0 6px 16px rgba(169, 221, 44, 0.12);
 }
 
 .randomize-button:hover {
-  border-color: var(--accent-primary);
+  border-color: #92c624;
 
-  background: rgba(59, 130, 246, 0.16);
-  color: #b7d2ff;
+  background:
+    linear-gradient(
+      to bottom,
+      #c8ed3f,
+      #94c925
+    );
+
+  color: #0d1209;
 
   transform: translateY(-1px);
-}
 
+  box-shadow:
+    0 8px 18px rgba(169, 221, 44, 0.18);
+}
 /* ======================================================
    RESULTS PANEL
 ====================================================== */
@@ -987,18 +1159,50 @@ input[type="number"]::-webkit-outer-spin-button {
     );
   }
 
+    /* Mobile brand lockup */
+
+  .brand-lockup {
+    gap: 10px;
+  }
+
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+
+    flex-basis: 44px;
+  }
+
+  .brand-icon img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-title {
+    font-size: 1.65rem;
+  }
+
+  .brand-the {
+    font-size: 0.62rem;
+  }
+
+  .brand-top-rule {
+    min-width: 36px;
+  }
+
+  .brand-subtitle {
+    font-size: 0.62rem;
+  }
+
   .app-header .container {
     min-height: 72px;
 
     align-items: center;
   }
 
-  .brand h1 {
-    font-size: 1.3rem;
-  }
+  .app-header .container {
+    min-height: 72px;
 
-  .brand p {
-    font-size: 0.66rem;
+    align-items: center;
   }
 
   main.container {
