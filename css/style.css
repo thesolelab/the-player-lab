@@ -195,26 +195,33 @@ button {
 .brand-lockup {
   display: flex;
   align-items: center;
+
+  width: auto;
+
   gap: 14px;
-  width: 100%;
 }
 
 .brand-icon {
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 54px;
+  flex: 0 0 50px;
+
+  overflow: visible;
 }
 
 .brand-icon img {
   display: block;
 
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
+
+  min-width: 46px;
+  min-height: 46px;
 
   object-fit: contain;
 }
@@ -301,6 +308,9 @@ button {
   text-transform: uppercase;
 
   white-space: nowrap;
+
+  padding-right: 8px;
+  overflow: visible;
 
   filter:
     drop-shadow(
@@ -1180,21 +1190,25 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
 
-  flex-basis: 44px;
+  flex: 0 0 42px;
 }
 
 .brand-icon img {
   width: 40px;
   height: 40px;
+
+  min-width: 40px;
+  min-height: 40px;
 }
 
 .brand-title {
   font-size: 1.65rem;
-}
 
+  padding-right: 6px;
+}
 .brand-the {
   font-size: 0.62rem;
 }
