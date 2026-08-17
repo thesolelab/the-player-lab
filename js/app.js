@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.2
+  Version: 0.2.3
   Updated: 2026-08-17
 
   PURPOSE
@@ -14,16 +14,21 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+  0.2.3 - Fixed attribute input initialization
+        - Corrected misplaced attribute input initialization code
+        - Restored Randomize Player button functionality
+        - Kept default-value clearing behavior for attribute fields
+        - Preserved 25–99 attribute validation and empty-field fallback
   0.2.2 - Improved attribute input usability
-      - Added mobile-friendly attribute input behavior
-      - Clears the default value of 25 when an attribute field is selected
-      - Restores 25 when an attribute field is left empty
-      - Enforces the valid 25–99 attribute range
+        - Added mobile-friendly attribute input behavior
+        - Clears the default value of 25 when an attribute field is selected
+        - Restores 25 when an attribute field is left empty
+        - Enforces the valid 25–99 attribute range
   0.2.1 - Updated player measurement handling
-      - Reads Height from separate feet and inches fields
-      - Reads Wingspan from separate feet and inches fields
-      - Removed ambiguous single-field height parsing
-      - Converts measurements directly to total inches
+        - Reads Height from separate feet and inches fields
+        - Reads Wingspan from separate feet and inches fields
+        - Removed ambiguous single-field height parsing
+        - Converts measurements directly to total inches
   0.2.0 - Added initial NBA 2K26 badge qualification engine
         - Reads window.BADGES_2K26
         - Collects player attributes from the UI
