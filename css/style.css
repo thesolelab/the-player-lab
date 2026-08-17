@@ -529,6 +529,20 @@ select {
   color: var(--text-primary);
 }
 
+.randomize-button {
+  border: 1px solid #7c5cff;
+
+  background: rgba(124, 92, 255, 0.12);
+  color: #b8a8ff;
+}
+
+.randomize-button:hover {
+  background: rgba(124, 92, 255, 0.2);
+  border-color: #9a82ff;
+  color: #d2c8ff;
+
+  transform: translateY(-1px);
+}
 
 /* ======================================================
    RESULTS PANEL
