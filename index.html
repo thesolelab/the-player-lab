@@ -105,14 +105,32 @@
         </div>
 
         <div class="form-group">
-          <label for="height">Height</label>
-          <input
-            type="text"
-            id="height"
-            name="height"
-            placeholder="Example: 6'6&quot;"
-          >
-        </div>
+  <label>Height</label>
+
+  <div class="measurement-group">
+    <input
+      type="number"
+      id="heightFeet"
+      name="heightFeet"
+      min="4"
+      max="8"
+      placeholder="Feet"
+    >
+
+    <span>ft</span>
+
+    <input
+      type="number"
+      id="heightInches"
+      name="heightInches"
+      min="0"
+      max="11"
+      placeholder="Inches"
+    >
+
+    <span>in</span>
+  </div>
+</div>
 
         <div class="form-group">
           <label for="weight">Weight</label>
@@ -125,16 +143,33 @@
           >
         </div>
 
-        <div class="form-group">
-          <label for="wingspan">Wingspan</label>
-          <input
-            type="text"
-            id="wingspan"
-            name="wingspan"
-            placeholder="Example: 6'10&quot;"
-          >
-        </div>
+       <div class="form-group">
+  <label>Wingspan</label>
 
+  <div class="measurement-group">
+    <input
+      type="number"
+      id="wingspanFeet"
+      name="wingspanFeet"
+      min="4"
+      max="8"
+      placeholder="Feet"
+    >
+
+    <span>ft</span>
+
+    <input
+      type="number"
+      id="wingspanInches"
+      name="wingspanInches"
+      min="0"
+      max="11"
+      placeholder="Inches"
+    >
+
+    <span>in</span>
+  </div>
+</div>
       </div>
     </section>
 
