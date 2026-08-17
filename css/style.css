@@ -189,14 +189,14 @@ button {
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 36px;
+  flex: 0 0 44px;
 
   color: var(--accent-primary);
 }
@@ -204,13 +204,12 @@ button {
 .brand-icon svg {
   display: block;
 
-  width: 32px !important;
-  height: 32px !important;
+  width: 40px !important;
+  height: 40px !important;
 
-  max-width: 32px;
-  max-height: 32px;
+  max-width: 40px;
+  max-height: 40px;
 }
-
 .brand h1 {
   margin: 0;
 
