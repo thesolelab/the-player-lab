@@ -938,22 +938,57 @@ function randomizeTestPlayer() {
 
 
   // ------------------------------------------
-  // ATTRIBUTES
-  // ------------------------------------------
+// ATTRIBUTES
+// ------------------------------------------
+//
+// Attribute generation is based on the
+// selected Player Lab competition profile.
+//
+// These ranges are Player Lab generation
+// guidance only and are not official 2K limits.
 
-  const attributeInputs =
-    document.querySelectorAll(
-      "[data-attribute]"
-    );
+const competitionLevel =
+  getInputValue("competitionLevel");
 
-  attributeInputs.forEach(
-    function (input) {
+const profiles =
+  window.PLAYER_LAB_RANDOMIZER_PROFILES;
 
-      input.value =
-        randomInteger(25, 99);
-    }
+const profile =
+  profiles
+    ? profiles[competitionLevel]
+    : null;
+
+
+if (!profile) {
+
+  console.error(
+    "Randomizer profile could not be found for:",
+    competitionLevel
   );
 
+  showError(
+    "The selected competition randomizer profile could not be loaded."
+  );
+
+  return;
+}
+
+
+const attributeInputs =
+  document.querySelectorAll(
+    "[data-attribute]"
+  );
+
+
+attributeInputs.forEach(
+  function (input) {
+
+    input.value =
+      randomizeAttributeFromProfile(
+        profile
+      );
+  }
+);
 
   // ------------------------------------------
   // CLEAR OLD RESULTS
@@ -975,6 +1010,30 @@ function randomizeTestPlayer() {
 // ======================================================
 // RANDOMIZER HELPERS
 // ======================================================
+function randomizeAttributeFromProfile(
+  profile
+) {
+
+  const eliteRoll =
+    Math.random();
+
+  if (
+    eliteRoll <
+    profile.eliteChance
+  ) {
+
+    return randomInteger(
+      profile.eliteMin,
+      profile.eliteMax
+    );
+  }
+
+
+  return randomInteger(
+    profile.normalMin,
+    profile.normalMax
+  );
+}
 
 function randomInteger(min, max) {
 
