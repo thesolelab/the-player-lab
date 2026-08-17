@@ -146,8 +146,7 @@ function initializePlayerLab() {
   }
 }
 
-initializeAttributeSliders();
-
+initializeAttributeInputs();
 
 // ======================================================
 // COLLECT PLAYER DATA
@@ -917,115 +916,65 @@ function setInputValue(id, value) {
     element.value = value;
   }
 }
+
 // ======================================================
-// ATTRIBUTE SLIDER SYNC
+// ATTRIBUTE INPUT QUALITY OF LIFE
 // ======================================================
 //
-// Keeps MVP slider controls and numeric attribute
-// inputs synchronized in both directions.
+// Improves attribute entry on desktop and mobile.
+//
+// - Clears the default value of 25 when focused
+// - Restores 25 if the field is left empty
+// - Keeps attribute values between 25 and 99
 
-function initializeAttributeSliders() {
+function initializeAttributeInputs() {
 
-  const sliders =
+  const attributeInputs =
     document.querySelectorAll(
-      "[data-slider-for]"
+      "[data-attribute]"
     );
 
-  sliders.forEach(function (slider) {
+  attributeInputs.forEach(
+    function (input) {
 
-    const attributeId =
-      slider.dataset.sliderFor;
+      input.addEventListener(
+        "focus",
+        function () {
 
-    const numberInput =
-      document.getElementById(attributeId);
+          if (input.value === "25") {
+            input.value = "";
+          }
+        }
+      );
 
-    if (!numberInput) {
-      return;
+
+      input.addEventListener(
+        "blur",
+        function () {
+
+          let value =
+            Number(input.value);
+
+          if (
+            input.value === "" ||
+            !Number.isFinite(value)
+          ) {
+            input.value = 25;
+            return;
+          }
+
+          if (value < 25) {
+            input.value = 25;
+            return;
+          }
+
+          if (value > 99) {
+            input.value = 99;
+          }
+        }
+      );
     }
-
-
-    // Slider -> number input
-
-    slider.addEventListener(
-      "input",
-      function () {
-
-        numberInput.value =
-          slider.value;
-
-        updateSliderFill(slider);
-      }
-    );
-
-
-    // Number input -> slider
-
-    numberInput.addEventListener(
-      "input",
-      function () {
-
-        let value =
-          Number(numberInput.value);
-
-        const min =
-          Number(numberInput.min);
-
-        const max =
-          Number(numberInput.max);
-
-
-        if (!Number.isFinite(value)) {
-          return;
-        }
-
-        if (value < min) {
-          value = min;
-        }
-
-        if (value > max) {
-          value = max;
-        }
-
-        slider.value =
-          value;
-
-        updateSliderFill(slider);
-      }
-    );
-
-
-    updateSliderFill(slider);
-  });
-}
-
-
-// ======================================================
-// SLIDER FILL
-// ======================================================
-
-function updateSliderFill(slider) {
-
-  const min =
-    Number(slider.min);
-
-  const max =
-    Number(slider.max);
-
-  const value =
-    Number(slider.value);
-
-  const percentage =
-    ((value - min) / (max - min)) * 100;
-
-  slider.style.background = `
-    linear-gradient(
-      to right,
-      var(--category-finishing) 0%,
-      var(--category-finishing) ${percentage}%,
-      var(--border-primary) ${percentage}%,
-      var(--border-primary) 100%
-    )
-  `;
+  );
 }
 
 // ======================================================
