@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: css/style.css
-  Version: 0.1.1
+  Version: 0.1.2
   Updated: 2026-08-16
 
   PURPOSE
@@ -16,6 +16,12 @@
   - Responsive desktop and mobile layouts
 
   CHANGELOG
+0.1.2 - Refined header layout and branding
+      - Added styling for the Player Lab brand icon
+      - Removed obsolete game-version card styles
+      - Updated brand subtitle styling
+      - Added emphasized styling for Player Creation & Analysis
+      - Simplified header presentation
 0.1.1 - Refined header and badge-level styling
       - Centered the NBA 2K26 version pill text
       - Updated Legend badge color from cyan to red
