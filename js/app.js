@@ -82,6 +82,9 @@ const BADGE_LEVELS = [
 const calculateBadgesButton =
   document.getElementById("calculateBadgesButton");
 
+const randomizePlayerButton =
+  document.getElementById("randomizePlayerButton");
+
 const resetPlayerButton =
   document.getElementById("resetPlayerButton");
 
@@ -128,6 +131,13 @@ function initializePlayerLab() {
     );
   }
 
+  if (randomizePlayerButton) {
+  randomizePlayerButton.addEventListener(
+    "click",
+    randomizeTestPlayer
+  );
+}
+  
   if (resetPlayerButton) {
     resetPlayerButton.addEventListener(
       "click",
@@ -738,6 +748,173 @@ function createBadgeResultCard(badge) {
   return card;
 }
 
+// ======================================================
+// TEST PLAYER RANDOMIZER
+// ======================================================
+//
+// TEMPORARY MVP TESTING TOOL
+//
+// This function exists to quickly generate players
+// for badge-engine testing.
+//
+// It is NOT the final Player Lab randomizer.
+//
+// Future HS / NCAA / NBA randomization logic should
+// replace or extend this function without changing
+// the badge qualification engine.
+
+function randomizeTestPlayer() {
+
+  // ------------------------------------------
+  // PLAYER INFORMATION
+  // ------------------------------------------
+
+  const playerName =
+    document.getElementById("playerName");
+
+  if (playerName) {
+    playerName.value = "Random Test Player";
+  }
+
+
+  // Random position
+
+  const position =
+    document.getElementById("position");
+
+  const positions = [
+    "PG",
+    "SG",
+    "SF",
+    "PF",
+    "C"
+  ];
+
+  if (position) {
+    position.value =
+      positions[
+        randomInteger(0, positions.length - 1)
+      ];
+  }
+
+
+  // ------------------------------------------
+  // HEIGHT
+  // ------------------------------------------
+  //
+  // Temporary testing range only.
+  // Not competition-level generation logic.
+
+  const heightTotal =
+    randomInteger(68, 88);
+
+  const heightFeet =
+    Math.floor(heightTotal / 12);
+
+  const heightInches =
+    heightTotal % 12;
+
+  setInputValue(
+    "heightFeet",
+    heightFeet
+  );
+
+  setInputValue(
+    "heightInches",
+    heightInches
+  );
+
+
+  // ------------------------------------------
+  // WEIGHT
+  // ------------------------------------------
+
+  setInputValue(
+    "weight",
+    randomInteger(160, 300)
+  );
+
+
+  // ------------------------------------------
+  // WINGSPAN
+  // ------------------------------------------
+
+  const wingspanTotal =
+    randomInteger(68, 96);
+
+  const wingspanFeet =
+    Math.floor(wingspanTotal / 12);
+
+  const wingspanInches =
+    wingspanTotal % 12;
+
+  setInputValue(
+    "wingspanFeet",
+    wingspanFeet
+  );
+
+  setInputValue(
+    "wingspanInches",
+    wingspanInches
+  );
+
+
+  // ------------------------------------------
+  // ATTRIBUTES
+  // ------------------------------------------
+
+  const attributeInputs =
+    document.querySelectorAll(
+      "[data-attribute]"
+    );
+
+  attributeInputs.forEach(
+    function (input) {
+
+      input.value =
+        randomInteger(25, 99);
+    }
+  );
+
+
+  // ------------------------------------------
+  // CLEAR OLD RESULTS
+  // ------------------------------------------
+
+  if (badgeResults) {
+
+    badgeResults.innerHTML = `
+      <div class="empty-results">
+        <p>
+          Random player generated. Click Calculate Badges to analyze the player.
+        </p>
+      </div>
+    `;
+  }
+}
+
+
+// ======================================================
+// RANDOMIZER HELPERS
+// ======================================================
+
+function randomInteger(min, max) {
+
+  return Math.floor(
+    Math.random() * (max - min + 1)
+  ) + min;
+}
+
+
+function setInputValue(id, value) {
+
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+    element.value = value;
+  }
+}
 
 // ======================================================
 // RESET PLAYER
