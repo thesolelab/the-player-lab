@@ -1,1 +1,554 @@
+<!--
+  THE PLAYER LAB
+  File: index.html
+  Version: 0.1.0
+  Updated: 2026-08-16
 
+  CHANGELOG
+  0.1.0 - Initial application structure
+        - Added Player Information section
+        - Added NBA 2K26 game version display
+        - Added player attribute inputs
+        - Added badge results area
+        - Added badge level legend
+        - Connected badge data and app.js placeholders
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The Player Lab | NBA 2K Player Calculator</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ========================================
+       APP HEADER
+  ========================================= -->
+  <header class="app-header">
+    <div class="container">
+      <div class="brand">
+        <h1>The Player Lab</h1>
+        <p>Player Creation & Analysis</p>
+      </div>
+
+      <div class="game-version">
+        <span>Game Version</span>
+        <strong id="gameVersion">NBA 2K26</strong>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ========================================
+       MAIN APPLICATION
+  ========================================= -->
+  <main class="container">
+
+    <!-- ======================================
+         PLAYER INFORMATION
+    ======================================= -->
+    <section class="panel" id="playerInfoSection">
+
+      <div class="section-header">
+        <h2>Player Information</h2>
+        <p>Enter the basic information for the player you want to analyze.</p>
+      </div>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="playerName">Player Name</label>
+          <input
+            type="text"
+            id="playerName"
+            name="playerName"
+            placeholder="Enter player name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="competitionLevel">Competition Level</label>
+          <select id="competitionLevel" name="competitionLevel">
+            <option value="nba">NBA</option>
+            <option value="ncaa">NCAA</option>
+            <option value="high-school">High School</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="position">Position</label>
+          <select id="position" name="position">
+            <option value="">Select Position</option>
+            <option value="PG">Point Guard</option>
+            <option value="SG">Shooting Guard</option>
+            <option value="SF">Small Forward</option>
+            <option value="PF">Power Forward</option>
+            <option value="C">Center</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="secondaryPosition">Secondary Position</label>
+          <select id="secondaryPosition" name="secondaryPosition">
+            <option value="">None</option>
+            <option value="PG">Point Guard</option>
+            <option value="SG">Shooting Guard</option>
+            <option value="SF">Small Forward</option>
+            <option value="PF">Power Forward</option>
+            <option value="C">Center</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="height">Height</label>
+          <input
+            type="text"
+            id="height"
+            name="height"
+            placeholder="Example: 6'6&quot;"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            placeholder="lbs"
+            min="0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="wingspan">Wingspan</label>
+          <input
+            type="text"
+            id="wingspan"
+            name="wingspan"
+            placeholder="Example: 6'10&quot;"
+          >
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================
+         PLAYER ATTRIBUTES
+    ======================================= -->
+    <section class="panel" id="attributesSection">
+
+      <div class="section-header">
+        <h2>Player Attributes</h2>
+        <p>
+          Enter the player's attributes first. Badge qualifications will be
+          calculated from these values.
+        </p>
+      </div>
+
+
+      <!-- FINISHING -->
+      <div class="attribute-category">
+
+        <h3>Finishing</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="closeShot">Close Shot</label>
+            <input
+              type="number"
+              id="closeShot"
+              data-attribute="closeShot"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="drivingLayup">Driving Layup</label>
+            <input
+              type="number"
+              id="drivingLayup"
+              data-attribute="drivingLayup"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="drivingDunk">Driving Dunk</label>
+            <input
+              type="number"
+              id="drivingDunk"
+              data-attribute="drivingDunk"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="standingDunk">Standing Dunk</label>
+            <input
+              type="number"
+              id="standingDunk"
+              data-attribute="standingDunk"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="postControl">Post Control</label>
+            <input
+              type="number"
+              id="postControl"
+              data-attribute="postControl"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- SHOOTING -->
+      <div class="attribute-category">
+
+        <h3>Shooting</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="midRangeShot">Mid-Range Shot</label>
+            <input
+              type="number"
+              id="midRangeShot"
+              data-attribute="midRangeShot"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="threePointShot">Three-Point Shot</label>
+            <input
+              type="number"
+              id="threePointShot"
+              data-attribute="threePointShot"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="freeThrow">Free Throw</label>
+            <input
+              type="number"
+              id="freeThrow"
+              data-attribute="freeThrow"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- PLAYMAKING -->
+      <div class="attribute-category">
+
+        <h3>Playmaking</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="passAccuracy">Pass Accuracy</label>
+            <input
+              type="number"
+              id="passAccuracy"
+              data-attribute="passAccuracy"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="ballHandle">Ball Handle</label>
+            <input
+              type="number"
+              id="ballHandle"
+              data-attribute="ballHandle"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="speedWithBall">Speed With Ball</label>
+            <input
+              type="number"
+              id="speedWithBall"
+              data-attribute="speedWithBall"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- DEFENSE / REBOUNDING -->
+      <div class="attribute-category">
+
+        <h3>Defense / Rebounding</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="interiorDefense">Interior Defense</label>
+            <input
+              type="number"
+              id="interiorDefense"
+              data-attribute="interiorDefense"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="perimeterDefense">Perimeter Defense</label>
+            <input
+              type="number"
+              id="perimeterDefense"
+              data-attribute="perimeterDefense"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="steal">Steal</label>
+            <input
+              type="number"
+              id="steal"
+              data-attribute="steal"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="block">Block</label>
+            <input
+              type="number"
+              id="block"
+              data-attribute="block"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="offensiveRebound">Offensive Rebound</label>
+            <input
+              type="number"
+              id="offensiveRebound"
+              data-attribute="offensiveRebound"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="defensiveRebound">Defensive Rebound</label>
+            <input
+              type="number"
+              id="defensiveRebound"
+              data-attribute="defensiveRebound"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- PHYSICALS -->
+      <div class="attribute-category">
+
+        <h3>Physicals</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="speed">Speed</label>
+            <input
+              type="number"
+              id="speed"
+              data-attribute="speed"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="agility">Agility</label>
+            <input
+              type="number"
+              id="agility"
+              data-attribute="agility"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="strength">Strength</label>
+            <input
+              type="number"
+              id="strength"
+              data-attribute="strength"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="vertical">Vertical</label>
+            <input
+              type="number"
+              id="vertical"
+              data-attribute="vertical"
+              min="25"
+              max="99"
+              value="25"
+            >
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- CALCULATE BUTTON -->
+      <div class="calculator-actions">
+
+        <button
+          type="button"
+          id="calculateBadgesButton"
+          class="primary-button"
+        >
+          Calculate Badges
+        </button>
+
+        <button
+          type="button"
+          id="resetPlayerButton"
+          class="secondary-button"
+        >
+          Reset Player
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================
+         BADGE RESULTS
+    ======================================= -->
+    <section class="panel results-panel" id="badgeResultsSection">
+
+      <div class="section-header">
+        <h2>Qualified Badges</h2>
+        <p>
+          NBA 2K26 badge results will appear here after the player's
+          attributes are analyzed.
+        </p>
+      </div>
+
+
+      <!-- Badge level legend -->
+      <div class="badge-level-legend">
+
+        <span class="badge-level bronze">Bronze</span>
+        <span class="badge-level silver">Silver</span>
+        <span class="badge-level gold">Gold</span>
+        <span class="badge-level hall-of-fame">Hall of Fame</span>
+        <span class="badge-level legend">Legend</span>
+
+      </div>
+
+
+      <!-- JavaScript will populate this area later -->
+      <div id="badgeResults">
+
+        <div class="empty-results">
+          <p>No badge calculations have been run yet.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       FOOTER
+  ========================================= -->
+  <footer class="app-footer">
+    <div class="container">
+      <p>
+        The Player Lab &bull; NBA 2K26 Development Ruleset
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ========================================
+       GAME DATA
+       
+       Version-specific data stays separate
+       from the application calculation logic.
+  ========================================= -->
+  <script src="data/badges-2k26.js"></script>
+
+
+  <!-- ========================================
+       APPLICATION LOGIC
+  ========================================= -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
