@@ -1,8 +1,8 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.1
-  Updated: 2026-08-16
+  Version: 0.2.2
+  Updated: 2026-08-17
 
   PURPOSE
   Handles Player Lab application logic.
@@ -14,6 +14,11 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+  0.2.2 - Improved attribute input usability
+      - Added mobile-friendly attribute input behavior
+      - Clears the default value of 25 when an attribute field is selected
+      - Restores 25 when an attribute field is left empty
+      - Enforces the valid 25–99 attribute range
   0.2.1 - Updated player measurement handling
       - Reads Height from separate feet and inches fields
       - Reads Wingspan from separate feet and inches fields
