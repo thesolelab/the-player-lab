@@ -738,6 +738,138 @@ select {
   font-weight: 700;
 }
 
+/* ======================================================
+   BADGE RESULT CARD LEVEL COLORS
+====================================================== */
+
+/* Bronze */
+
+.badge-result-card:has(.badge-level.bronze) {
+  border-color: rgba(200, 117, 61, 0.45);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(200, 117, 61, 0.08),
+      transparent 65%
+    ),
+    var(--bg-input);
+
+  box-shadow:
+    inset 0 0 18px rgba(200, 117, 61, 0.04);
+}
+
+.badge-result-card:has(.badge-level.bronze):hover {
+  border-color: rgba(200, 117, 61, 0.8);
+
+  box-shadow:
+    0 0 18px rgba(200, 117, 61, 0.12),
+    inset 0 0 18px rgba(200, 117, 61, 0.06);
+}
+
+
+/* Silver */
+
+.badge-result-card:has(.badge-level.silver) {
+  border-color: rgba(194, 202, 212, 0.4);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(194, 202, 212, 0.07),
+      transparent 65%
+    ),
+    var(--bg-input);
+
+  box-shadow:
+    inset 0 0 18px rgba(194, 202, 212, 0.03);
+}
+
+.badge-result-card:has(.badge-level.silver):hover {
+  border-color: rgba(194, 202, 212, 0.75);
+
+  box-shadow:
+    0 0 18px rgba(194, 202, 212, 0.1),
+    inset 0 0 18px rgba(194, 202, 212, 0.05);
+}
+
+
+/* Gold */
+
+.badge-result-card:has(.badge-level.gold) {
+  border-color: rgba(242, 201, 76, 0.5);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(242, 201, 76, 0.09),
+      transparent 65%
+    ),
+    var(--bg-input);
+
+  box-shadow:
+    inset 0 0 18px rgba(242, 201, 76, 0.04);
+}
+
+.badge-result-card:has(.badge-level.gold):hover {
+  border-color: rgba(242, 201, 76, 0.85);
+
+  box-shadow:
+    0 0 20px rgba(242, 201, 76, 0.14),
+    inset 0 0 18px rgba(242, 201, 76, 0.06);
+}
+
+
+/* Hall of Fame */
+
+.badge-result-card:has(.badge-level.hall-of-fame) {
+  border-color: rgba(187, 107, 217, 0.55);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(187, 107, 217, 0.1),
+      transparent 65%
+    ),
+    var(--bg-input);
+
+  box-shadow:
+    inset 0 0 20px rgba(187, 107, 217, 0.05);
+}
+
+.badge-result-card:has(.badge-level.hall-of-fame):hover {
+  border-color: rgba(187, 107, 217, 0.9);
+
+  box-shadow:
+    0 0 22px rgba(187, 107, 217, 0.18),
+    inset 0 0 20px rgba(187, 107, 217, 0.07);
+}
+
+
+/* Legend */
+
+.badge-result-card:has(.badge-level.legend) {
+  border-color: rgba(255, 90, 103, 0.6);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 90, 103, 0.11),
+      transparent 65%
+    ),
+    var(--bg-input);
+
+  box-shadow:
+    inset 0 0 22px rgba(255, 90, 103, 0.05);
+}
+
+.badge-result-card:has(.badge-level.legend):hover {
+  border-color: rgba(255, 90, 103, 0.95);
+
+  box-shadow:
+    0 0 24px rgba(255, 90, 103, 0.2),
+    inset 0 0 22px rgba(255, 90, 103, 0.08);
+}
 
 /* ======================================================
    EMPTY RESULTS
