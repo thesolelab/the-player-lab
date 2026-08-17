@@ -149,26 +149,76 @@ function initializePlayerLab() {
       resetPlayer
     );
   }
-  initializeAttributeInputs();
 }
 
 initializeAttributeInputs();
-function clearDefaultValue() {
+// ======================================================
+// ATTRIBUTE INPUT QUALITY OF LIFE
+// ======================================================
+//
+// Improves attribute entry on desktop and mobile.
+//
+// - Clears the default value of 25 when selected
+// - Restores 25 if the field is left empty
+// - Keeps attribute values between 25 and 99
 
-  if (input.value === "25") {
-    input.value = "";
-  }
+function initializeAttributeInputs() {
+
+  const attributeInputs =
+    document.querySelectorAll(
+      "[data-attribute]"
+    );
+
+  attributeInputs.forEach(
+    function (input) {
+
+      function clearDefaultValue() {
+
+        if (input.value === "25") {
+          input.value = "";
+        }
+      }
+
+
+      input.addEventListener(
+        "focus",
+        clearDefaultValue
+      );
+
+      input.addEventListener(
+        "click",
+        clearDefaultValue
+      );
+
+
+      input.addEventListener(
+        "blur",
+        function () {
+
+          let value =
+            Number(input.value);
+
+          if (
+            input.value === "" ||
+            !Number.isFinite(value)
+          ) {
+            input.value = 25;
+            return;
+          }
+
+          if (value < 25) {
+            input.value = 25;
+            return;
+          }
+
+          if (value > 99) {
+            input.value = 99;
+          }
+        }
+      );
+    }
+  );
 }
-
-input.addEventListener(
-  "focus",
-  clearDefaultValue
-);
-
-input.addEventListener(
-  "click",
-  clearDefaultValue
-);
 
 // ======================================================
 // COLLECT PLAYER DATA
