@@ -146,6 +146,8 @@ function initializePlayerLab() {
   }
 }
 
+initializeAttributeSliders();
+
 
 // ======================================================
 // COLLECT PLAYER DATA
@@ -914,6 +916,116 @@ function setInputValue(id, value) {
   if (element) {
     element.value = value;
   }
+}
+// ======================================================
+// ATTRIBUTE SLIDER SYNC
+// ======================================================
+//
+// Keeps MVP slider controls and numeric attribute
+// inputs synchronized in both directions.
+
+function initializeAttributeSliders() {
+
+  const sliders =
+    document.querySelectorAll(
+      "[data-slider-for]"
+    );
+
+  sliders.forEach(function (slider) {
+
+    const attributeId =
+      slider.dataset.sliderFor;
+
+    const numberInput =
+      document.getElementById(attributeId);
+
+    if (!numberInput) {
+      return;
+    }
+
+
+    // Slider -> number input
+
+    slider.addEventListener(
+      "input",
+      function () {
+
+        numberInput.value =
+          slider.value;
+
+        updateSliderFill(slider);
+      }
+    );
+
+
+    // Number input -> slider
+
+    numberInput.addEventListener(
+      "input",
+      function () {
+
+        let value =
+          Number(numberInput.value);
+
+        const min =
+          Number(numberInput.min);
+
+        const max =
+          Number(numberInput.max);
+
+
+        if (!Number.isFinite(value)) {
+          return;
+        }
+
+        if (value < min) {
+          value = min;
+        }
+
+        if (value > max) {
+          value = max;
+        }
+
+        slider.value =
+          value;
+
+        updateSliderFill(slider);
+      }
+    );
+
+
+    updateSliderFill(slider);
+  });
+}
+
+
+// ======================================================
+// SLIDER FILL
+// ======================================================
+
+function updateSliderFill(slider) {
+
+  const min =
+    Number(slider.min);
+
+  const max =
+    Number(slider.max);
+
+  const value =
+    Number(slider.value);
+
+  const percentage =
+    ((value - min) / (max - min)) * 100;
+
+  slider.style.background = `
+    linear-gradient(
+      to right,
+      var(--category-finishing) 0%,
+      var(--category-finishing) ${percentage}%,
+      var(--border-primary) ${percentage}%,
+      var(--border-primary) 100%
+    )
+  `;
 }
 
 // ======================================================
