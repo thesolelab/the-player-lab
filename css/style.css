@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: css/style.css
-  Version: 0.1.2
+  Version: 0.1.3
   Updated: 2026-08-16
 
   PURPOSE
@@ -16,8 +16,12 @@
   - Responsive desktop and mobile layouts
 
   CHANGELOG
+0.1.3 - Refined Player Lab header icon styling
+      - Added sizing and alignment for the laboratory flask icon
+      - Increased icon size for better balance with the header text
+      - Applied the Dark Lab blue accent color to the SVG icon
+      - Maintained responsive header alignment
 0.1.2 - Refined header layout and branding
-      - Added styling for the Player Lab brand icon
       - Removed obsolete game-version card styles
       - Updated brand subtitle styling
       - Added emphasized styling for Player Creation & Analysis
