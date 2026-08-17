@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: css/style.css
-  Version: 0.1.0
+  Version: 0.1.1
   Updated: 2026-08-16
 
   PURPOSE
@@ -16,7 +16,10 @@
   - Responsive desktop and mobile layouts
 
   CHANGELOG
-  0.1.0 - Initial Dark Lab UI
+0.1.1 - Refined header and badge-level styling
+      - Centered the NBA 2K26 version pill text
+      - Updated Legend badge color from cyan to red  
+0.1.0 - Initial Dark Lab UI
         - Added global color system
         - Added application header styling
         - Added panel and form styling
@@ -621,7 +624,7 @@ select {
 ====================================================== */
 
 .badge-level.legend {
-  border-color: rgba(77, 216, 255, 0.5);
+  border-color: rgba(255, 90, 103, 0.5);
 
   background: var(--badge-legend-bg);
   color: var(--badge-legend);
