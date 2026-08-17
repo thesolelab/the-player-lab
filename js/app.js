@@ -144,9 +144,26 @@ function initializePlayerLab() {
       resetPlayer
     );
   }
+  initializeAttributeInputs();
 }
 
 initializeAttributeInputs();
+function clearDefaultValue() {
+
+  if (input.value === "25") {
+    input.value = "";
+  }
+}
+
+input.addEventListener(
+  "focus",
+  clearDefaultValue
+);
+
+input.addEventListener(
+  "click",
+  clearDefaultValue
+);
 
 // ======================================================
 // COLLECT PLAYER DATA
