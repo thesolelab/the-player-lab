@@ -534,7 +534,7 @@ function meetsHeightRestriction(
 
   if (
     player.heightTotalInches === null ||
-    !Number.isFinite(player.heightInches)
+    !Number.isFinite(player.heightTotalInches)
   ) {
     return false;
   }
