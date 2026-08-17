@@ -74,6 +74,14 @@
   --accent-primary-hover: #2563eb;
   --accent-soft: #14233a;
 
+  /* Attribute category colors */
+  --category-finishing: #3b82f6;
+  --category-shooting: #39c66b;
+  --category-playmaking: #f28c38;
+  --category-defense: #e84a5f;
+  --category-rebounding: #8b5cf6;
+  --category-physicals: #e6a57e;
+  
   /* Badge levels */
   --badge-bronze: #c8753d;
   --badge-bronze-bg: #2c1b13;
@@ -491,7 +499,7 @@ main.container {
 
   color: var(--text-secondary);
 
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
@@ -597,7 +605,7 @@ select {
 
   gap: 10px;
 
-  color: #75aaff;
+  color: var(--text-primary);
 
   font-size: 0.82rem;
   font-weight: 800;
@@ -637,6 +645,116 @@ select {
   text-align: center;
 }
 
+/* ======================================================
+   ATTRIBUTE CATEGORY COLORS
+====================================================== */
+
+/* Finishing */
+
+.attribute-category:has(#closeShot) h3 {
+  color: var(--category-finishing);
+}
+
+.attribute-category:has(#closeShot) h3::before {
+  background: var(--category-finishing);
+}
+
+.attribute-category:has(#closeShot) input:focus {
+  border-color: var(--category-finishing);
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+
+/* Shooting */
+
+.attribute-category:has(#midRangeShot) h3 {
+  color: var(--category-shooting);
+}
+
+.attribute-category:has(#midRangeShot) h3::before {
+  background: var(--category-shooting);
+}
+
+.attribute-category:has(#midRangeShot) input:focus {
+  border-color: var(--category-shooting);
+
+  box-shadow:
+    0 0 0 3px rgba(57, 198, 107, 0.15);
+}
+
+
+/* Playmaking */
+
+.attribute-category:has(#passAccuracy) h3 {
+  color: var(--category-playmaking);
+}
+
+.attribute-category:has(#passAccuracy) h3::before {
+  background: var(--category-playmaking);
+}
+
+.attribute-category:has(#passAccuracy) input:focus {
+  border-color: var(--category-playmaking);
+
+  box-shadow:
+    0 0 0 3px rgba(242, 140, 56, 0.15);
+}
+
+
+/* Defense */
+
+.attribute-category-defense h3 {
+  color: var(--category-defense);
+}
+
+.attribute-category-defense h3::before {
+  background: var(--category-defense);
+}
+
+.attribute-category-defense input:focus {
+  border-color: var(--category-defense);
+
+  box-shadow:
+    0 0 0 3px rgba(232, 74, 95, 0.15);
+}
+
+
+/* Rebounding */
+
+.attribute-category-rebounding h3 {
+  color: var(--category-rebounding);
+}
+
+.attribute-category-rebounding h3::before {
+  background: var(--category-rebounding);
+}
+
+.attribute-category-rebounding input:focus {
+  border-color: var(--category-rebounding);
+
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+
+/* Physicals */
+
+.attribute-category:has(#speed) h3 {
+  color: var(--category-physicals);
+}
+
+.attribute-category:has(#speed) h3::before {
+  background: var(--category-physicals);
+}
+
+.attribute-category:has(#speed) input:focus {
+  border-color: var(--category-physicals);
+
+  box-shadow:
+    0 0 0 3px rgba(230, 165, 126, 0.15);
+}
 
 /* ======================================================
    BUTTONS
