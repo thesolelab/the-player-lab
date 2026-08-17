@@ -68,8 +68,8 @@
   --badge-hof: #bb6bd9;
   --badge-hof-bg: #281634;
 
-  --badge-legend: #4dd8ff;
-  --badge-legend-bg: #102a34;
+  --badge-legend: #ff5a67;
+  --badge-legend-bg: #2f1519;
 
   /* Status */
   --danger: #ff5a67;
@@ -209,8 +209,10 @@ button {
 .game-version strong {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 
   min-height: 36px;
+  min-width: 130px;
 
   padding: 0 14px;
 
@@ -222,6 +224,8 @@ button {
   color: #77adff;
 
   font-size: 0.9rem;
+  line-height: 1;
+  text-align: center;
 }
 
 
