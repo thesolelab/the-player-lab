@@ -1,1 +1,898 @@
+/*
+  THE PLAYER LAB
+  File: css/style.css
+  Version: 0.1.0
+  Updated: 2026-08-16
 
+  PURPOSE
+  Provides the visual styling for The Player Lab.
+
+  DESIGN SYSTEM
+  Dark Lab
+  - Dark charcoal application background
+  - Layered dark panels
+  - Electric blue primary accent
+  - Color-coded badge levels
+  - Responsive desktop and mobile layouts
+
+  CHANGELOG
+  0.1.0 - Initial Dark Lab UI
+        - Added global color system
+        - Added application header styling
+        - Added panel and form styling
+        - Added attribute input grid
+        - Added measurement input styling
+        - Added primary and secondary buttons
+        - Added badge level colors
+        - Added badge result cards
+        - Added responsive mobile layout
+*/
+
+
+/* ======================================================
+   DARK LAB COLOR SYSTEM
+====================================================== */
+
+:root {
+
+  /* Backgrounds */
+  --bg-main: #0e1117;
+  --bg-panel: #161b22;
+  --bg-panel-secondary: #1f2630;
+  --bg-input: #10151c;
+
+  /* Borders */
+  --border-primary: #2a3441;
+  --border-hover: #3a4758;
+
+  /* Text */
+  --text-primary: #f5f7fa;
+  --text-secondary: #9ba6b2;
+  --text-muted: #6f7b88;
+
+  /* Brand */
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #2563eb;
+  --accent-soft: #14233a;
+
+  /* Badge levels */
+  --badge-bronze: #c8753d;
+  --badge-bronze-bg: #2c1b13;
+
+  --badge-silver: #c2cad4;
+  --badge-silver-bg: #222831;
+
+  --badge-gold: #f2c94c;
+  --badge-gold-bg: #302811;
+
+  --badge-hof: #bb6bd9;
+  --badge-hof-bg: #281634;
+
+  --badge-legend: #4dd8ff;
+  --badge-legend-bg: #102a34;
+
+  /* Status */
+  --danger: #ff5a67;
+
+  /* Layout */
+  --content-width: 1400px;
+  --panel-radius: 12px;
+}
+
+
+/* ======================================================
+   RESET
+====================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.08),
+      transparent 28%
+    ),
+    var(--bg-main);
+
+  color: var(--text-primary);
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* ======================================================
+   SHARED CONTAINER
+====================================================== */
+
+.container {
+  width: min(
+    calc(100% - 40px),
+    var(--content-width)
+  );
+
+  margin: 0 auto;
+}
+
+
+/* ======================================================
+   APP HEADER
+====================================================== */
+
+.app-header {
+  border-bottom: 1px solid var(--border-primary);
+  background: rgba(14, 17, 23, 0.94);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  backdrop-filter: blur(12px);
+}
+
+.app-header .container {
+  min-height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+}
+
+.brand h1 {
+  margin: 0;
+
+  font-size: 1.65rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.brand p {
+  margin: 6px 0 0;
+
+  color: var(--accent-primary);
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-version {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 2px;
+}
+
+.game-version span {
+  color: var(--text-muted);
+
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-version strong {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 36px;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: 999px;
+
+  background: var(--accent-soft);
+
+  color: #77adff;
+
+  font-size: 0.9rem;
+}
+
+
+/* ======================================================
+   MAIN LAYOUT
+====================================================== */
+
+main.container {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.panel {
+  margin-bottom: 24px;
+
+  padding: 24px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: var(--panel-radius);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.015),
+      transparent
+    ),
+    var(--bg-panel);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ======================================================
+   SECTION HEADERS
+====================================================== */
+
+.section-header {
+  margin-bottom: 22px;
+}
+
+.section-header h2 {
+  margin: 0;
+
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.section-header p {
+  margin: 6px 0 0;
+
+  max-width: 760px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.9rem;
+}
+
+
+/* ======================================================
+   FORMS
+====================================================== */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.form-group label,
+.attribute-field label {
+  margin-bottom: 7px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 44px;
+
+  padding: 10px 12px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+
+  outline: none;
+
+  background: var(--bg-input);
+  color: var(--text-primary);
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+input:hover,
+select:hover {
+  border-color: var(--border-hover);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--accent-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(59, 130, 246, 0.15);
+
+  background: #111821;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+select {
+  cursor: pointer;
+}
+
+
+/* ======================================================
+   HEIGHT / WINGSPAN
+====================================================== */
+
+.measurement-group {
+  display: grid;
+
+  grid-template-columns:
+    minmax(60px, 1fr)
+    auto
+    minmax(60px, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.measurement-group span {
+  color: var(--text-secondary);
+
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.measurement-group input {
+  min-width: 0;
+
+  text-align: center;
+}
+
+
+/* ======================================================
+   ATTRIBUTE CATEGORIES
+====================================================== */
+
+.attribute-category {
+  padding-top: 6px;
+  padding-bottom: 24px;
+
+  margin-bottom: 18px;
+
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.attribute-category:last-of-type {
+  border-bottom: 0;
+}
+
+.attribute-category h3 {
+  margin: 0 0 16px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #75aaff;
+
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.attribute-category h3::before {
+  content: "";
+
+  width: 4px;
+  height: 16px;
+
+  border-radius: 999px;
+
+  background: var(--accent-primary);
+}
+
+.attribute-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.attribute-field {
+  min-width: 0;
+}
+
+.attribute-field input {
+  font-weight: 700;
+  font-size: 1rem;
+
+  text-align: center;
+}
+
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
+.calculator-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 8px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 46px;
+
+  padding: 0 20px;
+
+  border-radius: 8px;
+
+  font-weight: 700;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.primary-button {
+  border: 1px solid var(--accent-primary);
+
+  background: var(--accent-primary);
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(59, 130, 246, 0.18);
+}
+
+.primary-button:hover {
+  background: var(--accent-primary-hover);
+
+  border-color: var(--accent-primary-hover);
+
+  transform: translateY(-1px);
+}
+
+.secondary-button {
+  border: 1px solid var(--border-primary);
+
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.secondary-button:hover {
+  border-color: var(--border-hover);
+
+  background: var(--bg-panel-secondary);
+
+  color: var(--text-primary);
+}
+
+
+/* ======================================================
+   RESULTS PANEL
+====================================================== */
+
+.results-panel {
+  min-height: 220px;
+}
+
+
+/* ======================================================
+   BADGE LEVEL LEGEND
+====================================================== */
+
+.badge-level-legend {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 22px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.badge-level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 28px;
+
+  padding: 4px 10px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+
+/* ======================================================
+   BRONZE
+====================================================== */
+
+.badge-level.bronze {
+  border-color: rgba(200, 117, 61, 0.5);
+
+  background: var(--badge-bronze-bg);
+  color: var(--badge-bronze);
+}
+
+
+/* ======================================================
+   SILVER
+====================================================== */
+
+.badge-level.silver {
+  border-color: rgba(194, 202, 212, 0.4);
+
+  background: var(--badge-silver-bg);
+  color: var(--badge-silver);
+}
+
+
+/* ======================================================
+   GOLD
+====================================================== */
+
+.badge-level.gold {
+  border-color: rgba(242, 201, 76, 0.5);
+
+  background: var(--badge-gold-bg);
+  color: var(--badge-gold);
+}
+
+
+/* ======================================================
+   HALL OF FAME
+====================================================== */
+
+.badge-level.hall-of-fame {
+  border-color: rgba(187, 107, 217, 0.55);
+
+  background: var(--badge-hof-bg);
+  color: var(--badge-hof);
+}
+
+
+/* ======================================================
+   LEGEND
+====================================================== */
+
+.badge-level.legend {
+  border-color: rgba(77, 216, 255, 0.5);
+
+  background: var(--badge-legend-bg);
+  color: var(--badge-legend);
+}
+
+
+/* ======================================================
+   RESULTS SUMMARY
+====================================================== */
+
+.results-summary {
+  margin-bottom: 20px;
+
+  padding: 12px 14px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+
+  background: var(--bg-input);
+}
+
+.results-summary p {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 0.9rem;
+}
+
+.results-summary strong {
+  color: var(--text-primary);
+}
+
+
+/* ======================================================
+   RESULTS BY CATEGORY
+====================================================== */
+
+.badge-category-results {
+  margin-top: 26px;
+}
+
+.badge-category-results > h3 {
+  margin: 0 0 12px;
+
+  color: var(--text-primary);
+
+  font-size: 0.88rem;
+  font-weight: 800;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-results-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+/* ======================================================
+   BADGE RESULT CARDS
+====================================================== */
+
+.badge-result-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  min-height: 64px;
+
+  padding: 12px 14px;
+
+  border: 1px solid var(--border-primary);
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.018),
+      transparent
+    ),
+    var(--bg-input);
+
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.badge-result-card:hover {
+  border-color: var(--border-hover);
+
+  background: var(--bg-panel-secondary);
+
+  transform: translateY(-1px);
+}
+
+.badge-result-name {
+  min-width: 0;
+
+  color: var(--text-primary);
+
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+
+/* ======================================================
+   EMPTY RESULTS
+====================================================== */
+
+.empty-results {
+  padding: 26px;
+
+  border: 1px dashed var(--border-primary);
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.01);
+
+  text-align: center;
+}
+
+.empty-results p {
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+}
+
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.app-footer {
+  padding: 22px 0 30px;
+
+  border-top: 1px solid var(--border-primary);
+
+  color: var(--text-muted);
+
+  font-size: 0.78rem;
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+
+/* ======================================================
+   NUMBER INPUT CLEANUP
+====================================================== */
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+
+  -webkit-appearance: none;
+}
+
+
+/* ======================================================
+   TABLET
+====================================================== */
+
+@media (max-width: 1050px) {
+
+  .form-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .attribute-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .badge-results-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media (max-width: 700px) {
+
+  .container {
+    width: min(
+      calc(100% - 24px),
+      var(--content-width)
+    );
+  }
+
+  .app-header .container {
+    min-height: 72px;
+
+    align-items: center;
+  }
+
+  .brand h1 {
+    font-size: 1.3rem;
+  }
+
+  .brand p {
+    font-size: 0.66rem;
+  }
+
+  .game-version span {
+    display: none;
+  }
+
+  .game-version strong {
+    min-height: 32px;
+
+    padding: 0 10px;
+
+    font-size: 0.78rem;
+  }
+
+  main.container {
+    padding-top: 18px;
+  }
+
+  .panel {
+    padding: 18px;
+
+    margin-bottom: 16px;
+  }
+
+  .section-header h2 {
+    font-size: 1.05rem;
+  }
+
+  .form-grid,
+  .attribute-grid,
+  .badge-results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .measurement-group {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr)
+      auto;
+  }
+
+  .calculator-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+  }
+
+  .badge-result-card {
+    min-height: 58px;
+  }
+}
