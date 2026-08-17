@@ -196,6 +196,7 @@ button {
   display: flex;
   align-items: center;
   gap: 14px;
+  width: 100%;
 }
 
 .brand-icon {
@@ -227,7 +228,8 @@ button {
   display: flex;
   flex-direction: column;
 
-  min-width: 0;
+  flex: 1 1 auto;
+  min-width: 220px;
 }
 
 .brand-eyebrow {
@@ -390,6 +392,8 @@ button {
   letter-spacing: 0.035em;
 
   line-height: 1.2;
+
+  white-space: nowrap;
 }/* ======================================================
    MAIN LAYOUT
 ====================================================== */
@@ -1161,49 +1165,64 @@ input[type="number"]::-webkit-outer-spin-button {
 
     /* Mobile brand lockup */
 
-  .brand-lockup {
-    gap: 10px;
-  }
+ .brand {
+  width: 100%;
+  min-width: 0;
+}
 
-  .brand-icon {
-    width: 44px;
-    height: 44px;
+.brand-lockup {
+  width: 100%;
+  gap: 10px;
+}
 
-    flex-basis: 44px;
-  }
+.brand-wordmark {
+  min-width: 0;
+}
 
-  .brand-icon img {
-    width: 40px;
-    height: 40px;
-  }
+.brand-icon {
+  width: 44px;
+  height: 44px;
 
-  .brand-title {
-    font-size: 1.65rem;
-  }
+  flex-basis: 44px;
+}
 
-  .brand-the {
-    font-size: 0.62rem;
-  }
+.brand-icon img {
+  width: 40px;
+  height: 40px;
+}
 
-  .brand-top-rule {
-    min-width: 36px;
-  }
+.brand-title {
+  font-size: 1.65rem;
+}
 
-  .brand-subtitle {
-    font-size: 0.62rem;
-  }
+.brand-the {
+  font-size: 0.62rem;
+}
+
+.brand-top-rule {
+  min-width: 36px;
+}
+
+.brand-subtitle {
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+.app-header .container {
+  min-height: 82px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  align-items: center;
+}
 
   .app-header .container {
-    min-height: 72px;
+  min-height: 82px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
-    align-items: center;
-  }
-
-  .app-header .container {
-    min-height: 72px;
-
-    align-items: center;
-  }
+  align-items: center;
+}
 
   main.container {
     padding-top: 18px;
