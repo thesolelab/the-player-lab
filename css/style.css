@@ -579,38 +579,37 @@ select {
   text-align: center;
 }
 
-.attribute-helper {
+.section-header .attribute-helper {
   display: flex;
   align-items: center;
   gap: 5px;
 
-  margin: 2px 0 14px;
+  margin: 6px 0 0;
 
   color: var(--text-muted);
 
-  font-size: 0.56rem;
+  font-size: 0.65rem;
   font-weight: 500;
   line-height: 1.2;
 
-  opacity: 0.62;
+  opacity: 0.7;
 }
 
-.attribute-helper-icon {
-  width: 11px;
-  height: 11px;
+.section-header .attribute-helper-icon {
+  width: 12px;
+  height: 12px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  flex: 0 0 11px;
+  flex: 0 0 12px;
 
   border: 1px solid currentColor;
   border-radius: 50%;
 
-  font-size: 0.42rem;
+  font-size: 0.45rem;
   font-weight: 800;
-
   line-height: 1;
 }
 
