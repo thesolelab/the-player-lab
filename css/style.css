@@ -580,14 +580,39 @@ select {
 }
 
 .attribute-helper {
-  margin: -6px 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin: -4px 0 20px;
 
   color: var(--text-muted);
 
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 500;
-
   line-height: 1.4;
+
+  opacity: 0.85;
+}
+
+.attribute-helper-icon {
+  width: 16px;
+  height: 16px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 16px;
+
+  border: 1px solid var(--text-muted);
+  border-radius: 50%;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-style: normal;
+
+  line-height: 1;
 }
 
 /* ======================================================
