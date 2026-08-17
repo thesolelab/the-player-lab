@@ -579,6 +579,16 @@ select {
   text-align: center;
 }
 
+.attribute-helper {
+  margin: -6px 0 22px;
+
+  color: var(--text-muted);
+
+  font-size: 0.78rem;
+  font-weight: 500;
+
+  line-height: 1.4;
+}
 
 /* ======================================================
    ATTRIBUTE CATEGORIES
