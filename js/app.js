@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.0
+  Version: 0.2.1
   Updated: 2026-08-16
 
   PURPOSE
@@ -14,6 +14,11 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+  0.2.1 - Updated player measurement handling
+      - Reads Height from separate feet and inches fields
+      - Reads Wingspan from separate feet and inches fields
+      - Removed ambiguous single-field height parsing
+      - Converts measurements directly to total inches
   0.2.0 - Added initial NBA 2K26 badge qualification engine
         - Reads window.BADGES_2K26
         - Collects player attributes from the UI
@@ -138,22 +143,52 @@ function initializePlayerLab() {
 
 function getPlayerData() {
 
-  const heightValue =
-    getInputValue("height");
+  const heightFeet =
+    getNumberValue("heightFeet");
+
+  const heightInches =
+    getNumberValue("heightInches");
+
+  const wingspanFeet =
+    getNumberValue("wingspanFeet");
+
+  const wingspanInches =
+    getNumberValue("wingspanInches");
+
 
   const player = {
     name: getInputValue("playerName"),
     competitionLevel: getInputValue("competitionLevel"),
     position: getInputValue("position"),
     secondaryPosition: getInputValue("secondaryPosition"),
-    height: heightValue,
-    heightInches: parseHeightToInches(heightValue),
+
+    heightFeet: heightFeet,
+    heightInches: heightInches,
+
+    heightTotalInches:
+      convertFeetAndInchesToTotal(
+        heightFeet,
+        heightInches
+      ),
+
+    wingspanFeet: wingspanFeet,
+    wingspanInches: wingspanInches,
+
+    wingspanTotalInches:
+      convertFeetAndInchesToTotal(
+        wingspanFeet,
+        wingspanInches
+      ),
+
     weight: getNumberValue("weight"),
+
     attributes: {}
   };
 
+
   const attributeInputs =
     document.querySelectorAll("[data-attribute]");
+
 
   attributeInputs.forEach(function (input) {
 
@@ -168,6 +203,7 @@ function getPlayerData() {
         ? attributeValue
         : 0;
   });
+
 
   return player;
 }
@@ -202,101 +238,35 @@ function getNumberValue(id) {
 
 
 // ======================================================
-// HEIGHT CONVERSION
+// MEASUREMENT CONVERSION
 // ======================================================
 //
-// Accepts:
+// Converts separate feet and inches fields
+// into total inches.
 //
-// 6'6"
-// 6'6
-// 6-6
-// 6 6
-// 78
-//
-// Returns total inches.
+// Example:
+// 6 ft 4 in = 76 inches
 
-function parseHeightToInches(heightValue) {
+function convertFeetAndInchesToTotal(
+  feet,
+  inches
+) {
 
-  if (!heightValue) {
+  if (
+    feet === null ||
+    inches === null
+  ) {
     return null;
   }
 
-  const cleanedHeight =
-    String(heightValue)
-      .trim()
-      .replace(/"/g, "")
-      .replace(/’/g, "'")
-      .replace(/′/g, "'");
-
-  // Example: 6'6
-  if (cleanedHeight.includes("'")) {
-
-    const parts =
-      cleanedHeight.split("'");
-
-    const feet =
-      Number(parts[0]);
-
-    const inches =
-      Number(parts[1] || 0);
-
-    if (
-      Number.isFinite(feet) &&
-      Number.isFinite(inches)
-    ) {
-      return (feet * 12) + inches;
-    }
+  if (
+    !Number.isFinite(feet) ||
+    !Number.isFinite(inches)
+  ) {
+    return null;
   }
 
-  // Example: 6-6
-  if (cleanedHeight.includes("-")) {
-
-    const parts =
-      cleanedHeight.split("-");
-
-    const feet =
-      Number(parts[0]);
-
-    const inches =
-      Number(parts[1]);
-
-    if (
-      Number.isFinite(feet) &&
-      Number.isFinite(inches)
-    ) {
-      return (feet * 12) + inches;
-    }
-  }
-
-  // Example: 6 6
-  const spacedParts =
-    cleanedHeight.split(/\s+/);
-
-  if (spacedParts.length === 2) {
-
-    const feet =
-      Number(spacedParts[0]);
-
-    const inches =
-      Number(spacedParts[1]);
-
-    if (
-      Number.isFinite(feet) &&
-      Number.isFinite(inches)
-    ) {
-      return (feet * 12) + inches;
-    }
-  }
-
-  // Example: 78
-  const numericHeight =
-    Number(cleanedHeight);
-
-  if (Number.isFinite(numericHeight)) {
-    return numericHeight;
-  }
-
-  return null;
+  return (feet * 12) + inches;
 }
 
 
@@ -563,7 +533,7 @@ function meetsHeightRestriction(
   }
 
   if (
-    player.heightInches === null ||
+    player.heightTotalInches === null ||
     !Number.isFinite(player.heightInches)
   ) {
     return false;
@@ -575,7 +545,7 @@ function meetsHeightRestriction(
   ) {
 
     if (
-      player.heightInches <
+      player.heightTotalInches <
       Number(heightRestriction.minInches)
     ) {
       return false;
@@ -588,7 +558,7 @@ function meetsHeightRestriction(
   ) {
 
     if (
-      player.heightInches >
+      player.heightTotalInches >
       Number(heightRestriction.maxInches)
     ) {
       return false;
