@@ -18,7 +18,11 @@
   CHANGELOG
 0.1.1 - Refined header and badge-level styling
       - Centered the NBA 2K26 version pill text
-      - Updated Legend badge color from cyan to red  
+      - Updated Legend badge color from cyan to red
+      - Added stronger per-level badge card borders
+      - Added subtle per-level background tinting
+      - Added hover glow effects for Bronze, Silver, Gold,
+        Hall of Fame, and Legend badge cards
 0.1.0 - Initial Dark Lab UI
         - Added global color system
         - Added application header styling
