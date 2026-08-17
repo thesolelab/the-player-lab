@@ -1,1 +1,856 @@
+/*
+  THE PLAYER LAB
+  File: js/app.js
+  Version: 0.2.0
+  Updated: 2026-08-16
 
+  PURPOSE
+  Handles Player Lab application logic.
+
+  IMPORTANT
+  - Badge requirements do not belong in this file.
+  - Badge data is read from data/badges-2k26.js.
+  - This file evaluates the data and displays results.
+  - Future game versions should reuse this engine whenever possible.
+
+  CHANGELOG
+  0.2.0 - Added initial NBA 2K26 badge qualification engine
+        - Reads window.BADGES_2K26
+        - Collects player attributes from the UI
+        - Converts player height to inches
+        - Supports allOf requirements
+        - Supports anyOf requirements
+        - Supports height restrictions
+        - Returns highest qualified badge level
+        - Displays qualified badges by category
+        - Added reset functionality
+*/
+
+
+// ======================================================
+// ACTIVE GAME DATA
+// ======================================================
+
+const ACTIVE_BADGE_DATA = window.BADGES_2K26;
+
+
+// ======================================================
+// BADGE LEVEL ORDER
+// ======================================================
+//
+// Highest to lowest.
+// The first level the player qualifies for is returned.
+
+const BADGE_LEVELS = [
+  {
+    key: "legend",
+    label: "Legend",
+    cssClass: "legend"
+  },
+  {
+    key: "hallOfFame",
+    label: "Hall of Fame",
+    cssClass: "hall-of-fame"
+  },
+  {
+    key: "gold",
+    label: "Gold",
+    cssClass: "gold"
+  },
+  {
+    key: "silver",
+    label: "Silver",
+    cssClass: "silver"
+  },
+  {
+    key: "bronze",
+    label: "Bronze",
+    cssClass: "bronze"
+  }
+];
+
+
+// ======================================================
+// PAGE ELEMENTS
+// ======================================================
+
+const calculateBadgesButton =
+  document.getElementById("calculateBadgesButton");
+
+const resetPlayerButton =
+  document.getElementById("resetPlayerButton");
+
+const badgeResults =
+  document.getElementById("badgeResults");
+
+const gameVersionDisplay =
+  document.getElementById("gameVersion");
+
+
+// ======================================================
+// INITIALIZE PLAYER LAB
+// ======================================================
+
+function initializePlayerLab() {
+
+  if (
+    !ACTIVE_BADGE_DATA ||
+    !Array.isArray(ACTIVE_BADGE_DATA.badges)
+  ) {
+    console.error(
+      "The Player Lab badge dataset could not be loaded."
+    );
+
+    showError(
+      "Badge data could not be loaded. Check data/badges-2k26.js."
+    );
+
+    return;
+  }
+
+  if (
+    gameVersionDisplay &&
+    ACTIVE_BADGE_DATA.gameVersion
+  ) {
+    gameVersionDisplay.textContent =
+      ACTIVE_BADGE_DATA.gameVersion;
+  }
+
+  if (calculateBadgesButton) {
+    calculateBadgesButton.addEventListener(
+      "click",
+      calculateBadges
+    );
+  }
+
+  if (resetPlayerButton) {
+    resetPlayerButton.addEventListener(
+      "click",
+      resetPlayer
+    );
+  }
+}
+
+
+// ======================================================
+// COLLECT PLAYER DATA
+// ======================================================
+
+function getPlayerData() {
+
+  const heightValue =
+    getInputValue("height");
+
+  const player = {
+    name: getInputValue("playerName"),
+    competitionLevel: getInputValue("competitionLevel"),
+    position: getInputValue("position"),
+    secondaryPosition: getInputValue("secondaryPosition"),
+    height: heightValue,
+    heightInches: parseHeightToInches(heightValue),
+    weight: getNumberValue("weight"),
+    attributes: {}
+  };
+
+  const attributeInputs =
+    document.querySelectorAll("[data-attribute]");
+
+  attributeInputs.forEach(function (input) {
+
+    const attributeName =
+      input.dataset.attribute;
+
+    const attributeValue =
+      Number(input.value);
+
+    player.attributes[attributeName] =
+      Number.isFinite(attributeValue)
+        ? attributeValue
+        : 0;
+  });
+
+  return player;
+}
+
+
+// ======================================================
+// INPUT HELPERS
+// ======================================================
+
+function getInputValue(id) {
+
+  const element =
+    document.getElementById(id);
+
+  if (!element) {
+    return "";
+  }
+
+  return String(element.value).trim();
+}
+
+
+function getNumberValue(id) {
+
+  const value =
+    Number(getInputValue(id));
+
+  return Number.isFinite(value)
+    ? value
+    : null;
+}
+
+
+// ======================================================
+// HEIGHT CONVERSION
+// ======================================================
+//
+// Accepts:
+//
+// 6'6"
+// 6'6
+// 6-6
+// 6 6
+// 78
+//
+// Returns total inches.
+
+function parseHeightToInches(heightValue) {
+
+  if (!heightValue) {
+    return null;
+  }
+
+  const cleanedHeight =
+    String(heightValue)
+      .trim()
+      .replace(/"/g, "")
+      .replace(/’/g, "'")
+      .replace(/′/g, "'");
+
+  // Example: 6'6
+  if (cleanedHeight.includes("'")) {
+
+    const parts =
+      cleanedHeight.split("'");
+
+    const feet =
+      Number(parts[0]);
+
+    const inches =
+      Number(parts[1] || 0);
+
+    if (
+      Number.isFinite(feet) &&
+      Number.isFinite(inches)
+    ) {
+      return (feet * 12) + inches;
+    }
+  }
+
+  // Example: 6-6
+  if (cleanedHeight.includes("-")) {
+
+    const parts =
+      cleanedHeight.split("-");
+
+    const feet =
+      Number(parts[0]);
+
+    const inches =
+      Number(parts[1]);
+
+    if (
+      Number.isFinite(feet) &&
+      Number.isFinite(inches)
+    ) {
+      return (feet * 12) + inches;
+    }
+  }
+
+  // Example: 6 6
+  const spacedParts =
+    cleanedHeight.split(/\s+/);
+
+  if (spacedParts.length === 2) {
+
+    const feet =
+      Number(spacedParts[0]);
+
+    const inches =
+      Number(spacedParts[1]);
+
+    if (
+      Number.isFinite(feet) &&
+      Number.isFinite(inches)
+    ) {
+      return (feet * 12) + inches;
+    }
+  }
+
+  // Example: 78
+  const numericHeight =
+    Number(cleanedHeight);
+
+  if (Number.isFinite(numericHeight)) {
+    return numericHeight;
+  }
+
+  return null;
+}
+
+
+// ======================================================
+// CALCULATE BADGES
+// ======================================================
+
+function calculateBadges() {
+
+  if (
+    !ACTIVE_BADGE_DATA ||
+    !Array.isArray(ACTIVE_BADGE_DATA.badges)
+  ) {
+    showError(
+      "The active badge dataset is unavailable."
+    );
+
+    return;
+  }
+
+  const player =
+    getPlayerData();
+
+  const qualifiedBadges = [];
+
+  ACTIVE_BADGE_DATA.badges.forEach(
+    function (badge) {
+
+      const highestLevel =
+        getHighestQualifiedBadgeLevel(
+          player,
+          badge
+        );
+
+      if (highestLevel) {
+
+        qualifiedBadges.push({
+          name: badge.name,
+          category: badge.category,
+          level: highestLevel.label,
+          levelKey: highestLevel.key,
+          cssClass: highestLevel.cssClass
+        });
+      }
+    }
+  );
+
+  displayBadgeResults(
+    player,
+    qualifiedBadges
+  );
+}
+
+
+// ======================================================
+// FIND HIGHEST QUALIFIED LEVEL
+// ======================================================
+
+function getHighestQualifiedBadgeLevel(
+  player,
+  badge
+) {
+
+  if (
+    !badge ||
+    !badge.levels
+  ) {
+    return null;
+  }
+
+  if (
+    !meetsHeightRestriction(
+      player,
+      badge.heightRestriction
+    )
+  ) {
+    return null;
+  }
+
+  for (
+    let i = 0;
+    i < BADGE_LEVELS.length;
+    i++
+  ) {
+
+    const level =
+      BADGE_LEVELS[i];
+
+    const levelRequirements =
+      badge.levels[level.key];
+
+    if (!levelRequirements) {
+      continue;
+    }
+
+    if (
+      playerQualifiesForLevel(
+        player,
+        levelRequirements
+      )
+    ) {
+      return level;
+    }
+  }
+
+  return null;
+}
+
+
+// ======================================================
+// CHECK LEVEL REQUIREMENTS
+// ======================================================
+
+function playerQualifiesForLevel(
+  player,
+  levelRequirements
+) {
+
+  if (!levelRequirements) {
+    return false;
+  }
+
+  const allOf =
+    Array.isArray(levelRequirements.allOf)
+      ? levelRequirements.allOf
+      : [];
+
+  const anyOf =
+    Array.isArray(levelRequirements.anyOf)
+      ? levelRequirements.anyOf
+      : [];
+
+
+  // ------------------------------------------
+  // ALL OF
+  // Every requirement must pass.
+  // ------------------------------------------
+
+  if (allOf.length > 0) {
+
+    const meetsAll =
+      allOf.every(
+        function (requirement) {
+
+          return meetsAttributeRequirement(
+            player,
+            requirement
+          );
+        }
+      );
+
+    if (!meetsAll) {
+      return false;
+    }
+  }
+
+
+  // ------------------------------------------
+  // ANY OF
+  // At least one requirement must pass.
+  // ------------------------------------------
+
+  if (anyOf.length > 0) {
+
+    const meetsAny =
+      anyOf.some(
+        function (requirement) {
+
+          return meetsAttributeRequirement(
+            player,
+            requirement
+          );
+        }
+      );
+
+    if (!meetsAny) {
+      return false;
+    }
+  }
+
+
+  // A level should contain at least one
+  // verified requirement.
+
+  if (
+    allOf.length === 0 &&
+    anyOf.length === 0
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+
+// ======================================================
+// CHECK ATTRIBUTE REQUIREMENT
+// ======================================================
+
+function meetsAttributeRequirement(
+  player,
+  requirement
+) {
+
+  if (
+    !requirement ||
+    !requirement.attribute
+  ) {
+    return false;
+  }
+
+  const playerValue =
+    Number(
+      player.attributes[
+        requirement.attribute
+      ]
+    );
+
+  if (!Number.isFinite(playerValue)) {
+    return false;
+  }
+
+  if (
+    requirement.min !== undefined &&
+    requirement.min !== null
+  ) {
+
+    if (
+      playerValue <
+      Number(requirement.min)
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    requirement.max !== undefined &&
+    requirement.max !== null
+  ) {
+
+    if (
+      playerValue >
+      Number(requirement.max)
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+// ======================================================
+// CHECK HEIGHT RESTRICTION
+// ======================================================
+
+function meetsHeightRestriction(
+  player,
+  heightRestriction
+) {
+
+  if (!heightRestriction) {
+    return true;
+  }
+
+  if (
+    player.heightInches === null ||
+    !Number.isFinite(player.heightInches)
+  ) {
+    return false;
+  }
+
+  if (
+    heightRestriction.minInches !== undefined &&
+    heightRestriction.minInches !== null
+  ) {
+
+    if (
+      player.heightInches <
+      Number(heightRestriction.minInches)
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    heightRestriction.maxInches !== undefined &&
+    heightRestriction.maxInches !== null
+  ) {
+
+    if (
+      player.heightInches >
+      Number(heightRestriction.maxInches)
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+// ======================================================
+// DISPLAY RESULTS
+// ======================================================
+
+function displayBadgeResults(
+  player,
+  qualifiedBadges
+) {
+
+  if (!badgeResults) {
+    return;
+  }
+
+  badgeResults.innerHTML = "";
+
+  if (qualifiedBadges.length === 0) {
+
+    badgeResults.innerHTML = `
+      <div class="empty-results">
+        <p>No qualified badges were found for these attributes.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  // ------------------------------------------
+  // SUMMARY
+  // ------------------------------------------
+
+  const summary =
+    document.createElement("div");
+
+  summary.className =
+    "results-summary";
+
+  const playerName =
+    player.name || "Player";
+
+  summary.innerHTML = `
+    <p>
+      <strong>${escapeHTML(playerName)}</strong>
+      qualified for
+      <strong>${qualifiedBadges.length}</strong>
+      badge${qualifiedBadges.length === 1 ? "" : "s"}.
+    </p>
+  `;
+
+  badgeResults.appendChild(summary);
+
+
+  // ------------------------------------------
+  // GROUP BY CATEGORY
+  // ------------------------------------------
+
+  const badgesByCategory = {};
+
+  qualifiedBadges.forEach(
+    function (badge) {
+
+      const category =
+        badge.category || "Other";
+
+      if (!badgesByCategory[category]) {
+        badgesByCategory[category] = [];
+      }
+
+      badgesByCategory[category].push(
+        badge
+      );
+    }
+  );
+
+
+  Object.keys(badgesByCategory)
+    .forEach(
+      function (category) {
+
+        const categorySection =
+          document.createElement("div");
+
+        categorySection.className =
+          "badge-category-results";
+
+
+        const heading =
+          document.createElement("h3");
+
+        heading.textContent =
+          category;
+
+        categorySection.appendChild(
+          heading
+        );
+
+
+        const badgeGrid =
+          document.createElement("div");
+
+        badgeGrid.className =
+          "badge-results-grid";
+
+
+        badgesByCategory[category]
+          .forEach(
+            function (badge) {
+
+              badgeGrid.appendChild(
+                createBadgeResultCard(
+                  badge
+                )
+              );
+            }
+          );
+
+
+        categorySection.appendChild(
+          badgeGrid
+        );
+
+        badgeResults.appendChild(
+          categorySection
+        );
+      }
+    );
+}
+
+
+// ======================================================
+// CREATE BADGE CARD
+// ======================================================
+
+function createBadgeResultCard(badge) {
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "badge-result-card";
+
+
+  const name =
+    document.createElement("div");
+
+  name.className =
+    "badge-result-name";
+
+  name.textContent =
+    badge.name;
+
+
+  const level =
+    document.createElement("span");
+
+  level.className =
+    "badge-level " +
+    badge.cssClass;
+
+  level.textContent =
+    badge.level;
+
+
+  card.appendChild(name);
+  card.appendChild(level);
+
+  return card;
+}
+
+
+// ======================================================
+// RESET PLAYER
+// ======================================================
+
+function resetPlayer() {
+
+  const playerInfoInputs =
+    document.querySelectorAll(
+      "#playerInfoSection input, #playerInfoSection select"
+    );
+
+  playerInfoInputs.forEach(
+    function (input) {
+
+      if (input.tagName === "SELECT") {
+        input.selectedIndex = 0;
+      } else {
+        input.value = "";
+      }
+    }
+  );
+
+
+  const attributeInputs =
+    document.querySelectorAll(
+      "[data-attribute]"
+    );
+
+  attributeInputs.forEach(
+    function (input) {
+
+      input.value = 25;
+    }
+  );
+
+
+  if (badgeResults) {
+
+    badgeResults.innerHTML = `
+      <div class="empty-results">
+        <p>No badge calculations have been run yet.</p>
+      </div>
+    `;
+  }
+}
+
+
+// ======================================================
+// ERROR DISPLAY
+// ======================================================
+
+function showError(message) {
+
+  if (!badgeResults) {
+    return;
+  }
+
+  badgeResults.innerHTML = `
+    <div class="empty-results">
+      <p>${escapeHTML(message)}</p>
+    </div>
+  `;
+}
+
+
+// ======================================================
+// HTML SAFETY
+// ======================================================
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+// ======================================================
+// START APPLICATION
+// ======================================================
+
+initializePlayerLab();
