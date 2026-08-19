@@ -1500,7 +1500,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
     /* Mobile brand lockup */
 
- .brand {
+ /* Mobile brand lockup */
+
+.brand {
   width: 100%;
   min-width: 0;
 }
@@ -1535,6 +1537,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-right: 6px;
   overflow: visible;
 }
+
 .brand-the {
   font-size: 0.62rem;
 }
@@ -1550,20 +1553,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .app-header .container {
   min-height: 82px;
+
   padding-top: 10px;
   padding-bottom: 10px;
 
   align-items: center;
 }
-
-  .app-header .container {
-  min-height: 82px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-  align-items: center;
-}
-
   main.container {
     padding-top: 18px;
   }
