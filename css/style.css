@@ -1328,20 +1328,6 @@ input[type="number"]::-webkit-outer-spin-button {
     );
   }
 
-  .attribute-slider-grid {
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.attribute-slider-field {
-  padding: 12px 14px;
-}
-
-.attribute-slider-header {
-  margin-bottom: 10px;
-}
-    /* Mobile brand lockup */
-
  /* Mobile brand lockup */
 
 .brand {
