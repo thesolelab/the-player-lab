@@ -146,23 +146,29 @@
   <label>Height</label>
 
   <div class="measurement-inputs">
-    <input
-      type="number"
-      id="heightFeet"
-      min="5"
-      max="8"
-      inputmode="numeric"
-      placeholder="FT"
-    >
+    <div class="measurement-field">
+      <input
+        type="number"
+        id="heightFeet"
+        min="5"
+        max="8"
+        inputmode="numeric"
+        placeholder="Feet"
+      >
+      <span class="measurement-unit">ft</span>
+    </div>
 
-    <input
-      type="number"
-      id="heightInches"
-      min="0"
-      max="11"
-      inputmode="numeric"
-      placeholder="IN"
-    >
+    <div class="measurement-field">
+      <input
+        type="number"
+        id="heightInches"
+        min="0"
+        max="11"
+        inputmode="numeric"
+        placeholder="Inches"
+      >
+      <span class="measurement-unit">in</span>
+    </div>
   </div>
 </div>
 
