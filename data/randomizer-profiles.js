@@ -1,8 +1,8 @@
 /*
   THE PLAYER LAB
   File: data/randomizer-profiles.js
-  Version: 0.1.0
-  Updated: 2026-08-17
+  Version: 0.1.1
+  Updated: 2026-08-21
 
   PURPOSE
   Stores Player Lab competition-level randomization profiles.
@@ -14,6 +14,10 @@
   - NBA 2K ultimately determines the in-game player result.
 
   CHANGELOG
+  0.1.1 - Fixed randomizer profile syntax
+        - Added missing comma after High School eliteChance
+        - Restored loading of PLAYER_LAB_RANDOMIZER_PROFILES
+        - Restored Randomize Player functionality
   0.1.0 - Initial competition generation profiles
         - Added High School profile
         - Added NCAA profile
