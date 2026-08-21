@@ -53,6 +53,9 @@
   <title>The Player Lab | NBA 2K Player Calculator</title>
 
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Umami Analytics Tracking -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="5127b925-7c51-4251-848c-05372b45e340"></script>
 </head>
 
 <body>
@@ -582,6 +585,7 @@
     type="button"
     id="calculateBadgesButton"
     class="primary-button"
+    data-umami-event="calculate-badges"
   >
     Calculate Badges
   </button>
@@ -590,6 +594,7 @@
     type="button"
     id="randomizePlayerButton"
     class="secondary-button randomize-button"
+    data-umami-event="randomize-player"
   >
     Randomize Player
   </button>
@@ -598,6 +603,7 @@
     type="button"
     id="resetPlayerButton"
     class="secondary-button"
+    data-umami-event="reset-player"
   >
     Reset Player
   </button>
