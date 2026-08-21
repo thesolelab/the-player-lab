@@ -1175,18 +1175,20 @@ function initializeAutoAdvance() {
   );
 
 
-  // ------------------------------------------
+   // ------------------------------------------
   // INCHES FIELDS
   // ------------------------------------------
   //
-  // Values 2-9 are complete immediately.
+  // Height minimum is 5'7".
   //
-  // 0 and 1 briefly wait because the user
-  // may be entering 10 or 11.
+  // Valid single-digit inches advance immediately.
+  // Values beginning with 1 briefly wait so
+  // 10 or 11 can still be entered.
 
   function addInchesAdvance(
     input,
-    nextElement
+    nextElement,
+    minimumSingleDigit
   ) {
 
     if (!input || !nextElement) {
@@ -1205,17 +1207,27 @@ function initializeAutoAdvance() {
         const value =
           String(input.value);
 
+        const numericValue =
+          Number(value);
+
 
         if (value.length >= 2) {
 
-          focusElement(nextElement);
+          if (
+            numericValue >= 10 &&
+            numericValue <= 11
+          ) {
+            focusElement(nextElement);
+          }
+
           return;
         }
 
 
         if (
           value.length === 1 &&
-          Number(value) >= 2
+          numericValue >= minimumSingleDigit &&
+          numericValue <= 9
         ) {
 
           focusElement(nextElement);
@@ -1223,10 +1235,7 @@ function initializeAutoAdvance() {
         }
 
 
-        if (
-          value === "0" ||
-          value === "1"
-        ) {
+        if (value === "1") {
 
           advanceTimer =
             setTimeout(
@@ -1247,10 +1256,119 @@ function initializeAutoAdvance() {
   }
 
 
-  addInchesAdvance(
-    heightInches,
-    weight
-  );
+  // Height minimum:
+  // 5 ft requires at least 7 inches.
+  // 6+ ft allows 0-11 inches.
+
+  function initializeHeightInchesAdvance() {
+
+    if (
+      !heightFeet ||
+      !heightInches ||
+      !weight
+    ) {
+      return;
+    }
+
+    let advanceTimer = null;
+
+
+    heightInches.addEventListener(
+      "input",
+      function () {
+
+        clearTimeout(advanceTimer);
+
+        const feet =
+          Number(heightFeet.value);
+
+        const value =
+          String(heightInches.value);
+
+        const inches =
+          Number(value);
+
+
+        const minimumInches =
+          feet === 5
+            ? 7
+            : 0;
+
+
+        if (value.length >= 2) {
+
+          if (
+            inches >= 10 &&
+            inches <= 11
+          ) {
+            focusElement(weight);
+          }
+
+          return;
+        }
+
+
+        if (
+          value.length === 1 &&
+          inches >= minimumInches &&
+          inches <= 9 &&
+          inches !== 1
+        ) {
+
+          focusElement(weight);
+          return;
+        }
+
+
+        if (value === "1") {
+
+          advanceTimer =
+            setTimeout(
+              function () {
+
+                if (
+                  document.activeElement ===
+                  heightInches
+                ) {
+                  focusElement(weight);
+                }
+
+              },
+              500
+            );
+        }
+      }
+    );
+
+
+    heightInches.addEventListener(
+      "blur",
+      function () {
+
+        const feet =
+          Number(heightFeet.value);
+
+        const inches =
+          Number(heightInches.value);
+
+
+        if (
+          feet === 5 &&
+          inches < 7
+        ) {
+          heightInches.value = 7;
+        }
+
+
+        if (inches > 11) {
+          heightInches.value = 11;
+        }
+      }
+    );
+  }
+
+
+  initializeHeightInchesAdvance();
 
 
   // ------------------------------------------
@@ -1282,10 +1400,11 @@ function initializeAutoAdvance() {
     attributeInputs.length > 0
   ) {
 
-    addInchesAdvance(
-      wingspanInches,
-      attributeInputs[0]
-    );
+   addInchesAdvance(
+  wingspanInches,
+  attributeInputs[0],
+  0
+);
   }
 
 
