@@ -22,7 +22,12 @@
         - Added strict 0-11 validation for height and wingspan inches
         - Enforced a minimum player height of 5'7"
         - Removed Secondary Position from player data handling
-        - Preserved badge calculations, randomizer behavior, and attribute validation 
+        - Preserved badge calculations, randomizer behavior, and attribute validation
+        - Improved randomized player proportions
+        - Generates wingspan relative to player height
+        - Uses competition profile wingspan difference settings
+        - Prevents unrealistic independently generated wingspans
+        - Preserved randomizer, badge calculation, and analytics functionality
   0.2.5 - Improved manual player-entry workflow
         - Removed Secondary Position from player data handling
         - Added automatic field-to-field input advancement
