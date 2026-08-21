@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.5
+  Version: 0.2.6
   Updated: 2026-08-21
 
   PURPOSE
@@ -14,13 +14,22 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+ 0.2.6  - Added League Type analytics and improved player entry
+        - Added Umami event properties to Calculate Badges and Randomize Player
+        - Tracks selected League Type using existing nba, ncaa, and high-school values
+        - Prevented duplicate analytics events
+        - Added automatic field-to-field advancement for manual player entry
+        - Added strict 0-11 validation for height and wingspan inches
+        - Enforced a minimum player height of 5'7"
+        - Removed Secondary Position from player data handling
+        - Preserved badge calculations, randomizer behavior, and attribute validation 
   0.2.5 - Improved manual player-entry workflow
-      - Removed Secondary Position from player data handling
-      - Added automatic field-to-field input advancement
-      - Added strict 0–11 validation for height and wingspan inches
-      - Added 5'7" minimum player-height enforcement
-      - Preserved 10 and 11 inch entry with delayed single-digit advance
-      - Preserved attribute input validation and badge calculation behavior
+        - Removed Secondary Position from player data handling
+        - Added automatic field-to-field input advancement
+          - Added strict 0–11 validation for height and wingspan inches
+        - Added 5'7" minimum player-height enforcement
+        - Preserved 10 and 11 inch entry with delayed single-digit advance
+        - Preserved attribute input validation and badge calculation behavior
   0.2.4 - Activated NBA 2K27 badge calculations
         - Updated the live badge engine to use window.BADGES_2K27
         - Preserved historical NBA 2K26 badge data separately
