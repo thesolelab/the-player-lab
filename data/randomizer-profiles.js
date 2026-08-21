@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: data/randomizer-profiles.js
-  Version: 0.1.1
+  Version: 0.1.2
   Updated: 2026-08-21
 
   PURPOSE
@@ -14,6 +14,12 @@
   - NBA 2K ultimately determines the in-game player result.
 
   CHANGELOG
+  0.1.2 - Refined randomized wingspan generation
+      - Changed randomized wingspan to never be shorter than player height
+      - Limited randomized wingspan to a maximum of 5 inches above player height
+      - Applied the same wingspan difference range across High School, NCAA, and NBA profiles
+      - Preserved existing attribute and physical generation behavior
+  
   0.1.1 - Fixed randomizer profile syntax
         - Added missing comma after High School eliteChance
         - Restored loading of PLAYER_LAB_RANDOMIZER_PROFILES
