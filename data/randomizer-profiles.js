@@ -32,15 +32,16 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
     eliteMin: 79,
     eliteMax: 88,
 
-    eliteChance: 0.08
+    eliteChance: 0.08,
+
     physicals: {
-    heightMin: 65,
-    heightMax: 82,
-    weightMin: 135,
-    weightMax: 260,
-    wingspanDifferenceMin: -1,
-    wingspanDifferenceMax: 7
-  }
+      heightMin: 65,
+      heightMax: 82,
+      weightMin: 135,
+      weightMax: 260,
+      wingspanDifferenceMin: -1,
+      wingspanDifferenceMax: 7
+    }
   },
 
 
