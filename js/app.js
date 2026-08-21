@@ -128,6 +128,41 @@ const gameVersionDisplay =
 
 
 // ======================================================
+// UMAMI EVENT TRACKING
+// ======================================================
+//
+// Tracks meaningful Player Lab actions with the
+// currently selected Competition Level.
+//
+// Uses the existing Competition Level values:
+// - high-school
+// - ncaa
+// - nba
+//
+// Tracking failures never block Player Lab functionality.
+
+function trackPlayerLabEvent(eventName) {
+
+  if (
+    !window.umami ||
+    typeof window.umami.track !== "function"
+  ) {
+    return;
+  }
+
+  const competition =
+    getInputValue("competitionLevel");
+
+  window.umami.track(
+    eventName,
+    {
+      competition: competition
+    }
+  );
+}
+
+
+// ======================================================
 // INITIALIZE PLAYER LAB
 // ======================================================
 
@@ -159,17 +194,31 @@ function initializePlayerLab() {
   if (calculateBadgesButton) {
     calculateBadgesButton.addEventListener(
       "click",
-      calculateBadges
+      function () {
+
+        trackPlayerLabEvent(
+          "calculate-badges"
+        );
+
+        calculateBadges();
+      }
     );
   }
 
   if (randomizePlayerButton) {
-  randomizePlayerButton.addEventListener(
-    "click",
-    randomizeTestPlayer
-  );
-}
-  
+    randomizePlayerButton.addEventListener(
+      "click",
+      function () {
+
+        trackPlayerLabEvent(
+          "randomize-player"
+        );
+
+        randomizeTestPlayer();
+      }
+    );
+  }
+
   if (resetPlayerButton) {
     resetPlayerButton.addEventListener(
       "click",
