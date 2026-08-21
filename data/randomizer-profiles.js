@@ -18,6 +18,7 @@
         - Added missing comma after High School eliteChance
         - Restored loading of PLAYER_LAB_RANDOMIZER_PROFILES
         - Restored Randomize Player functionality
+
   0.1.0 - Initial competition generation profiles
         - Added High School profile
         - Added NCAA profile
@@ -43,8 +44,9 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
       heightMax: 82,
       weightMin: 135,
       weightMax: 260,
+
       wingspanDifferenceMin: -1,
-      wingspanDifferenceMax: 7
+      wingspanDifferenceMax: 6
     }
   },
 
@@ -58,7 +60,12 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
     eliteMin: 85,
     eliteMax: 93,
 
-    eliteChance: 0.10
+    eliteChance: 0.10,
+
+    physicals: {
+      wingspanDifferenceMin: -1,
+      wingspanDifferenceMax: 6
+    }
   },
 
 
@@ -71,7 +78,12 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
     eliteMin: 93,
     eliteMax: 99,
 
-    eliteChance: 0.12
+    eliteChance: 0.12,
+
+    physicals: {
+      wingspanDifferenceMin: -1,
+      wingspanDifferenceMax: 6
+    }
   }
 
 };
