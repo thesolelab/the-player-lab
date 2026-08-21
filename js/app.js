@@ -14,7 +14,10 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
-  0.2.4 - Cleaned duplicate attribute input initialization
+  0.2.4 - Activated NBA 2K27 badge calculations
+        - Updated the live badge engine to use window.BADGES_2K27
+        - Preserved historical NBA 2K26 badge data separately
+        - Cleaned duplicate attribute input initialization
         - Removed duplicate initializeAttributeInputs function
         - Consolidated attribute input setup into a single implementation
         - Preserved Randomize Player functionality
