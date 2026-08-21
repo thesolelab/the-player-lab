@@ -5,7 +5,13 @@
   Updated: 2026-08-19
 
   CHANGELOG
-0.1.6 - Repaired Player Lab header markup
+0.1.6 - Updated live app to NBA 2K27
+      - Aligned the interface with NBA 2K27 attribute-qualified badge levels
+      - Removed Legend from the live badge-level legend
+      - Removed the NBA 2K26 script from the live application
+      - Fixed malformed brand/header HTML structure
+      - Kept historical NBA 2K26 badge data in the repository
+      - Repaired Player Lab header markup
       - Fixed malformed brand/header HTML structure
       - Restored correct logo placement inside the header container
       - Restored consistent brand lockup behavior across screen sizes
@@ -642,8 +648,7 @@
         <span class="badge-level silver">Silver</span>
         <span class="badge-level gold">Gold</span>
         <span class="badge-level hall-of-fame">Hall of Fame</span>
-        <span class="badge-level legend">Legend</span>
-
+      
       </div>
 
 
@@ -692,9 +697,9 @@
        Version-specific data stays separate
        from the application calculation logic.
   ========================================= -->
-  <script src="data/badges-2k26.js"></script>
-<script src="data/badges-2k27.js"></script>
-<script src="data/randomizer-profiles.js"></script>
+  <script src="data/badges-2k27.js"></script>
+  <script src="data/randomizer-profiles.js"></script>
+  <script src="js/app.js"></script>
 
 
   <!-- ========================================
