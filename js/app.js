@@ -1,8 +1,8 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.3
-  Updated: 2026-08-17
+  Version: 0.2.4
+  Updated: 2026-08-21
 
   PURPOSE
   Handles Player Lab application logic.
@@ -14,6 +14,12 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+  0.2.4 - Cleaned duplicate attribute input initialization
+        - Removed duplicate initializeAttributeInputs function
+        - Consolidated attribute input setup into a single implementation
+        - Preserved Randomize Player functionality
+        - Preserved badge calculation functionality
+        - Preserved default-value clearing and 25–99 validation
   0.2.3 - Fixed attribute input initialization
         - Corrected misplaced attribute input initialization code
         - Restored Randomize Player button functionality
