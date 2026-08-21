@@ -45,7 +45,7 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
       weightMin: 135,
       weightMax: 260,
 
-      wingspanDifferenceMin: -1,
+      wingspanDifferenceMin: 0,
       wingspanDifferenceMax: 6
     }
   },
@@ -63,7 +63,7 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
     eliteChance: 0.10,
 
     physicals: {
-      wingspanDifferenceMin: -1,
+      wingspanDifferenceMin: 0,
       wingspanDifferenceMax: 6
     }
   },
@@ -81,7 +81,7 @@ window.PLAYER_LAB_RANDOMIZER_PROFILES = {
     eliteChance: 0.12,
 
     physicals: {
-      wingspanDifferenceMin: -1,
+      wingspanDifferenceMin: 0,
       wingspanDifferenceMax: 6
     }
   }
