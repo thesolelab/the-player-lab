@@ -1076,8 +1076,9 @@ function initializeAttributeInputs() {
 //
 // Measurement behavior:
 // - Feet advances after 1 digit.
-// - Inches 2-9 advance immediately.
-// - Inches 0-1 briefly wait so 10 or 11 can be entered.
+// - Height and wingspan inches are limited to 0-11.
+// - Minimum player height is 5'7".
+// - Single-digit inches wait briefly so 10 or 11 can be entered.
 // - Weight advances after 3 digits.
 // - Attributes advance after 2 digits.
 
@@ -1138,7 +1139,7 @@ function initializeAutoAdvance() {
 
 
   // ------------------------------------------
-  // SINGLE-DIGIT FEET FIELDS
+  // FEET FIELDS
   // ------------------------------------------
 
   function addFeetAdvance(
@@ -1175,20 +1176,20 @@ function initializeAutoAdvance() {
   );
 
 
-    // ------------------------------------------
+  // ------------------------------------------
   // INCHES FIELDS
   // ------------------------------------------
   //
-  // Height inches: 0-11
-  // Wingspan inches: 0-11
+  // Valid range: 0-11.
   //
-  // Minimum player height: 5'7"
+  // Invalid values such as 12, 31, or 61
+  // are rejected and the last valid value
+  // is restored.
   //
-  // Single-digit values advance immediately,
-  // except 1 briefly waits so 10 or 11 can
-  // still be entered.
+  // A short delay on single-digit values
+  // allows 10 or 11 to be entered normally.
 
-  function addInchesAdvance(
+  function initializeInchesField(
     input,
     nextElement,
     options = {}
@@ -1199,6 +1200,31 @@ function initializeAutoAdvance() {
     }
 
     let advanceTimer = null;
+    let lastValidValue = "";
+
+
+    input.addEventListener(
+      "focus",
+      function () {
+
+        const currentValue =
+          String(input.value);
+
+        const currentNumber =
+          Number(currentValue);
+
+        if (
+          currentValue !== "" &&
+          Number.isFinite(currentNumber) &&
+          currentNumber >= 0 &&
+          currentNumber <= 11
+        ) {
+          lastValidValue = currentValue;
+        } else {
+          lastValidValue = "";
+        }
+      }
+    );
 
 
     input.addEventListener(
@@ -1207,50 +1233,61 @@ function initializeAutoAdvance() {
 
         clearTimeout(advanceTimer);
 
-        let value =
+        const value =
           String(input.value);
 
-        let numericValue =
+        const number =
           Number(value);
 
 
-        // Hard cap inches at 11.
-
-        if (numericValue > 11) {
-          input.value = 11;
-          numericValue = 11;
-          value = "11";
+        if (value === "") {
+          lastValidValue = "";
+          return;
         }
 
 
-        // Do not allow negative inches.
+        // Reject anything outside 0-11.
+        // Restore the last valid value instead
+        // of converting an invalid entry to 11.
 
-        if (numericValue < 0) {
-          input.value = 0;
-          numericValue = 0;
-          value = "0";
-        }
+        if (
+          !Number.isFinite(number) ||
+          number < 0 ||
+          number > 11
+        ) {
 
-
-        // Two-digit valid value: 10 or 11.
-
-        if (value.length >= 2) {
-
-          if (
-            numericValue >= 10 &&
-            numericValue <= 11
-          ) {
-            focusElement(nextElement);
-          }
+          input.value =
+            lastValidValue;
 
           return;
         }
 
 
-        // 1 needs a short delay because
-        // the user may be entering 10 or 11.
+        lastValidValue =
+          value;
 
-        if (value === "1") {
+
+        // 10 and 11 are complete immediately.
+
+        if (
+          value === "10" ||
+          value === "11"
+        ) {
+
+          focusElement(nextElement);
+
+          return;
+        }
+
+
+        // Valid single-digit values wait briefly
+        // so the user can still type 10 or 11.
+
+        if (
+          value.length === 1 &&
+          number >= 0 &&
+          number <= 9
+        ) {
 
           advanceTimer =
             setTimeout(
@@ -1263,83 +1300,67 @@ function initializeAutoAdvance() {
                 }
 
               },
-              500
+              400
             );
-
-          return;
-        }
-
-
-        // Other valid single-digit values
-        // can advance immediately.
-
-        if (
-          value.length === 1 &&
-          numericValue >= 0 &&
-          numericValue <= 9
-        ) {
-          focusElement(nextElement);
         }
       }
     );
 
 
-    // ------------------------------------------
-    // OPTIONAL MINIMUM HEIGHT VALIDATION
-    // ------------------------------------------
+    input.addEventListener(
+      "blur",
+      function () {
 
-    if (options.enforceMinimumHeight) {
-
-      input.addEventListener(
-        "blur",
-        function () {
-
-          const feet =
-            Number(heightFeet.value);
-
-          let inches =
-            Number(input.value);
-
-
-          if (!Number.isFinite(inches)) {
-            inches = 0;
-          }
-
-
-          if (inches > 11) {
-            inches = 11;
-          }
-
-
-          if (inches < 0) {
-            inches = 0;
-          }
-
-
-          // Overall minimum height = 5'7".
-
-          if (
-            feet === 5 &&
-            inches < 7
-          ) {
-            inches = 7;
-          }
-
-
-          input.value = inches;
+        if (input.value === "") {
+          return;
         }
-      );
-    }
+
+        let number =
+          Number(input.value);
+
+
+        if (!Number.isFinite(number)) {
+          input.value = "";
+          return;
+        }
+
+
+        if (number < 0) {
+          number = 0;
+        }
+
+        if (number > 11) {
+          number = 11;
+        }
+
+
+        // Overall minimum player height = 5'7".
+
+        if (
+          options.enforceMinimumHeight &&
+          Number(heightFeet.value) === 5 &&
+          number < 7
+        ) {
+          number = 7;
+        }
+
+
+        input.value =
+          number;
+      }
+    );
   }
 
 
-  addInchesAdvance(
+  initializeInchesField(
     heightInches,
     weight,
     {
       enforceMinimumHeight: true
     }
   );
+
+
   // ------------------------------------------
   // WEIGHT
   // ------------------------------------------
@@ -1364,12 +1385,12 @@ function initializeAutoAdvance() {
   // WINGSPAN INCHES -> FIRST ATTRIBUTE
   // ------------------------------------------
 
-    if (
+  if (
     wingspanInches &&
     attributeInputs.length > 0
   ) {
 
-    addInchesAdvance(
+    initializeInchesField(
       wingspanInches,
       attributeInputs[0]
     );
