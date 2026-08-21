@@ -1175,20 +1175,23 @@ function initializeAutoAdvance() {
   );
 
 
-   // ------------------------------------------
+    // ------------------------------------------
   // INCHES FIELDS
   // ------------------------------------------
   //
-  // Height minimum is 5'7".
+  // Height inches: 0-11
+  // Wingspan inches: 0-11
   //
-  // Valid single-digit inches advance immediately.
-  // Values beginning with 1 briefly wait so
-  // 10 or 11 can still be entered.
+  // Minimum player height: 5'7"
+  //
+  // Single-digit values advance immediately,
+  // except 1 briefly waits so 10 or 11 can
+  // still be entered.
 
   function addInchesAdvance(
     input,
     nextElement,
-    minimumSingleDigit
+    options = {}
   ) {
 
     if (!input || !nextElement) {
@@ -1204,12 +1207,32 @@ function initializeAutoAdvance() {
 
         clearTimeout(advanceTimer);
 
-        const value =
+        let value =
           String(input.value);
 
-        const numericValue =
+        let numericValue =
           Number(value);
 
+
+        // Hard cap inches at 11.
+
+        if (numericValue > 11) {
+          input.value = 11;
+          numericValue = 11;
+          value = "11";
+        }
+
+
+        // Do not allow negative inches.
+
+        if (numericValue < 0) {
+          input.value = 0;
+          numericValue = 0;
+          value = "0";
+        }
+
+
+        // Two-digit valid value: 10 or 11.
 
         if (value.length >= 2) {
 
@@ -1224,16 +1247,8 @@ function initializeAutoAdvance() {
         }
 
 
-        if (
-          value.length === 1 &&
-          numericValue >= minimumSingleDigit &&
-          numericValue <= 9
-        ) {
-
-          focusElement(nextElement);
-          return;
-        }
-
+        // 1 needs a short delay because
+        // the user may be entering 10 or 11.
 
         if (value === "1") {
 
@@ -1250,127 +1265,81 @@ function initializeAutoAdvance() {
               },
               500
             );
-        }
-      }
-    );
-  }
-
-
-  // Height minimum:
-  // 5 ft requires at least 7 inches.
-  // 6+ ft allows 0-11 inches.
-
-  function initializeHeightInchesAdvance() {
-
-    if (
-      !heightFeet ||
-      !heightInches ||
-      !weight
-    ) {
-      return;
-    }
-
-    let advanceTimer = null;
-
-
-    heightInches.addEventListener(
-      "input",
-      function () {
-
-        clearTimeout(advanceTimer);
-
-        const feet =
-          Number(heightFeet.value);
-
-        const value =
-          String(heightInches.value);
-
-        const inches =
-          Number(value);
-
-
-        const minimumInches =
-          feet === 5
-            ? 7
-            : 0;
-
-
-        if (value.length >= 2) {
-
-          if (
-            inches >= 10 &&
-            inches <= 11
-          ) {
-            focusElement(weight);
-          }
 
           return;
         }
 
+
+        // Other valid single-digit values
+        // can advance immediately.
 
         if (
           value.length === 1 &&
-          inches >= minimumInches &&
-          inches <= 9 &&
-          inches !== 1
+          numericValue >= 0 &&
+          numericValue <= 9
         ) {
-
-          focusElement(weight);
-          return;
-        }
-
-
-        if (value === "1") {
-
-          advanceTimer =
-            setTimeout(
-              function () {
-
-                if (
-                  document.activeElement ===
-                  heightInches
-                ) {
-                  focusElement(weight);
-                }
-
-              },
-              500
-            );
+          focusElement(nextElement);
         }
       }
     );
 
 
-    heightInches.addEventListener(
-      "blur",
-      function () {
+    // ------------------------------------------
+    // OPTIONAL MINIMUM HEIGHT VALIDATION
+    // ------------------------------------------
 
-        const feet =
-          Number(heightFeet.value);
+    if (options.enforceMinimumHeight) {
 
-        const inches =
-          Number(heightInches.value);
+      input.addEventListener(
+        "blur",
+        function () {
+
+          const feet =
+            Number(heightFeet.value);
+
+          let inches =
+            Number(input.value);
 
 
-        if (
-          feet === 5 &&
-          inches < 7
-        ) {
-          heightInches.value = 7;
+          if (!Number.isFinite(inches)) {
+            inches = 0;
+          }
+
+
+          if (inches > 11) {
+            inches = 11;
+          }
+
+
+          if (inches < 0) {
+            inches = 0;
+          }
+
+
+          // Overall minimum height = 5'7".
+
+          if (
+            feet === 5 &&
+            inches < 7
+          ) {
+            inches = 7;
+          }
+
+
+          input.value = inches;
         }
-
-
-        if (inches > 11) {
-          heightInches.value = 11;
-        }
-      }
-    );
+      );
+    }
   }
 
 
-  initializeHeightInchesAdvance();
-
-
+  addInchesAdvance(
+    heightInches,
+    weight,
+    {
+      enforceMinimumHeight: true
+    }
+  );
   // ------------------------------------------
   // WEIGHT
   // ------------------------------------------
@@ -1395,16 +1364,15 @@ function initializeAutoAdvance() {
   // WINGSPAN INCHES -> FIRST ATTRIBUTE
   // ------------------------------------------
 
-  if (
+    if (
     wingspanInches &&
     attributeInputs.length > 0
   ) {
 
-   addInchesAdvance(
-  wingspanInches,
-  attributeInputs[0],
-  0
-);
+    addInchesAdvance(
+      wingspanInches,
+      attributeInputs[0]
+    );
   }
 
 
