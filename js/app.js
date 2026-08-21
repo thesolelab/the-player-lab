@@ -51,8 +51,14 @@
 // ======================================================
 // ACTIVE GAME DATA
 // ======================================================
+//
+// The Player Lab uses the latest supported NBA 2K
+// ruleset for live calculations.
+//
+// Historical badge datasets remain stored separately
+// in the repository for reference.
 
-const ACTIVE_BADGE_DATA = window.BADGES_2K26;
+const ACTIVE_BADGE_DATA = window.BADGES_2K27;
 
 
 // ======================================================
