@@ -9,7 +9,7 @@
 
   IMPORTANT
   - Badge requirements do not belong in this file.
-  - Badge data is read from data/badges-2k26.js.
+  - Badge data is read from data/badges-2k27.js.
   - This file evaluates the data and displays results.
   - Future game versions should reuse this engine whenever possible.
 
@@ -135,7 +135,7 @@ function initializePlayerLab() {
     );
 
     showError(
-      "Badge data could not be loaded. Check data/badges-2k26.js."
+      "Badge data could not be loaded. Check data/badges-2k27.js."
     );
 
     return;
@@ -195,7 +195,6 @@ function getPlayerData() {
     name: getInputValue("playerName"),
     competitionLevel: getInputValue("competitionLevel"),
     position: getInputValue("position"),
-    secondaryPosition: getInputValue("secondaryPosition"),
 
     heightFeet: heightFeet,
     heightInches: heightInches,
@@ -1064,7 +1063,7 @@ function initializeAttributeInputs() {
 // PLAYER INPUT AUTO-ADVANCE
 // ======================================================
 //
-// Moves focus through the player form in a natural order.
+// Moves focus through manual player entry.
 //
 // Flow:
 // Position
@@ -1075,12 +1074,12 @@ function initializeAttributeInputs() {
 // -> Wingspan Inches
 // -> Attributes in page order
 //
-// Notes:
-// - Position advances after a selection is made.
-// - Single-digit measurement fields advance immediately.
+// Measurement behavior:
+// - Feet advances after 1 digit.
+// - Inches 2-9 advance immediately.
+// - Inches 0-1 briefly wait so 10 or 11 can be entered.
 // - Weight advances after 3 digits.
-// - Attribute fields advance after 2 digits.
-// - Tab and Shift+Tab continue to work normally.
+// - Attributes advance after 2 digits.
 
 function initializeAutoAdvance() {
 
@@ -1117,39 +1116,6 @@ function initializeAutoAdvance() {
     }
 
     element.focus();
-
-    if (
-      typeof element.select === "function"
-    ) {
-      element.select();
-    }
-  }
-
-
-  function addNumericAdvance(
-    input,
-    nextElement,
-    requiredDigits
-  ) {
-
-    if (!input || !nextElement) {
-      return;
-    }
-
-    input.addEventListener(
-      "input",
-      function () {
-
-        const value =
-          String(input.value);
-
-        if (
-          value.length >= requiredDigits
-        ) {
-          focusElement(nextElement);
-        }
-      }
-    );
   }
 
 
@@ -1172,42 +1138,153 @@ function initializeAutoAdvance() {
 
 
   // ------------------------------------------
-  // PLAYER MEASUREMENTS
+  // SINGLE-DIGIT FEET FIELDS
   // ------------------------------------------
 
-  addNumericAdvance(
+  function addFeetAdvance(
+    input,
+    nextElement
+  ) {
+
+    if (!input || !nextElement) {
+      return;
+    }
+
+    input.addEventListener(
+      "input",
+      function () {
+
+        if (
+          String(input.value).length >= 1
+        ) {
+          focusElement(nextElement);
+        }
+      }
+    );
+  }
+
+
+  addFeetAdvance(
     heightFeet,
-    heightInches,
-    1
+    heightInches
   );
 
-  addNumericAdvance(
-    heightInches,
-    weight,
-    2
-  );
-
-  addNumericAdvance(
-    weight,
+  addFeetAdvance(
     wingspanFeet,
-    3
+    wingspanInches
   );
 
-  addNumericAdvance(
-    wingspanFeet,
-    wingspanInches,
-    1
+
+  // ------------------------------------------
+  // INCHES FIELDS
+  // ------------------------------------------
+  //
+  // Values 2-9 are complete immediately.
+  //
+  // 0 and 1 briefly wait because the user
+  // may be entering 10 or 11.
+
+  function addInchesAdvance(
+    input,
+    nextElement
+  ) {
+
+    if (!input || !nextElement) {
+      return;
+    }
+
+    let advanceTimer = null;
+
+
+    input.addEventListener(
+      "input",
+      function () {
+
+        clearTimeout(advanceTimer);
+
+        const value =
+          String(input.value);
+
+
+        if (value.length >= 2) {
+
+          focusElement(nextElement);
+          return;
+        }
+
+
+        if (
+          value.length === 1 &&
+          Number(value) >= 2
+        ) {
+
+          focusElement(nextElement);
+          return;
+        }
+
+
+        if (
+          value === "0" ||
+          value === "1"
+        ) {
+
+          advanceTimer =
+            setTimeout(
+              function () {
+
+                if (
+                  document.activeElement === input
+                ) {
+                  focusElement(nextElement);
+                }
+
+              },
+              500
+            );
+        }
+      }
+    );
+  }
+
+
+  addInchesAdvance(
+    heightInches,
+    weight
   );
+
+
+  // ------------------------------------------
+  // WEIGHT
+  // ------------------------------------------
+
+  if (weight && wingspanFeet) {
+
+    weight.addEventListener(
+      "input",
+      function () {
+
+        if (
+          String(weight.value).length >= 3
+        ) {
+          focusElement(wingspanFeet);
+        }
+      }
+    );
+  }
+
+
+  // ------------------------------------------
+  // WINGSPAN INCHES -> FIRST ATTRIBUTE
+  // ------------------------------------------
 
   if (
     wingspanInches &&
     attributeInputs.length > 0
   ) {
 
-    addNumericAdvance(
+    addInchesAdvance(
       wingspanInches,
-      attributeInputs[0],
-      2
+      attributeInputs[0]
     );
   }
 
@@ -1226,15 +1303,21 @@ function initializeAutoAdvance() {
         return;
       }
 
-      addNumericAdvance(
-        input,
-        nextInput,
-        2
+
+      input.addEventListener(
+        "input",
+        function () {
+
+          if (
+            String(input.value).length >= 2
+          ) {
+            focusElement(nextInput);
+          }
+        }
       );
     }
   );
 }
-
 // ======================================================
 // RESET PLAYER
 // ======================================================
