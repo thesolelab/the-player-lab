@@ -855,6 +855,37 @@ function createBadgeResultCard(badge) {
 function randomizeTestPlayer() {
 
   // ------------------------------------------
+  // COMPETITION PROFILE
+  // ------------------------------------------
+
+  const competitionLevel =
+    getInputValue("competitionLevel");
+
+  const profiles =
+    window.PLAYER_LAB_RANDOMIZER_PROFILES;
+
+  const profile =
+    profiles
+      ? profiles[competitionLevel]
+      : null;
+
+
+  if (!profile) {
+
+    console.error(
+      "Randomizer profile could not be found for:",
+      competitionLevel
+    );
+
+    showError(
+      "The selected competition randomizer profile could not be loaded."
+    );
+
+    return;
+  }
+
+
+  // ------------------------------------------
   // PLAYER INFORMATION
   // ------------------------------------------
 
@@ -862,7 +893,8 @@ function randomizeTestPlayer() {
     document.getElementById("playerName");
 
   if (playerName) {
-    playerName.value = "Random Test Player";
+    playerName.value =
+      "Random Test Player";
   }
 
 
@@ -880,9 +912,13 @@ function randomizeTestPlayer() {
   ];
 
   if (position) {
+
     position.value =
       positions[
-        randomInteger(0, positions.length - 1)
+        randomInteger(
+          0,
+          positions.length - 1
+        )
       ];
   }
 
@@ -891,17 +927,45 @@ function randomizeTestPlayer() {
   // HEIGHT
   // ------------------------------------------
   //
-  // Temporary testing range only.
-  // Not competition-level generation logic.
+  // Temporary testing range unless a
+  // competition profile provides its own
+  // verified Player Lab generation range.
+
+  const physicals =
+    profile.physicals || {};
+
+
+  const heightMin =
+    Number.isFinite(
+      physicals.heightMin
+    )
+      ? physicals.heightMin
+      : 68;
+
+
+  const heightMax =
+    Number.isFinite(
+      physicals.heightMax
+    )
+      ? physicals.heightMax
+      : 88;
+
 
   const heightTotal =
-    randomInteger(68, 88);
+    randomInteger(
+      heightMin,
+      heightMax
+    );
+
 
   const heightFeet =
-    Math.floor(heightTotal / 12);
+    Math.floor(
+      heightTotal / 12
+    );
 
   const heightInches =
     heightTotal % 12;
+
 
   setInputValue(
     "heightFeet",
@@ -918,24 +982,78 @@ function randomizeTestPlayer() {
   // WEIGHT
   // ------------------------------------------
 
+  const weightMin =
+    Number.isFinite(
+      physicals.weightMin
+    )
+      ? physicals.weightMin
+      : 160;
+
+
+  const weightMax =
+    Number.isFinite(
+      physicals.weightMax
+    )
+      ? physicals.weightMax
+      : 300;
+
+
   setInputValue(
     "weight",
-    randomInteger(160, 300)
+    randomInteger(
+      weightMin,
+      weightMax
+    )
   );
 
 
   // ------------------------------------------
   // WINGSPAN
   // ------------------------------------------
+  //
+  // Wingspan is generated relative to height
+  // instead of independently.
+  //
+  // Player Lab default:
+  // minimum = height - 1 inch
+  // maximum = height + 6 inches
+
+  const wingspanDifferenceMin =
+    Number.isFinite(
+      physicals.wingspanDifferenceMin
+    )
+      ? physicals.wingspanDifferenceMin
+      : -1;
+
+
+  const wingspanDifferenceMax =
+    Number.isFinite(
+      physicals.wingspanDifferenceMax
+    )
+      ? physicals.wingspanDifferenceMax
+      : 6;
+
+
+  const wingspanDifference =
+    randomInteger(
+      wingspanDifferenceMin,
+      wingspanDifferenceMax
+    );
+
 
   const wingspanTotal =
-    randomInteger(68, 96);
+    heightTotal +
+    wingspanDifference;
+
 
   const wingspanFeet =
-    Math.floor(wingspanTotal / 12);
+    Math.floor(
+      wingspanTotal / 12
+    );
 
   const wingspanInches =
     wingspanTotal % 12;
+
 
   setInputValue(
     "wingspanFeet",
@@ -949,57 +1067,31 @@ function randomizeTestPlayer() {
 
 
   // ------------------------------------------
-// ATTRIBUTES
-// ------------------------------------------
-//
-// Attribute generation is based on the
-// selected Player Lab competition profile.
-//
-// These ranges are Player Lab generation
-// guidance only and are not official 2K limits.
+  // ATTRIBUTES
+  // ------------------------------------------
+  //
+  // Attribute generation is based on the
+  // selected Player Lab competition profile.
+  //
+  // These ranges are Player Lab generation
+  // guidance only and are not official 2K limits.
 
-const competitionLevel =
-  getInputValue("competitionLevel");
-
-const profiles =
-  window.PLAYER_LAB_RANDOMIZER_PROFILES;
-
-const profile =
-  profiles
-    ? profiles[competitionLevel]
-    : null;
+  const attributeInputs =
+    document.querySelectorAll(
+      "[data-attribute]"
+    );
 
 
-if (!profile) {
+  attributeInputs.forEach(
+    function (input) {
 
-  console.error(
-    "Randomizer profile could not be found for:",
-    competitionLevel
+      input.value =
+        randomizeAttributeFromProfile(
+          profile
+        );
+    }
   );
 
-  showError(
-    "The selected competition randomizer profile could not be loaded."
-  );
-
-  return;
-}
-
-
-const attributeInputs =
-  document.querySelectorAll(
-    "[data-attribute]"
-  );
-
-
-attributeInputs.forEach(
-  function (input) {
-
-    input.value =
-      randomizeAttributeFromProfile(
-        profile
-      );
-  }
-);
 
   // ------------------------------------------
   // CLEAR OLD RESULTS
@@ -1016,7 +1108,6 @@ attributeInputs.forEach(
     `;
   }
 }
-
 
 // ======================================================
 // RANDOMIZER HELPERS
