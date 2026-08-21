@@ -1061,6 +1061,181 @@ function initializeAttributeInputs() {
 }
 
 // ======================================================
+// PLAYER INPUT AUTO-ADVANCE
+// ======================================================
+//
+// Moves focus through the player form in a natural order.
+//
+// Flow:
+// Position
+// -> Height Feet
+// -> Height Inches
+// -> Weight
+// -> Wingspan Feet
+// -> Wingspan Inches
+// -> Attributes in page order
+//
+// Notes:
+// - Position advances after a selection is made.
+// - Single-digit measurement fields advance immediately.
+// - Weight advances after 3 digits.
+// - Attribute fields advance after 2 digits.
+// - Tab and Shift+Tab continue to work normally.
+
+function initializeAutoAdvance() {
+
+  const position =
+    document.getElementById("position");
+
+  const heightFeet =
+    document.getElementById("heightFeet");
+
+  const heightInches =
+    document.getElementById("heightInches");
+
+  const weight =
+    document.getElementById("weight");
+
+  const wingspanFeet =
+    document.getElementById("wingspanFeet");
+
+  const wingspanInches =
+    document.getElementById("wingspanInches");
+
+  const attributeInputs =
+    Array.from(
+      document.querySelectorAll(
+        "[data-attribute]"
+      )
+    );
+
+
+  function focusElement(element) {
+
+    if (!element) {
+      return;
+    }
+
+    element.focus();
+
+    if (
+      typeof element.select === "function"
+    ) {
+      element.select();
+    }
+  }
+
+
+  function addNumericAdvance(
+    input,
+    nextElement,
+    requiredDigits
+  ) {
+
+    if (!input || !nextElement) {
+      return;
+    }
+
+    input.addEventListener(
+      "input",
+      function () {
+
+        const value =
+          String(input.value);
+
+        if (
+          value.length >= requiredDigits
+        ) {
+          focusElement(nextElement);
+        }
+      }
+    );
+  }
+
+
+  // ------------------------------------------
+  // POSITION
+  // ------------------------------------------
+
+  if (position) {
+
+    position.addEventListener(
+      "change",
+      function () {
+
+        if (position.value) {
+          focusElement(heightFeet);
+        }
+      }
+    );
+  }
+
+
+  // ------------------------------------------
+  // PLAYER MEASUREMENTS
+  // ------------------------------------------
+
+  addNumericAdvance(
+    heightFeet,
+    heightInches,
+    1
+  );
+
+  addNumericAdvance(
+    heightInches,
+    weight,
+    2
+  );
+
+  addNumericAdvance(
+    weight,
+    wingspanFeet,
+    3
+  );
+
+  addNumericAdvance(
+    wingspanFeet,
+    wingspanInches,
+    1
+  );
+
+  if (
+    wingspanInches &&
+    attributeInputs.length > 0
+  ) {
+
+    addNumericAdvance(
+      wingspanInches,
+      attributeInputs[0],
+      2
+    );
+  }
+
+
+  // ------------------------------------------
+  // ATTRIBUTES
+  // ------------------------------------------
+
+  attributeInputs.forEach(
+    function (input, index) {
+
+      const nextInput =
+        attributeInputs[index + 1];
+
+      if (!nextInput) {
+        return;
+      }
+
+      addNumericAdvance(
+        input,
+        nextInput,
+        2
+      );
+    }
+  );
+}
+
+// ======================================================
 // RESET PLAYER
 // ======================================================
 
@@ -1146,3 +1321,4 @@ function escapeHTML(value) {
 
 initializePlayerLab();
 initializeAttributeInputs();
+initializeAutoAdvance();
