@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: data/badges-2k27.js
-  Version: 0.1.0
+  Version: 0.1.1
   Updated: 2026-08-21
 
   PURPOSE
@@ -32,6 +32,11 @@
     present in the verified source chart.
 
   CHANGELOG
+ 0.1.1 - Added NBA 2K27 badge descriptions
+      - Added concise descriptions for all 53 badges
+      - Kept badge descriptions separate from qualification requirements
+      - Applied descriptions to badge records by badge name
+      - Preserved all existing badge thresholds, restrictions, and qualification logic
   0.1.0 - Initial NBA 2K27 badge database
         - Added 53 badges from the verified requirement chart
         - Added Bronze through Hall of Fame requirements
