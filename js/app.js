@@ -838,16 +838,6 @@ function createBadgeResultCard(badge) {
     badge.name;
 
 
-  const toggle =
-    document.createElement("span");
-
-  toggle.className =
-    "badge-result-toggle";
-
-  toggle.textContent =
-    "+";
-
-
   const level =
     document.createElement("span");
 
@@ -857,6 +847,16 @@ function createBadgeResultCard(badge) {
 
   level.textContent =
     badge.level;
+
+
+  const toggle =
+    document.createElement("span");
+
+  toggle.className =
+    "badge-result-toggle";
+
+  toggle.textContent =
+    "+";
 
 
   const description =
@@ -870,50 +870,26 @@ function createBadgeResultCard(badge) {
 
 
   card.appendChild(name);
-
-
-  if (badge.description) {
-
-    card.appendChild(toggle);
-  }
-
-
   card.appendChild(level);
 
 
   if (badge.description) {
 
-    card.appendChild(
-      description
-    );
+    card.appendChild(toggle);
+    card.appendChild(description);
 
     card.classList.add(
       "has-description"
     );
 
 
-    // ------------------------------------------
-    // TOUCH DEVICE TAP BEHAVIOR
-    // ------------------------------------------
-
     card.addEventListener(
       "click",
       function () {
 
-        const isTouchDevice =
-          window.matchMedia(
-            "(hover: none), (pointer: coarse)"
-          ).matches;
-
-        if (!isTouchDevice) {
-          return;
-        }
-
-
         card.classList.toggle(
           "is-expanded"
         );
-
 
         toggle.textContent =
           card.classList.contains(
@@ -927,8 +903,7 @@ function createBadgeResultCard(badge) {
 
 
   return card;
-}
-// ======================================================
+}// ======================================================
 // TEST PLAYER RANDOMIZER
 // ======================================================
 //
