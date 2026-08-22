@@ -1492,11 +1492,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .brand-top-rule {
-  flex: 0 0 78px;
+  flex: 0 0 68px;
 }
 
 .brand-bottom-rule {
-  width: 135px;
+  width: 115px;
 }  
 
 .brand-subtitle {
