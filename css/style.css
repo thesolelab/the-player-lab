@@ -3,8 +3,8 @@
 /*
   THE PLAYER LAB
   File: css/style.css
-  Version: 0.1.3
-  Updated: 2026-08-16
+  Version: 0.1.4
+  Updated: 2026-08-21
 
   PURPOSE
   Provides the visual styling for The Player Lab.
@@ -18,6 +18,11 @@
   - Responsive desktop and mobile layouts
 
   CHANGELOG
+0.1.4 - Added responsive badge description interactions
+      - Added desktop hover behavior for badge descriptions
+      - Added mobile tap-expanded badge description styling
+      - Preserved existing badge card alignment
+      - Preserved Bronze, Silver, Gold, and Hall of Fame card styling
 0.1.3 - Refined Player Lab header icon styling
       - Added sizing and alignment for the laboratory flask icon
       - Increased icon size for better balance with the header text
