@@ -281,7 +281,7 @@ button {
 }
 
 .brand-top-rule {
-  flex: 0 0 170px;
+  flex: 0 0 105px;
 
   height: 1px;
 
@@ -385,7 +385,7 @@ padding-right: 8px;
 ====================================================== */
 
 .brand-bottom-rule {
-  width: 235px;
+  width: 165px;
   height: 2px;
 
   margin-top: 4px;
