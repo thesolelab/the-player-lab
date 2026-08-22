@@ -1112,12 +1112,75 @@ select {
    BADGE DESCRIPTIONS
 ====================================================== */
 
-/* Description hidden by default */
+.badge-result-card.has-description {
+  display: grid;
 
-.badge-result-description {
-  display: none !important;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    18px;
+
+  align-items: center;
+
+  column-gap: 8px;
+
+  cursor: pointer;
+}
+
+
+/* Badge name */
+
+.badge-result-card.has-description
+> .badge-result-name {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+
+/* Badge level */
+
+.badge-result-card.has-description
+> .badge-level {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+
+/* + / − indicator */
+
+.badge-result-card.has-description
+> .badge-result-toggle {
+  display: inline-flex;
+
+  grid-column: 3;
+  grid-row: 1;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  margin: 0;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+
+  opacity: 0.8;
+}
+
+
+/* Description hidden until clicked/tapped */
+
+.badge-result-card.has-description
+> .badge-result-description {
+  display: none;
 
   grid-column: 1 / -1;
+  grid-row: 2;
 
   margin-top: 8px;
 
@@ -1128,103 +1191,11 @@ select {
 }
 
 
-/* Desktop/default card layout */
+/* Expanded state */
 
-.badge-result-card.has-description {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    auto;
-
-  align-items: center;
-
-  column-gap: 10px;
-
-  cursor: pointer;
-}
-
-
-/* Hide + / − on desktop */
-
-.badge-result-toggle {
-  display: none;
-}
-
-
-/* ======================================================
-   DESKTOP — HOVER ONLY
-====================================================== */
-
-@media (min-width: 701px) {
-
-  .badge-result-card.has-description:hover
-  .badge-result-description {
-
-    display: block !important;
-  }
-}
-
-
-/* ======================================================
-   MOBILE — TAP + / −
-====================================================== */
-
-@media (max-width: 700px) {
-
-  .badge-result-card.has-description {
-    grid-template-columns:
-      minmax(0, 1fr)
-      auto
-      auto;
-
-    column-gap: 7px;
-  }
-
-
-  .badge-result-name {
-    grid-column: 1;
-  }
-
-
-  .badge-level {
-    grid-column: 2;
-  }
-
-
-  .badge-result-toggle {
-    grid-column: 3;
-
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 16px;
-    height: 16px;
-
-    color: var(--text-muted);
-
-    font-size: 0.9rem;
-    font-weight: 700;
-    line-height: 1;
-
-    opacity: 0.8;
-  }
-
-
-  .badge-result-description {
-    display: none !important;
-
-    grid-column: 1 / -1;
-  }
-
-
-  .badge-result-card.has-description.is-expanded
-  .badge-result-description {
-
-    display: block !important;
-  }
+.badge-result-card.has-description.is-expanded
+> .badge-result-description {
+  display: block;
 }
 /* ======================================================
    BADGE RESULT CARD LEVEL COLORS
