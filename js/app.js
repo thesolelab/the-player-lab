@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.6
+  Version: 0.2.7
   Updated: 2026-08-21
 
   PURPOSE
@@ -14,6 +14,12 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+ 0.2.7  - Added interactive badge descriptions
+        - Passes badge description data into qualified badge results
+        - Added badge description rendering to result cards
+        - Added tap-to-expand behavior for touch devices
+        - Preserved all existing badge qualification logic
+        - Preserved randomizer and analytics functionality
  0.2.6  - Added League Type analytics and improved player entry
         - Added Umami event properties to Calculate Badges and Randomize Player
         - Tracks selected League Type using existing nba, ncaa, and high-school values
