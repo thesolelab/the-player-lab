@@ -106,9 +106,6 @@
   --badge-hof: #bb6bd9;
   --badge-hof-bg: #281634;
 
-  --badge-legend: #ff5a67;
-  --badge-legend-bg: #2f1519;
-
   /* Status */
   --danger: #ff5a67;
 
@@ -905,43 +902,6 @@ select {
 
 
 /* ======================================================
-   BADGE LEVEL LEGEND
-====================================================== */
-
-.badge-level-legend {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 8px;
-
-  margin-bottom: 22px;
-
-  padding-bottom: 18px;
-
-  border-bottom: 1px solid var(--border-primary);
-}
-
-.badge-level {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 28px;
-
-  padding: 4px 10px;
-
-  border: 1px solid transparent;
-  border-radius: 999px;
-
-  font-size: 0.72rem;
-  font-weight: 800;
-
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-}
-
-
-/* ======================================================
    BRONZE
 ====================================================== */
 
@@ -988,19 +948,6 @@ select {
   color: var(--badge-hof);
 }
 
-
-/* ======================================================
-   LEGEND
-====================================================== */
-
-.badge-level.legend {
-  border-color: rgba(255, 90, 103, 0.5);
-
-  background: var(--badge-legend-bg);
-  color: var(--badge-legend);
-}
-
-
 /* ======================================================
    RESULTS SUMMARY
 ====================================================== */
@@ -1040,6 +987,11 @@ select {
 .badge-category-results > h3 {
   margin: 0 0 12px;
 
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
   color: var(--text-primary);
 
   font-size: 0.88rem;
@@ -1049,15 +1001,74 @@ select {
   text-transform: uppercase;
 }
 
-.badge-results-grid {
-  display: grid;
+.badge-category-results > h3::before {
+  content: "";
 
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+  width: 4px;
+  height: 16px;
 
-  gap: 12px;
+  border-radius: 999px;
+
+  background: var(--text-primary);
 }
 
+
+/* ======================================================
+   BADGE RESULT CATEGORY COLORS
+====================================================== */
+
+.badge-category-finishing > h3 {
+  color: var(--category-finishing);
+}
+
+.badge-category-finishing > h3::before {
+  background: var(--category-finishing);
+}
+
+
+.badge-category-shooting > h3 {
+  color: var(--category-shooting);
+}
+
+.badge-category-shooting > h3::before {
+  background: var(--category-shooting);
+}
+
+
+.badge-category-playmaking > h3 {
+  color: var(--category-playmaking);
+}
+
+.badge-category-playmaking > h3::before {
+  background: var(--category-playmaking);
+}
+
+
+.badge-category-defense > h3 {
+  color: var(--category-defense);
+}
+
+.badge-category-defense > h3::before {
+  background: var(--category-defense);
+}
+
+
+.badge-category-rebounding > h3 {
+  color: var(--category-rebounding);
+}
+
+.badge-category-rebounding > h3::before {
+  background: var(--category-rebounding);
+}
+
+
+.badge-category-physicals > h3 {
+  color: var(--category-physicals);
+}
+
+.badge-category-physicals > h3::before {
+  background: var(--category-physicals);
+}
 
 /* ======================================================
    BADGE RESULT CARDS
@@ -1304,31 +1315,6 @@ select {
     inset 0 0 20px rgba(187, 107, 217, 0.07);
 }
 
-
-/* Legend */
-
-.badge-result-card:has(.badge-level.legend) {
-  border-color: rgba(255, 90, 103, 0.6);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 90, 103, 0.11),
-      transparent 65%
-    ),
-    var(--bg-input);
-
-  box-shadow:
-    inset 0 0 22px rgba(255, 90, 103, 0.05);
-}
-
-.badge-result-card:has(.badge-level.legend):hover {
-  border-color: rgba(255, 90, 103, 0.95);
-
-  box-shadow:
-    0 0 24px rgba(255, 90, 103, 0.2),
-    inset 0 0 22px rgba(255, 90, 103, 0.08);
-}
 
 /* ======================================================
    EMPTY RESULTS
