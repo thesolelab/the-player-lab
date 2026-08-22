@@ -3,7 +3,7 @@
 /*
   THE PLAYER LAB
   File: css/style.css
-  Version: 0.1.4
+  Version: 0.1.5
   Updated: 2026-08-21
 
   PURPOSE
@@ -18,6 +18,12 @@
   - Responsive desktop and mobile layouts
 
   CHANGELOG
+0.1.5 - Refined badge description interaction styling
+      - Removed the expand indicator from desktop badge cards
+      - Kept desktop badge descriptions on natural hover
+      - Added mobile-only + / − expand indicators
+      - Positioned the mobile badge level and expand indicator inline
+      - Preserved aligned badge-card layout across mobile results
 0.1.4 - Added responsive badge description interactions
       - Added desktop hover behavior for badge descriptions
       - Added mobile tap-expanded badge description styling
