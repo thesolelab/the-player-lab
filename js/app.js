@@ -833,6 +833,16 @@ function createBadgeResultCard(badge) {
     badge.name;
 
 
+  const toggle =
+    document.createElement("span");
+
+  toggle.className =
+    "badge-result-toggle";
+
+  toggle.textContent =
+    "+";
+
+
   const level =
     document.createElement("span");
 
@@ -855,6 +865,14 @@ function createBadgeResultCard(badge) {
 
 
   card.appendChild(name);
+
+
+  if (badge.description) {
+
+    card.appendChild(toggle);
+  }
+
+
   card.appendChild(level);
 
 
@@ -886,9 +904,18 @@ function createBadgeResultCard(badge) {
           return;
         }
 
+
         card.classList.toggle(
           "is-expanded"
         );
+
+
+        toggle.textContent =
+          card.classList.contains(
+            "is-expanded"
+          )
+            ? "−"
+            : "+";
       }
     );
   }
