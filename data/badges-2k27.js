@@ -1473,3 +1473,86 @@ window.BADGES_2K27 = {
 
   ]
 };
+
+// =========================================================
+// BADGE DESCRIPTIONS
+// =========================================================
+//
+// Concise badge descriptions based on published
+// NBA 2K27 badge descriptions.
+//
+// Kept separate from qualification requirements so
+// descriptive copy can be maintained independently.
+
+const BADGE_DESCRIPTIONS_2K27 = {
+  "Aerial Wizard": "Boosts alley-oop and putback dunks.",
+  "Float Game": "Boosts floater finishing.",
+  "Ghost Stepper": "Boosts shot-fake step-through finishes.",
+  "Hook Specialist": "Boosts post hooks.",
+  "Layup Mixmaster": "Boosts acrobatic layups.",
+  "Paint Prodigy": "Boosts paint scoring.",
+  "Physical Finisher": "Boosts contact layups.",
+  "Post Powerhouse": "Boosts backdowns and drop steps.",
+  "Post Spin Catalyst": "Boosts post spins and drives.",
+  "Posterizer": "Boosts contact dunks.",
+  "Rise Up": "Boosts standing paint dunks.",
+
+  "Arc Cadence": "Boosts moving three-pointers.",
+  "Deadeye": "Reduces closeout contest penalties.",
+  "Limitless Range": "Extends effective three-point range.",
+  "Mini Marksman": "Reduces tall-defender contest impact.",
+  "Post Fade Phenom": "Boosts post fades and hops.",
+  "Quick Trigger": "Boosts no-dip jumpers.",
+  "Set and Fire": "Boosts set three-pointers.",
+  "Smooth Operator": "Boosts moving mid-range shots.",
+  "Static Middy": "Boosts stationary mid-range shots.",
+
+  "Ankle Assassin": "Boosts defender-breaking dribble moves.",
+  "Bail Out": "Improves passes from shots.",
+  "Break Starter": "Improves quick outlet passes.",
+  "Dimer": "Boosts teammates after passes.",
+  "Handles for Days": "Reduces dribble energy loss.",
+  "Lightning Launch": "Speeds perimeter launches.",
+  "Pace": "Boosts sprint dribble speed.",
+  "Strong Handle": "Improves dribbling through pressure.",
+  "Unpluckable": "Reduces ball-strip risk.",
+  "Versatile Visionary": "Improves tight-window passing.",
+
+  "Ankle Braces": "Resists ankle-breaking moves.",
+  "Challenger": "Boosts perimeter shot contests.",
+  "Glove": "Boosts steals and strips.",
+  "High-Flying Denier": "Boosts chase-down blocks.",
+  "Immovable Enforcer": "Boosts physical on-ball defense.",
+  "Interceptor": "Boosts pass interceptions.",
+  "Off-Ball Pest": "Improves off-ball containment.",
+  "Paint Patroller": "Boosts rim protection.",
+  "Pick Dodger": "Improves screen navigation.",
+  "Post Lockdown": "Boosts post defense and strips.",
+  "Seatbelt": "Boosts body-up perimeter defense.",
+  "Wall Up": "Boosts hands-up paint contests.",
+
+  "Boxout Boss": "Boosts defensive boxouts.",
+  "Breaker": "Boosts boxout break-throughs.",
+  "Crasher": "Boosts offensive rebounding.",
+  "Possession Closer": "Boosts defensive rebounding.",
+  "Sync Snatcher": "Boosts timed-jump rebounding.",
+
+  "Brick Wall": "Boosts screen effectiveness.",
+  "Bruiser": "Drains energy through contact.",
+  "Flash": "Boosts off-ball transition speed.",
+  "Pogo Stick": "Speeds repeat jumps.",
+  "Slippery Off-Ball": "Improves off-screen movement.",
+  "Work Horse": "Boosts loose-ball recovery."
+};
+
+// =========================================================
+// APPLY BADGE DESCRIPTIONS
+// =========================================================
+
+window.BADGES_2K27.badges.forEach(
+  function (badge) {
+
+    badge.description =
+      BADGE_DESCRIPTIONS_2K27[badge.name] || "";
+  }
+);
