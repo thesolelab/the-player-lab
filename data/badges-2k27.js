@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: data/badges-2k27.js
-  Version: 0.1.1
+  Version: 0.1.2
   Updated: 2026-08-21
 
   PURPOSE
@@ -16,8 +16,8 @@
   - Badge qualification logic belongs in js/app.js.
   - Do not invent or estimate badge requirements.
   - Do not overwrite prior NBA 2K badge datasets.
-  - NBA 2K26 requirements remain stored separately in:
-      data/badges-2k26.js
+  - NBA 2K27 requirements remain stored separately in:
+      data/badges-2k27.js
 
   DATA FORMAT
   - allOf = every listed requirement must be met
@@ -32,7 +32,12 @@
     present in the verified source chart.
 
   CHANGELOG
- 0.1.1 - Added NBA 2K27 badge descriptions
+ 0.1.2 - Added full NBA 2K27 badge descriptions
+        - Replaced temporary shortened badge summaries
+        - Added full descriptions for all 53 NBA 2K27 badges
+        - Preserved all existing badge requirements and restrictions
+        - Kept descriptions separate from qualification logic
+  0.1.1 - Added NBA 2K27 badge descriptions
       - Added concise descriptions for all 53 badges
       - Kept badge descriptions separate from qualification requirements
       - Applied descriptions to badge records by badge name
