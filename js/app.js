@@ -1,7 +1,7 @@
 /*
   THE PLAYER LAB
   File: js/app.js
-  Version: 0.2.7
+  Version: 0.2.8
   Updated: 2026-08-21
 
   PURPOSE
@@ -14,6 +14,11 @@
   - Future game versions should reuse this engine whenever possible.
 
   CHANGELOG
+ 0.2.8  - Added mobile badge description expand indicators
+        - Added + / − indicators for badge cards with descriptions
+        - Updates the indicator when a mobile badge card is expanded or collapsed
+        - Preserved desktop hover behavior
+        - Preserved badge qualification and description logic
  0.2.7  - Added interactive badge descriptions
         - Passes badge description data into qualified badge results
         - Added badge description rendering to result cards
