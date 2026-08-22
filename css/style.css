@@ -1100,6 +1100,75 @@ select {
 }
 
 /* ======================================================
+   BADGE DESCRIPTIONS
+====================================================== */
+
+.badge-result-card.has-description {
+  position: relative;
+
+  flex-wrap: wrap;
+
+  cursor: pointer;
+}
+
+.badge-result-description {
+  width: 100%;
+  max-height: 0;
+
+  margin-top: 0;
+
+  overflow: hidden;
+
+  color: var(--text-secondary);
+
+  font-size: 0.8rem;
+  line-height: 1.4;
+
+  opacity: 0;
+
+  transition:
+    max-height 0.2s ease,
+    margin-top 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+/* ======================================================
+   DESKTOP HOVER
+====================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+  .badge-result-card.has-description:hover
+  .badge-result-description {
+
+    max-height: 80px;
+
+    margin-top: 4px;
+
+    opacity: 1;
+  }
+}
+
+
+/* ======================================================
+   TOUCH / MOBILE TAP
+====================================================== */
+
+@media (hover: none), (pointer: coarse) {
+
+  .badge-result-card.has-description.is-expanded
+  .badge-result-description {
+
+    max-height: 80px;
+
+    margin-top: 4px;
+
+    opacity: 1;
+  }
+}
+
+/* ======================================================
    BADGE RESULT CARD LEVEL COLORS
 ====================================================== */
 
