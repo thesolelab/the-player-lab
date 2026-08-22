@@ -1103,38 +1103,42 @@ select {
    BADGE DESCRIPTIONS
 ====================================================== */
 
+/*
+  Keep the original badge-card layout intact.
+
+  Description behavior:
+  - Desktop: appears only while hovering
+  - Mobile / touch: appears only after tapping
+*/
+
 .badge-result-card.has-description {
-  position: relative;
+  display: grid;
 
-  flex-wrap: wrap;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
 
-  cursor: pointer;
+  align-items: center;
+
+  column-gap: 12px;
 }
 
 .badge-result-description {
-  width: 100%;
-  max-height: 0;
+  display: none;
 
-  margin-top: 0;
+  grid-column: 1 / -1;
 
-  overflow: hidden;
+  margin-top: 8px;
 
   color: var(--text-secondary);
 
   font-size: 0.8rem;
   line-height: 1.4;
-
-  opacity: 0;
-
-  transition:
-    max-height 0.2s ease,
-    margin-top 0.2s ease,
-    opacity 0.2s ease;
 }
 
 
 /* ======================================================
-   DESKTOP HOVER
+   DESKTOP HOVER ONLY
 ====================================================== */
 
 @media (hover: hover) and (pointer: fine) {
@@ -1142,17 +1146,13 @@ select {
   .badge-result-card.has-description:hover
   .badge-result-description {
 
-    max-height: 80px;
-
-    margin-top: 4px;
-
-    opacity: 1;
+    display: block;
   }
 }
 
 
 /* ======================================================
-   TOUCH / MOBILE TAP
+   MOBILE / TOUCH TAP ONLY
 ====================================================== */
 
 @media (hover: none), (pointer: coarse) {
@@ -1160,14 +1160,9 @@ select {
   .badge-result-card.has-description.is-expanded
   .badge-result-description {
 
-    max-height: 80px;
-
-    margin-top: 4px;
-
-    opacity: 1;
+    display: block;
   }
 }
-
 /* ======================================================
    BADGE RESULT CARD LEVEL COLORS
 ====================================================== */
