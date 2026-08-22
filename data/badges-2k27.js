@@ -1340,12 +1340,12 @@ window.BADGES_2K27 = {
 
 
     // =========================================================
-    // GENERAL
+    // PHYSICALS
     // =========================================================
 
     {
       name: "Brick Wall",
-      category: "General",
+      category: "Physicals",
       heightRestriction: {
         minInches: 77,
         display: "Min Height: 6'5\""
@@ -1360,7 +1360,7 @@ window.BADGES_2K27 = {
 
     {
       name: "Bruiser",
-      category: "General",
+      category: "Physicals",
       heightRestriction: null,
       levels: {
         bronze: { allOf: [{ attribute: "strength", min: 71 }] },
@@ -1372,7 +1372,7 @@ window.BADGES_2K27 = {
 
     {
       name: "Flash",
-      category: "General",
+      category: "Physicals",
       heightRestriction: null,
       levels: {
         bronze: {
@@ -1404,7 +1404,7 @@ window.BADGES_2K27 = {
 
     {
       name: "Pogo Stick",
-      category: "General",
+      category: "Physicals",
       heightRestriction: null,
       levels: {
         bronze: { allOf: [{ attribute: "vertical", min: 63 }] },
@@ -1416,7 +1416,7 @@ window.BADGES_2K27 = {
 
     {
       name: "Slippery Off-Ball",
-      category: "General",
+      category: "Physicals",
       heightRestriction: {
         maxInches: 81,
         display: "Max Height: 6'9\""
@@ -1451,7 +1451,7 @@ window.BADGES_2K27 = {
 
     {
       name: "Work Horse",
-      category: "General",
+      category: "Physicals",
       heightRestriction: null,
       levels: {
         bronze: {
