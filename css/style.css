@@ -1109,6 +1109,7 @@ select {
 ====================================================== */
 
 /* Hidden everywhere by default */
+
 .badge-result-description {
   display: none !important;
 
@@ -1123,17 +1124,52 @@ select {
 }
 
 
-/* Keep badge title + level aligned */
+/* Keep badge title, toggle, and level aligned */
+
 .badge-result-card.has-description {
   display: grid;
 
   grid-template-columns:
     minmax(0, 1fr)
+    auto
     auto;
 
   align-items: center;
 
-  column-gap: 12px;
+  column-gap: 10px;
+
+  cursor: pointer;
+}
+
+
+/* Small expand indicator */
+
+.badge-result-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 18px;
+  height: 18px;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+
+  opacity: 0.75;
+
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.badge-result-card.has-description:hover
+.badge-result-toggle {
+  color: var(--text-secondary);
+
+  opacity: 1;
 }
 
 
@@ -1168,8 +1204,7 @@ select {
 
     display: block !important;
   }
-}
-/* ======================================================
+}/* ======================================================
    BADGE RESULT CARD LEVEL COLORS
 ====================================================== */
 
