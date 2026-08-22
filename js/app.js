@@ -397,26 +397,27 @@ function calculateBadges() {
   const qualifiedBadges = [];
 
   ACTIVE_BADGE_DATA.badges.forEach(
-    function (badge) {
+  function (badge) {
 
-      const highestLevel =
-        getHighestQualifiedBadgeLevel(
-          player,
-          badge
-        );
+    const highestLevel =
+      getHighestQualifiedBadgeLevel(
+        player,
+        badge
+      );
 
-      if (highestLevel) {
+    if (highestLevel) {
 
-        qualifiedBadges.push({
-          name: badge.name,
-          category: badge.category,
-          level: highestLevel.label,
-          levelKey: highestLevel.key,
-          cssClass: highestLevel.cssClass
-        });
-      }
+      qualifiedBadges.push({
+        name: badge.name,
+        category: badge.category,
+        description: badge.description || "",
+        level: highestLevel.label,
+        levelKey: highestLevel.key,
+        cssClass: highestLevel.cssClass
+      });
     }
-  );
+  }
+);
 
   displayBadgeResults(
     player,
@@ -805,6 +806,13 @@ function displayBadgeResults(
 // ======================================================
 // CREATE BADGE CARD
 // ======================================================
+//
+// Badge descriptions:
+// - Desktop: displayed through CSS hover behavior
+// - Touch devices: tap to expand / collapse
+//
+// Description data comes directly from the active
+// NBA 2K badge dataset.
 
 function createBadgeResultCard(badge) {
 
@@ -836,12 +844,58 @@ function createBadgeResultCard(badge) {
     badge.level;
 
 
+  const description =
+    document.createElement("div");
+
+  description.className =
+    "badge-result-description";
+
+  description.textContent =
+    badge.description || "";
+
+
   card.appendChild(name);
   card.appendChild(level);
 
+
+  if (badge.description) {
+
+    card.appendChild(
+      description
+    );
+
+    card.classList.add(
+      "has-description"
+    );
+
+
+    // ------------------------------------------
+    // TOUCH DEVICE TAP BEHAVIOR
+    // ------------------------------------------
+
+    card.addEventListener(
+      "click",
+      function () {
+
+        const isTouchDevice =
+          window.matchMedia(
+            "(hover: none), (pointer: coarse)"
+          ).matches;
+
+        if (!isTouchDevice) {
+          return;
+        }
+
+        card.classList.toggle(
+          "is-expanded"
+        );
+      }
+    );
+  }
+
+
   return card;
 }
-
 // ======================================================
 // TEST PLAYER RANDOMIZER
 // ======================================================
