@@ -1108,7 +1108,7 @@ select {
    BADGE DESCRIPTIONS
 ====================================================== */
 
-/* Hidden everywhere by default */
+/* Description hidden by default */
 
 .badge-result-description {
   display: none !important;
@@ -1124,14 +1124,13 @@ select {
 }
 
 
-/* Keep badge title, toggle, and level aligned */
+/* Desktop/default card layout */
 
 .badge-result-card.has-description {
   display: grid;
 
   grid-template-columns:
     minmax(0, 1fr)
-    auto
     auto;
 
   align-items: center;
@@ -1142,39 +1141,15 @@ select {
 }
 
 
-/* Small expand indicator */
+/* Hide + / − on desktop */
 
 .badge-result-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 18px;
-  height: 18px;
-
-  color: var(--text-muted);
-
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1;
-
-  opacity: 0.75;
-
-  transition:
-    color 0.15s ease,
-    opacity 0.15s ease;
-}
-
-.badge-result-card.has-description:hover
-.badge-result-toggle {
-  color: var(--text-secondary);
-
-  opacity: 1;
+  display: none;
 }
 
 
 /* ======================================================
-   DESKTOP ONLY — HOVER
+   DESKTOP — HOVER ONLY
 ====================================================== */
 
 @media (min-width: 701px) {
@@ -1188,23 +1163,66 @@ select {
 
 
 /* ======================================================
-   MOBILE ONLY — TAP
+   MOBILE — TAP + / −
 ====================================================== */
 
 @media (max-width: 700px) {
 
-  .badge-result-card.has-description
-  .badge-result-description {
+  .badge-result-card.has-description {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      auto;
 
-    display: none !important;
+    column-gap: 7px;
   }
+
+
+  .badge-result-name {
+    grid-column: 1;
+  }
+
+
+  .badge-level {
+    grid-column: 2;
+  }
+
+
+  .badge-result-toggle {
+    grid-column: 3;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 16px;
+    height: 16px;
+
+    color: var(--text-muted);
+
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
+
+    opacity: 0.8;
+  }
+
+
+  .badge-result-description {
+    display: none !important;
+
+    grid-column: 1 / -1;
+  }
+
 
   .badge-result-card.has-description.is-expanded
   .badge-result-description {
 
     display: block !important;
   }
-}/* ======================================================
+}
+/* ======================================================
    BADGE RESULT CARD LEVEL COLORS
 ====================================================== */
 
