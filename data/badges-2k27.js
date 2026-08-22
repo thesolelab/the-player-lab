@@ -1490,64 +1490,116 @@ window.BADGES_2K27 = {
 // descriptive copy can be maintained independently.
 
 const BADGE_DESCRIPTIONS_2K27 = {
-  "Aerial Wizard": "Boosts alley-oop and putback dunks.",
-  "Float Game": "Boosts floater finishing.",
-  "Ghost Stepper": "Boosts shot-fake step-through finishes.",
-  "Hook Specialist": "Boosts post hooks.",
-  "Layup Mixmaster": "Boosts acrobatic layups.",
-  "Paint Prodigy": "Boosts paint scoring.",
-  "Physical Finisher": "Boosts contact layups.",
-  "Post Powerhouse": "Boosts backdowns and drop steps.",
-  "Post Spin Catalyst": "Boosts post spins and drives.",
-  "Posterizer": "Boosts contact dunks.",
-  "Rise Up": "Boosts standing paint dunks.",
+  "Aerial Wizard": "Increases ability to finish an alley-oop dunk from a teammate, or an in-air putback dunk off an offensive rebound.",
 
-  "Arc Cadence": "Boosts moving three-pointers.",
-  "Deadeye": "Reduces closeout contest penalties.",
-  "Limitless Range": "Extends effective three-point range.",
-  "Mini Marksman": "Reduces tall-defender contest impact.",
-  "Post Fade Phenom": "Boosts post fades and hops.",
-  "Quick Trigger": "Boosts no-dip jumpers.",
-  "Set and Fire": "Boosts set three-pointers.",
-  "Smooth Operator": "Boosts moving mid-range shots.",
-  "Static Middy": "Boosts stationary mid-range shots.",
+  "Float Game": "Increases a player's ability to finish floaters.",
 
-  "Ankle Assassin": "Boosts defender-breaking dribble moves.",
-  "Bail Out": "Improves passes from shots.",
-  "Break Starter": "Improves quick outlet passes.",
-  "Dimer": "Boosts teammates after passes.",
-  "Handles for Days": "Reduces dribble energy loss.",
-  "Lightning Launch": "Speeds perimeter launches.",
-  "Pace": "Boosts sprint dribble speed.",
-  "Strong Handle": "Improves dribbling through pressure.",
-  "Unpluckable": "Reduces ball-strip risk.",
-  "Versatile Visionary": "Improves tight-window passing.",
+  "Ghost Stepper": "Increases the effectiveness of step-through layups or other close-range shots that come after a shot fake.",
 
-  "Ankle Braces": "Resists ankle-breaking moves.",
-  "Challenger": "Boosts perimeter shot contests.",
-  "Glove": "Boosts steals and strips.",
-  "High-Flying Denier": "Boosts chase-down blocks.",
-  "Immovable Enforcer": "Boosts physical on-ball defense.",
-  "Interceptor": "Boosts pass interceptions.",
-  "Off-Ball Pest": "Improves off-ball containment.",
-  "Paint Patroller": "Boosts rim protection.",
-  "Pick Dodger": "Improves screen navigation.",
-  "Post Lockdown": "Boosts post defense and strips.",
-  "Seatbelt": "Boosts body-up perimeter defense.",
-  "Wall Up": "Boosts hands-up paint contests.",
+  "Hook Specialist": "Improves ability to make post hooks.",
 
-  "Boxout Boss": "Boosts defensive boxouts.",
-  "Breaker": "Boosts boxout break-throughs.",
-  "Crasher": "Boosts offensive rebounding.",
-  "Possession Closer": "Boosts defensive rebounding.",
-  "Sync Snatcher": "Boosts timed-jump rebounding.",
+  "Layup Mixmaster": "Improves a player's ability to finish fancy or acrobatic layups.",
 
-  "Brick Wall": "Boosts screen effectiveness.",
-  "Bruiser": "Drains energy through contact.",
-  "Flash": "Boosts off-ball transition speed.",
-  "Pogo Stick": "Speeds repeat jumps.",
-  "Slippery Off-Ball": "Improves off-screen movement.",
-  "Work Horse": "Boosts loose-ball recovery."
+  "Paint Prodigy": "Improves a player's ability to quickly and effectively score while going to work in the paint.",
+
+  "Physical Finisher": "Improves a player's ability to battle through contact and convert contact layups.",
+
+  "Post Powerhouse": "Strengthens a player's ability at backing down defenders and moving them with drop steps.",
+
+  "Post Spin Catalyst": "Attempting post spins or drives results in more effective moves and less of a chance to be stripped.",
+
+  "Posterizer": "Increases the chances of throwing down a dunk on your defender while driving to the hoop.",
+
+  "Rise Up": "Increases the likelihood of dunking on your opponent when standing in the painted area.",
+
+
+  "Arc Cadence": "Improves a player's ability to knock down 3-point shots on the move, including pull-ups, hop-steps, or spin shots.",
+
+  "Deadeye": "Jump shots taken with a defender closing out receive less of a penalty from a shot contest.",
+
+  "Limitless Range": "Extends the range from which a player can shoot 3PT shots effectively from deep.",
+
+  "Mini Marksman": "Shorter shooters are less bothered by lengthy defenders.",
+
+  "Post Fade Phenom": "Improves ability to make post fades and hop shots.",
+
+  "Quick Trigger": "Improves a player's ability to make no-dip jump shots.",
+
+  "Set and Fire": "Applies a shooting boost to 3-point shots when the player's feet are completely set.",
+
+  "Smooth Operator": "Improves a player's ability to knock down mid-range shots on the move, including pull-ups, hop-steps, or spin shots.",
+
+  "Static Middy": "Applies a shooting boost to stand-still mid-range shots.",
+
+
+  "Ankle Assassin": "Increases the ability to break down the defender and cross them up.",
+
+  "Bail Out": "Passing out of a jump shot or layup yields fewer errant passes than normal. Additionally helps passing out of double teams.",
+
+  "Break Starter": "After grabbing a defensive rebound, deep outlet passes made up the court are more accurate. Passes must be made quickly following the defensive rebound.",
+
+  "Dimer": "Boosts the shot percentage for open teammates after catching a pass.",
+
+  "Handles for Days": "Allows a player to take less of an energy hit when performing consecutive dribble moves.",
+
+  "Lightning Launch": "Speeds up launches when attacking from the perimeter.",
+
+  "Pace": "Raises the speed of the ball handler when sprinting.",
+
+  "Strong Handle": "Reduces the likelihood of being bothered by defenders when dribbling.",
+
+  "Unpluckable": "Defenders have a tougher time poking the ball free with their steal attempts.",
+
+  "Versatile Visionary": "Improves a player's ability to thread and fire tight passes, including alley-oops, quickly and on time.",
+
+
+  "Ankle Braces": "Lowers the likelihood of getting ankle-broken by opposing dribble moves.",
+
+  "Challenger": "Improves the effectiveness of well-timed contests against perimeter shooters.",
+
+  "Glove": "Increases the ability to successfully steal from ball handlers or strip layup attempts.",
+
+  "High-Flying Denier": "Boosts the speed and leaping ability of a defensive player in anticipation of a chase-down block attempt.",
+
+  "Immovable Enforcer": "Improves a defensive player's strength when defending ball handlers and finishers coming straight at them.",
+
+  "Interceptor": "The frequency of successfully tipped or intercepted passes greatly increases.",
+
+  "Off-Ball Pest": "Makes players more difficult to get past when playing off-ball, as they can grab and hold their matchup.",
+
+  "Paint Patroller": "Increases a player's ability to block or contest shots at the rim.",
+
+  "Pick Dodger": "Improves a player's ability to navigate through and around screens while on defense.",
+
+  "Post Lockdown": "Strengthens a player's ability to effectively defend moves in the post, with an increased chance of stripping the opponent.",
+
+  "Seatbelt": "Boost body-up defense effectiveness, making it easier to clamp opponents and disrupt their drive path.",
+
+  "Wall Up": "Improves shot contest effectiveness during hands-up defense when guarding the paint.",
+
+
+  "Boxout Boss": "Improves the effectiveness of boxouts as the boxer.",
+
+  "Breaker": "Increases the success rate of breaking through opponent boxouts.",
+
+  "Crasher": "Boost a player's ability to track down or grab rebounds on the offensive end.",
+
+  "Possession Closer": "Boost a player's ability to grab rebounds on the defensive end.",
+
+  "Sync Snatcher": "Gives an additional Vertical and Rebounding boost when perfectly timing the jump.",
+
+
+  "Brick Wall": "Increases the effectiveness of screens.",
+
+  "Bruiser": "Drains energy from opponents when making physical contact.",
+
+  "Flash": "Speeds up movement without the ball while in transition on offense or defense.",
+
+  "Pogo Stick": "Allows players to quickly go back up for another jump upon landing. This applies after a rebound, block attempt, or jump shot.",
+
+  "Slippery Off-Ball": "When attempting to get open off screens, the player more effectively navigates through traffic.",
+
+  "Work Horse": "Increases a player's speed and ability to get loose balls over the opponent."
 };
 
 // =========================================================
