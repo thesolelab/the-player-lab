@@ -100,11 +100,6 @@ const ACTIVE_BADGE_DATA = window.BADGES_2K27;
 
 const BADGE_LEVELS = [
   {
-    key: "legend",
-    label: "Legend",
-    cssClass: "legend"
-  },
-  {
     key: "hallOfFame",
     label: "Hall of Fame",
     cssClass: "hall-of-fame"
@@ -125,7 +120,6 @@ const BADGE_LEVELS = [
     cssClass: "bronze"
   }
 ];
-
 
 // ======================================================
 // PAGE ELEMENTS
@@ -1080,24 +1074,23 @@ function randomizeTestPlayer() {
   // instead of independently.
   //
   // Player Lab default:
-  // minimum = height - 1 inch
-  // maximum = height + 6 inches
+// minimum = player height
+// maximum = height + 5 inches
 
-  const wingspanDifferenceMin =
-    Number.isFinite(
-      physicals.wingspanDifferenceMin
-    )
-      ? physicals.wingspanDifferenceMin
-      : -1;
+const wingspanDifferenceMin =
+  Number.isFinite(
+    physicals.wingspanDifferenceMin
+  )
+    ? physicals.wingspanDifferenceMin
+    : 0;
 
 
-  const wingspanDifferenceMax =
-    Number.isFinite(
-      physicals.wingspanDifferenceMax
-    )
-      ? physicals.wingspanDifferenceMax
-      : 6;
-
+const wingspanDifferenceMax =
+  Number.isFinite(
+    physicals.wingspanDifferenceMax
+  )
+    ? physicals.wingspanDifferenceMax
+    : 5;
 
   const wingspanDifference =
     randomInteger(
