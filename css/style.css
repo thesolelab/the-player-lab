@@ -900,6 +900,28 @@ select {
   min-height: 220px;
 }
 
+/* ======================================================
+   BADGE LEVEL
+====================================================== */
+
+.badge-level {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 28px;
+
+  padding: 4px 10px;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
 
 /* ======================================================
    BRONZE
