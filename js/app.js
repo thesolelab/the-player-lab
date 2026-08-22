@@ -762,7 +762,11 @@ function displayBadgeResults(
           document.createElement("div");
 
         categorySection.className =
-          "badge-category-results";
+          "badge-category-results " +
+          "badge-category-" +
+        category
+          .toLowerCase()
+          .replace(/\s+/g, "-");
 
 
         const heading =
