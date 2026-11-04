@@ -2679,3 +2679,533 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
 }
+
+/* ======================================================
+   PLAYER SUMMARY
+====================================================== */
+
+.player-builder-sidebar {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+
+/* ======================================================
+   SUMMARY PANEL
+====================================================== */
+
+.player-summary-panel {
+  padding: 20px;
+}
+
+
+.player-summary-panel
+.section-header {
+  margin-bottom: 18px;
+}
+
+
+.player-summary-panel
+.section-header h2 {
+  font-size: 1.05rem;
+}
+
+
+.player-summary-panel
+.section-header p {
+  font-size: 0.78rem;
+
+  line-height: 1.45;
+}
+
+
+/* ======================================================
+   SUMMARY IDLE
+====================================================== */
+
+.summary-idle-state {
+  padding: 20px 14px;
+
+  border: 1px dashed
+    var(--border-primary);
+
+  border-radius: 9px;
+
+  text-align: center;
+}
+
+
+.summary-idle-state p {
+  margin: 0;
+
+  color:
+    var(--text-muted);
+
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+}
+
+
+/* ======================================================
+   PLAYER VITALS
+====================================================== */
+
+.summary-vitals {
+  margin-bottom: 18px;
+
+  padding-bottom: 14px;
+
+  border-bottom:
+    1px solid
+    var(--border-primary);
+
+  color:
+    var(--text-secondary);
+
+  font-size: 0.76rem;
+
+  font-weight: 700;
+
+  line-height: 1.5;
+}
+
+
+/* ======================================================
+   SUMMARY BLOCKS
+====================================================== */
+
+.summary-block {
+  margin-top: 18px;
+}
+
+
+.summary-block:first-child {
+  margin-top: 0;
+}
+
+
+.summary-block-title {
+  color:
+    var(--text-muted);
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+.summary-block-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 12px;
+
+  margin-bottom: 10px;
+}
+
+
+/* ======================================================
+   TOP ATTRIBUTES
+====================================================== */
+
+.summary-attribute-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+  margin-top: 10px;
+}
+
+
+.summary-attribute-row {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 12px;
+
+  padding:
+    8px
+    10px;
+
+  border:
+    1px solid
+    var(--border-primary);
+
+  border-radius:
+    7px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.015
+    );
+}
+
+
+.summary-attribute-name {
+  min-width: 0;
+
+  color:
+    var(--text-secondary);
+
+  font-size:
+    0.78rem;
+
+  overflow: hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+.summary-attribute-value {
+  color:
+    var(--text-primary);
+
+  font-size:
+    0.92rem;
+}
+
+
+.summary-empty-copy {
+  padding: 10px 0;
+
+  color:
+    var(--text-muted);
+
+  font-size:
+    0.76rem;
+
+  line-height: 1.5;
+}
+
+
+/* ======================================================
+   STRENGTH / WEAKNESS
+====================================================== */
+
+.summary-analysis-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+
+.summary-analysis-card {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 11px 10px;
+
+  border:
+    1px solid
+    var(--border-primary);
+
+  border-radius:
+    8px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.015
+    );
+}
+
+
+.summary-analysis-card.strength {
+  border-color:
+    rgba(
+      57,
+      198,
+      107,
+      0.35
+    );
+}
+
+
+.summary-analysis-card.weakness {
+  border-color:
+    rgba(
+      232,
+      74,
+      95,
+      0.3
+    );
+}
+
+
+.summary-analysis-label {
+  color:
+    var(--text-muted);
+
+  font-size:
+    0.62rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.07em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.summary-analysis-card strong {
+  color:
+    var(--text-primary);
+
+  font-size:
+    0.82rem;
+}
+
+
+.summary-analysis-card small {
+  color:
+    var(--text-muted);
+
+  font-size:
+    0.65rem;
+
+  font-weight:
+    700;
+}
+
+
+.summary-analysis-note {
+  margin-top: 7px;
+
+  color:
+    var(--text-muted);
+
+  font-size:
+    0.62rem;
+
+  line-height: 1.4;
+}
+
+
+/* ======================================================
+   BADGE SUMMARY
+====================================================== */
+
+.summary-badge-block {
+  padding-top: 16px;
+
+  border-top:
+    1px solid
+    var(--border-primary);
+}
+
+
+.summary-total-badges {
+  color:
+    var(--text-primary);
+
+  font-size:
+    1.15rem;
+}
+
+
+.summary-badge-counts {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 6px;
+}
+
+
+.summary-badge-count {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  min-width: 0;
+
+  padding:
+    8px
+    3px;
+
+  border:
+    1px solid
+    var(--border-primary);
+
+  border-radius:
+    7px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.015
+    );
+}
+
+
+.summary-badge-count strong {
+  color:
+    var(--text-primary);
+
+  font-size:
+    0.92rem;
+}
+
+
+.summary-badge-count span {
+  color:
+    var(--text-muted);
+
+  font-size:
+    0.57rem;
+
+  font-weight:
+    800;
+}
+
+
+.summary-badge-count.hof {
+  border-color:
+    rgba(
+      187,
+      107,
+      217,
+      0.45
+    );
+}
+
+
+.summary-badge-count.gold {
+  border-color:
+    rgba(
+      242,
+      201,
+      76,
+      0.45
+    );
+}
+
+
+.summary-badge-count.silver {
+  border-color:
+    rgba(
+      194,
+      202,
+      212,
+      0.4
+    );
+}
+
+
+.summary-badge-count.bronze {
+  border-color:
+    rgba(
+      200,
+      117,
+      61,
+      0.45
+    );
+}
+
+
+/* ======================================================
+   BADGE RESULTS PANEL
+====================================================== */
+
+.player-builder-sidebar
+.results-panel {
+  width: 100%;
+}
+
+
+/* ======================================================
+   MOBILE PLAYER SUMMARY
+====================================================== */
+
+@media (max-width: 1150px) {
+
+  .player-builder-sidebar {
+    position: static;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .player-builder-sidebar {
+    gap: 16px;
+  }
+
+
+  .player-summary-panel {
+    padding: 18px;
+  }
+
+
+  .summary-analysis-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .summary-badge-counts {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+}
