@@ -1152,15 +1152,18 @@ const wingspanDifferenceMax =
 
 
   attributeInputs.forEach(
-    function (input) {
+  function (input) {
 
-      input.value =
-        randomizeAttributeFromProfile(
-          profile
-        );
-    }
-  );
+    input.value =
+      randomizeAttributeFromProfile(
+        profile
+      );
 
+    syncAttributeSlider(
+      input
+    );
+  }
+);
 
   // ------------------------------------------
   // CLEAR OLD RESULTS
@@ -1222,6 +1225,236 @@ function setInputValue(id, value) {
   if (element) {
     element.value = value;
   }
+}
+
+// ======================================================
+// ATTRIBUTE SLIDERS
+// ======================================================
+//
+// Automatically adds a 25-99 slider to every
+// existing attribute input.
+//
+// The original numeric inputs remain the source
+// of truth so badge calculations, randomization,
+// manual entry, and future features continue to
+// use the existing attribute structure.
+
+function initializeAttributeSliders() {
+
+  const attributeInputs =
+    document.querySelectorAll(
+      "[data-attribute]"
+    );
+
+
+  attributeInputs.forEach(
+    function (input) {
+
+      const field =
+        input.closest(
+          ".attribute-field"
+        );
+
+
+      if (!field) {
+        return;
+      }
+
+
+      // Prevent duplicate sliders if initialization
+      // is ever called more than once.
+
+      if (
+        field.querySelector(
+          ".attribute-slider"
+        )
+      ) {
+        return;
+      }
+
+
+      const sliderWrap =
+        document.createElement("div");
+
+      sliderWrap.className =
+        "attribute-slider-wrap";
+
+
+      const slider =
+        document.createElement("input");
+
+      slider.type =
+        "range";
+
+      slider.className =
+        "attribute-slider";
+
+      slider.min =
+        "25";
+
+      slider.max =
+        "99";
+
+      slider.step =
+        "1";
+
+      slider.value =
+        input.value || "25";
+
+      slider.dataset.attribute =
+        input.dataset.attribute;
+
+
+      sliderWrap.appendChild(
+        slider
+      );
+
+      field.appendChild(
+        sliderWrap
+      );
+
+
+      // ------------------------------------------
+      // SLIDER -> NUMBER INPUT
+      // ------------------------------------------
+
+      slider.addEventListener(
+        "input",
+        function () {
+
+          input.value =
+            slider.value;
+
+          updateAttributeSliderFill(
+            slider
+          );
+        }
+      );
+
+
+      // ------------------------------------------
+      // NUMBER INPUT -> SLIDER
+      // ------------------------------------------
+
+      input.addEventListener(
+        "input",
+        function () {
+
+          syncAttributeSlider(
+            input
+          );
+        }
+      );
+
+
+      syncAttributeSlider(
+        input
+      );
+    }
+  );
+}
+
+
+// ======================================================
+// SYNC ATTRIBUTE SLIDER
+// ======================================================
+
+function syncAttributeSlider(
+  attributeInput
+) {
+
+  if (!attributeInput) {
+    return;
+  }
+
+
+  const field =
+    attributeInput.closest(
+      ".attribute-field"
+    );
+
+
+  if (!field) {
+    return;
+  }
+
+
+  const slider =
+    field.querySelector(
+      ".attribute-slider"
+    );
+
+
+  if (!slider) {
+    return;
+  }
+
+
+  let value =
+    Number(
+      attributeInput.value
+    );
+
+
+  if (!Number.isFinite(value)) {
+    value = 25;
+  }
+
+
+  value =
+    Math.max(
+      25,
+      Math.min(
+        99,
+        value
+      )
+    );
+
+
+  slider.value =
+    value;
+
+
+  updateAttributeSliderFill(
+    slider
+  );
+}
+
+
+// ======================================================
+// ATTRIBUTE SLIDER FILL
+// ======================================================
+
+function updateAttributeSliderFill(
+  slider
+) {
+
+  if (!slider) {
+    return;
+  }
+
+
+  const min =
+    Number(slider.min);
+
+  const max =
+    Number(slider.max);
+
+  const value =
+    Number(slider.value);
+
+
+  const percentage =
+    (
+      (value - min) /
+      (max - min)
+    ) * 100;
+
+
+  slider.style.setProperty(
+    "--slider-fill",
+    percentage + "%"
+  );
 }
 
 // ======================================================
@@ -1680,11 +1913,15 @@ function resetPlayer() {
     );
 
   attributeInputs.forEach(
-    function (input) {
+  function (input) {
 
-      input.value = 25;
-    }
-  );
+    input.value = 25;
+
+    syncAttributeSlider(
+      input
+    );
+  }
+);
 
 
   if (badgeResults) {
@@ -1736,5 +1973,6 @@ function escapeHTML(value) {
 // ======================================================
 
 initializePlayerLab();
+initializeAttributeSliders();
 initializeAttributeInputs();
 initializeAutoAdvance();
