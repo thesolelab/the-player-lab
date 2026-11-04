@@ -629,39 +629,20 @@ select {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  grid-template-areas:
-    "finishing defense"
-    "shooting rebounding"
-    "playmaking physicals";
-
   align-items: start;
 
   gap: 16px;
 }
 
 
-.attribute-category-finishing {
-  grid-area: finishing;
-}
+.attribute-category-column {
+  display: flex;
 
-.attribute-category-shooting {
-  grid-area: shooting;
-}
+  flex-direction: column;
 
-.attribute-category-playmaking {
-  grid-area: playmaking;
-}
+  gap: 16px;
 
-.attribute-category-defense {
-  grid-area: defense;
-}
-
-.attribute-category-rebounding {
-  grid-area: rebounding;
-}
-
-.attribute-category-physicals {
-  grid-area: physicals;
+  min-width: 0;
 }
 
 /* ======================================================
