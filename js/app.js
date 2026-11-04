@@ -1477,3 +1477,798 @@ initializeAttributeSliders();
 initializeAttributeInputs();
 initializeAutoAdvance();
 initializeLiveBadgeAnalysis();
+
+// ======================================================
+// LIVE PLAYER SUMMARY
+// ======================================================
+//
+// Player Lab analysis only.
+//
+// Strength and weakness are determined from the
+// average ratings of the six attribute categories.
+//
+// This is NOT an official NBA 2K build-name,
+// archetype, or strength/weakness calculation.
+// ======================================================
+
+
+const PLAYER_SUMMARY_ATTRIBUTE_LABELS = {
+
+  closeShot:
+    "Close Shot",
+
+  drivingLayup:
+    "Driving Layup",
+
+  drivingDunk:
+    "Driving Dunk",
+
+  standingDunk:
+    "Standing Dunk",
+
+  postControl:
+    "Post Control",
+
+  midRangeShot:
+    "Mid-Range Shot",
+
+  threePointShot:
+    "Three-Point Shot",
+
+  freeThrow:
+    "Free Throw",
+
+  passAccuracy:
+    "Pass Accuracy",
+
+  ballHandle:
+    "Ball Handle",
+
+  speedWithBall:
+    "Speed With Ball",
+
+  interiorDefense:
+    "Interior Defense",
+
+  perimeterDefense:
+    "Perimeter Defense",
+
+  steal:
+    "Steal",
+
+  block:
+    "Block",
+
+  offensiveRebound:
+    "Offensive Rebound",
+
+  defensiveRebound:
+    "Defensive Rebound",
+
+  speed:
+    "Speed",
+
+  agility:
+    "Agility",
+
+  strength:
+    "Strength",
+
+  vertical:
+    "Vertical"
+};
+
+
+const PLAYER_SUMMARY_CATEGORIES = {
+
+  Finishing: [
+    "closeShot",
+    "drivingLayup",
+    "drivingDunk",
+    "standingDunk",
+    "postControl"
+  ],
+
+  Shooting: [
+    "midRangeShot",
+    "threePointShot",
+    "freeThrow"
+  ],
+
+  Playmaking: [
+    "passAccuracy",
+    "ballHandle",
+    "speedWithBall"
+  ],
+
+  Defense: [
+    "interiorDefense",
+    "perimeterDefense",
+    "steal",
+    "block"
+  ],
+
+  Rebounding: [
+    "offensiveRebound",
+    "defensiveRebound"
+  ],
+
+  Physicals: [
+    "speed",
+    "agility",
+    "strength",
+    "vertical"
+  ]
+};
+
+
+// ======================================================
+// CATEGORY AVERAGE
+// ======================================================
+
+function getPlayerSummaryCategoryAverage(
+  attributes,
+  attributeNames
+) {
+
+  if (
+    !attributes ||
+    !Array.isArray(attributeNames) ||
+    attributeNames.length === 0
+  ) {
+    return 0;
+  }
+
+
+  const values =
+    attributeNames.map(
+      function (attributeName) {
+
+        const value =
+          Number(
+            attributes[
+              attributeName
+            ]
+          );
+
+        return Number.isFinite(value)
+          ? value
+          : 25;
+      }
+    );
+
+
+  const total =
+    values.reduce(
+      function (
+        sum,
+        value
+      ) {
+
+        return sum + value;
+
+      },
+      0
+    );
+
+
+  return (
+    total /
+    values.length
+  );
+}
+
+
+// ======================================================
+// FORMAT PLAYER VITALS
+// ======================================================
+
+function getPlayerSummaryVitals(
+  player
+) {
+
+  const parts = [];
+
+
+  if (
+    player.position
+  ) {
+
+    parts.push(
+      player.position
+    );
+  }
+
+
+  if (
+    Number.isFinite(
+      player.heightFeet
+    ) &&
+    Number.isFinite(
+      player.heightInches
+    )
+  ) {
+
+    parts.push(
+      `${player.heightFeet}'${player.heightInches}"`
+    );
+  }
+
+
+  if (
+    Number.isFinite(
+      player.weight
+    ) &&
+    player.weight > 0
+  ) {
+
+    parts.push(
+      `${player.weight} lbs`
+    );
+  }
+
+
+  if (
+    Number.isFinite(
+      player.wingspanFeet
+    ) &&
+    Number.isFinite(
+      player.wingspanInches
+    )
+  ) {
+
+    parts.push(
+      `${player.wingspanFeet}'${player.wingspanInches}" WS`
+    );
+  }
+
+
+  return parts.join(
+    " • "
+  );
+}
+
+
+// ======================================================
+// COUNT LIVE BADGE LEVELS
+// ======================================================
+
+function getPlayerSummaryBadgeCounts() {
+
+  const counts = {
+
+    hallOfFame: 0,
+
+    gold: 0,
+
+    silver: 0,
+
+    bronze: 0
+  };
+
+
+  const badgeCards =
+    document.querySelectorAll(
+      "#badgeResults .badge-result-card"
+    );
+
+
+  badgeCards.forEach(
+    function (card) {
+
+      const level =
+        card.querySelector(
+          ".badge-level"
+        );
+
+
+      if (!level) {
+        return;
+      }
+
+
+      if (
+        level.classList.contains(
+          "hall-of-fame"
+        )
+      ) {
+
+        counts.hallOfFame += 1;
+
+      } else if (
+        level.classList.contains(
+          "gold"
+        )
+      ) {
+
+        counts.gold += 1;
+
+      } else if (
+        level.classList.contains(
+          "silver"
+        )
+      ) {
+
+        counts.silver += 1;
+
+      } else if (
+        level.classList.contains(
+          "bronze"
+        )
+      ) {
+
+        counts.bronze += 1;
+      }
+    }
+  );
+
+
+  return counts;
+}
+
+
+// ======================================================
+// RENDER PLAYER SUMMARY
+// ======================================================
+
+function renderPlayerSummary() {
+
+  const container =
+    document.getElementById(
+      "playerSummary"
+    );
+
+
+  if (!container) {
+    return;
+  }
+
+
+  if (
+    !hasMeaningfulPlayerInput()
+  ) {
+
+    container.innerHTML = `
+      <div class="summary-idle-state">
+        <p>
+          Adjust the player attributes to build the player summary.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  const player =
+    getPlayerData();
+
+
+  const attributes =
+    player.attributes || {};
+
+
+  // ------------------------------------------
+  // TOP ATTRIBUTES
+  // ------------------------------------------
+
+  const topAttributes =
+    Object.entries(
+      attributes
+    )
+      .filter(
+        function (
+          entry
+        ) {
+
+          const value =
+            Number(
+              entry[1]
+            );
+
+          return (
+            Number.isFinite(value) &&
+            value > 25
+          );
+        }
+      )
+      .sort(
+        function (
+          a,
+          b
+        ) {
+
+          return (
+            Number(b[1]) -
+            Number(a[1])
+          );
+        }
+      )
+      .slice(
+        0,
+        5
+      );
+
+
+  // ------------------------------------------
+  // CATEGORY ANALYSIS
+  // ------------------------------------------
+
+  const categoryScores =
+    Object.entries(
+      PLAYER_SUMMARY_CATEGORIES
+    )
+      .map(
+        function (
+          entry
+        ) {
+
+          const category =
+            entry[0];
+
+          const attributeNames =
+            entry[1];
+
+
+          return {
+
+            category:
+              category,
+
+            average:
+              getPlayerSummaryCategoryAverage(
+                attributes,
+                attributeNames
+              )
+          };
+        }
+      )
+      .sort(
+        function (
+          a,
+          b
+        ) {
+
+          return (
+            b.average -
+            a.average
+          );
+        }
+      );
+
+
+  const strongestCategory =
+    categoryScores[0];
+
+
+  const weakestCategory =
+    categoryScores[
+      categoryScores.length - 1
+    ];
+
+
+  const badgeCounts =
+    getPlayerSummaryBadgeCounts();
+
+
+  const totalBadges =
+    badgeCounts.hallOfFame +
+    badgeCounts.gold +
+    badgeCounts.silver +
+    badgeCounts.bronze;
+
+
+  const vitals =
+    getPlayerSummaryVitals(
+      player
+    );
+
+
+  // ------------------------------------------
+  // TOP ATTRIBUTE HTML
+  // ------------------------------------------
+
+  let topAttributeHTML = "";
+
+
+  if (
+    topAttributes.length > 0
+  ) {
+
+    topAttributeHTML =
+      topAttributes.map(
+        function (
+          entry
+        ) {
+
+          const key =
+            entry[0];
+
+          const value =
+            entry[1];
+
+          const label =
+            PLAYER_SUMMARY_ATTRIBUTE_LABELS[
+              key
+            ] || key;
+
+
+          return `
+            <div class="summary-attribute-row">
+
+              <span class="summary-attribute-name">
+                ${escapeHTML(label)}
+              </span>
+
+              <strong class="summary-attribute-value">
+                ${escapeHTML(value)}
+              </strong>
+
+            </div>
+          `;
+        }
+      ).join("");
+
+  } else {
+
+    topAttributeHTML = `
+      <div class="summary-empty-copy">
+        Increase attributes above 25 to identify the player's top ratings.
+      </div>
+    `;
+  }
+
+
+  // ------------------------------------------
+  // FINAL SUMMARY
+  // ------------------------------------------
+
+  container.innerHTML = `
+
+    ${
+      vitals
+        ? `
+          <div class="summary-vitals">
+            ${escapeHTML(vitals)}
+          </div>
+        `
+        : ""
+    }
+
+
+    <div class="summary-block">
+
+      <div class="summary-block-title">
+        Top Attributes
+      </div>
+
+      <div class="summary-attribute-list">
+
+        ${topAttributeHTML}
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-analysis-grid">
+
+      <div class="summary-analysis-card strength">
+
+        <span class="summary-analysis-label">
+          Strength
+        </span>
+
+        <strong>
+          ${
+            strongestCategory
+              ? escapeHTML(
+                  strongestCategory.category
+                )
+              : "—"
+          }
+        </strong>
+
+        <small>
+          ${
+            strongestCategory
+              ? Math.round(
+                  strongestCategory.average
+                )
+              : "—"
+          }
+          AVG
+        </small>
+
+      </div>
+
+
+      <div class="summary-analysis-card weakness">
+
+        <span class="summary-analysis-label">
+          Weakness
+        </span>
+
+        <strong>
+          ${
+            weakestCategory
+              ? escapeHTML(
+                  weakestCategory.category
+                )
+              : "—"
+          }
+        </strong>
+
+        <small>
+          ${
+            weakestCategory
+              ? Math.round(
+                  weakestCategory.average
+                )
+              : "—"
+          }
+          AVG
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="summary-analysis-note">
+      Strength and weakness are Player Lab estimates based on category averages.
+    </div>
+
+
+    <div class="summary-block summary-badge-block">
+
+      <div class="summary-block-heading">
+
+        <div class="summary-block-title">
+          Qualified Badges
+        </div>
+
+        <strong class="summary-total-badges">
+          ${totalBadges}
+        </strong>
+
+      </div>
+
+
+      <div class="summary-badge-counts">
+
+        <div class="summary-badge-count hof">
+
+          <strong>
+            ${badgeCounts.hallOfFame}
+          </strong>
+
+          <span>
+            HOF
+          </span>
+
+        </div>
+
+
+        <div class="summary-badge-count gold">
+
+          <strong>
+            ${badgeCounts.gold}
+          </strong>
+
+          <span>
+            Gold
+          </span>
+
+        </div>
+
+
+        <div class="summary-badge-count silver">
+
+          <strong>
+            ${badgeCounts.silver}
+          </strong>
+
+          <span>
+            Silver
+          </span>
+
+        </div>
+
+
+        <div class="summary-badge-count bronze">
+
+          <strong>
+            ${badgeCounts.bronze}
+          </strong>
+
+          <span>
+            Bronze
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+}
+
+
+// ======================================================
+// KEEP SUMMARY IN SYNC WITH LIVE BADGES
+// ======================================================
+
+let playerSummaryTimer = null;
+
+
+function schedulePlayerSummaryRender() {
+
+  clearTimeout(
+    playerSummaryTimer
+  );
+
+
+  playerSummaryTimer =
+    setTimeout(
+      renderPlayerSummary,
+      160
+    );
+}
+
+
+// Re-render whenever badge results change.
+
+if (badgeResults) {
+
+  const playerSummaryObserver =
+    new MutationObserver(
+      function () {
+
+        schedulePlayerSummaryRender();
+      }
+    );
+
+
+  playerSummaryObserver.observe(
+    badgeResults,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
+}
+
+
+// Re-render while the user edits the player.
+
+document
+  .querySelectorAll(
+    `
+      [data-attribute],
+      #position,
+      #heightFeet,
+      #heightInches,
+      #weight,
+      #wingspanFeet,
+      #wingspanInches
+    `
+  )
+  .forEach(
+    function (input) {
+
+      input.addEventListener(
+        "input",
+        schedulePlayerSummaryRender
+      );
+
+      input.addEventListener(
+        "change",
+        schedulePlayerSummaryRender
+      );
+    }
+  );
+
+
+renderPlayerSummary();
