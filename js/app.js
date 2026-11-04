@@ -1301,10 +1301,6 @@ function initializeAttributeSliders() {
       slider.value =
         input.value || "25";
 
-      slider.dataset.attribute =
-        input.dataset.attribute;
-
-
       sliderWrap.appendChild(
         slider
       );
