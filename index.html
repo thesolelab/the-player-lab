@@ -632,47 +632,102 @@
 
       </div>
 
-  <aside class="player-builder-sidebar">
+<aside class="player-builder-sidebar">
 
-    <!-- ======================================
-         BADGE RESULTS
-    ======================================= -->
-    <section class="panel results-panel" id="badgeResultsSection">
+  <!-- ======================================
+       PLAYER SUMMARY
+  ======================================= -->
 
-      <div class="section-header">
-        <h2>Qualified Badges</h2>
+  <section
+    class="panel player-summary-panel"
+    id="playerSummarySection"
+  >
+
+    <div class="section-header">
+
+      <h2>
+        Player Summary
+      </h2>
+
+      <p>
+        Live analysis based on the player's current attributes.
+      </p>
+
+    </div>
+
+    <div id="playerSummary">
+
+      <div class="summary-idle-state">
+
         <p>
-          <p>
-  Eligible badges will appear here after the player's
-  attributes are analyzed.
-</p>
+          Adjust the player attributes to build the player summary.
         </p>
-      </div>
-
-
-      <!-- Badge level legend -->
-      <div class="badge-level-legend">
-
-        <span class="badge-level bronze">Bronze</span>
-        <span class="badge-level silver">Silver</span>
-        <span class="badge-level gold">Gold</span>
-        <span class="badge-level hall-of-fame">Hall of Fame</span>
-      
-      </div>
-
-
-      <!-- JavaScript will populate this area later -->
-      <div id="badgeResults">
-
-        <div class="empty-results">
-          <p>Adjust the player attributes to see qualified badges.</p>
-        </div>
 
       </div>
 
-    </section>
+    </div>
 
-      </aside>
+  </section>
+
+
+  <!-- ======================================
+       QUALIFIED BADGES
+  ======================================= -->
+
+  <section
+    class="panel results-panel"
+    id="badgeResultsSection"
+  >
+
+    <div class="section-header">
+
+      <h2>
+        Qualified Badges
+      </h2>
+
+      <p>
+        Badge qualifications update automatically as attributes change.
+      </p>
+
+    </div>
+
+
+    <div class="badge-level-legend">
+
+      <span class="badge-level bronze">
+        Bronze
+      </span>
+
+      <span class="badge-level silver">
+        Silver
+      </span>
+
+      <span class="badge-level gold">
+        Gold
+      </span>
+
+      <span class="badge-level hall-of-fame">
+        Hall of Fame
+      </span>
+
+    </div>
+
+
+    <div id="badgeResults">
+
+      <div class="empty-results">
+
+        <p>
+          Adjust the player attributes to see qualified badges.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</aside>
 
 </div>
 
