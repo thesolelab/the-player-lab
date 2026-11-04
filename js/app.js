@@ -1447,10 +1447,14 @@ function updateAttributeSliderFill(
     ) * 100;
 
 
-  slider.style.setProperty(
-    "--slider-fill",
-    percentage + "%"
-  );
+  slider.style.background =
+    `linear-gradient(
+      to right,
+      var(--attribute-accent) 0%,
+      var(--attribute-accent) ${percentage}%,
+      #242d3b ${percentage}%,
+      #242d3b 100%
+    )`;
 }
 
 // ======================================================
