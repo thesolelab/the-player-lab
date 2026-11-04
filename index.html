@@ -5,7 +5,7 @@
   Updated: 2026-08-19
 
   CHANGELOG
-  0.1.7 - Improved player information and analytics setup
+0.1.7 - Improved player information and analytics setup
       - Removed Secondary Position from Player Information
       - Restored League Type selector for NBA, NCAA, and High School
       - Renamed Competition Level label to League Type
@@ -13,351 +13,191 @@
       - Removed duplicate Umami event attributes from Calculate Badges and Randomize Player
       - Preserved Reset Player declarative Umami tracking
       - Cleaned version-specific interface copy
-
-  0.1.6 - Updated live app to NBA 2K27
+0.1.6 - Updated live app to NBA 2K27
       - Aligned the interface with NBA 2K27 attribute-qualified badge levels
       - Removed Legend from the live badge-level legend
       - Removed the NBA 2K26 script from the live application
       - Fixed malformed brand/header HTML structure
       - Kept historical NBA 2K26 badge data in the repository
       - Repaired Player Lab header markup
+      - Fixed malformed brand/header HTML structure
       - Restored correct logo placement inside the header container
       - Restored consistent brand lockup behavior across screen sizes
       - Preserved Player Lab wordmark and subtitle structure
-
-  0.1.5 - Added numeric keypad support to vitals and attribute inputs
+0.1.5 - Added numeric keypad support to vitals and attribute inputs
       - Prepared fields for faster mobile attribute entry
-
-  0.1.4 - Added Player Lab laboratory icon
+0.1.4 - Added Player Lab laboratory icon
       - Added custom inline SVG flask icon to the header
       - Increased visibility of the flask liquid
-
-  0.1.3 - Refined application header branding
+0.1.3 - Refined application header branding
       - Added Player Lab brand icon placeholder
       - Removed separate game-version display block
       - Moved NBA 2K26 MyNBA context into the brand subtitle
       - Updated subtitle to emphasize Player Creation & Analysis
-
-  0.1.2 - Updated application footer
+0.1.2 - Updated application footer
       - Added The Player Lab product identity
       - Added "A Sole Lab Project" branding
       - Added basketball creation, analysis, and simulation description
       - Added current NBA 2K26 ruleset messaging
       - Added independent project / non-affiliation disclaimer
-
-  0.1.1 - Improved player measurement inputs
+0.1.1 - Improved player measurement inputs
       - Split Height into separate feet and inches fields
       - Split Wingspan into separate feet and inches fields
       - Reduced input ambiguity for badge height calculations
-
-  0.1.0 - Initial application structure
-      - Added Player Information section
-      - Added NBA 2K26 game version display
-      - Added player attribute inputs
-      - Added badge results area
-      - Added badge level legend
-      - Connected badge data and app.js placeholders
+0.1.0 - Initial application structure
+        - Added Player Information section
+        - Added NBA 2K26 game version display
+        - Added player attribute inputs
+        - Added badge results area
+        - Added badge level legend
+        - Connected badge data and app.js placeholders
 -->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <title>The Player Lab | NBA 2K Player Calculator</title>
 
-  <title>
-    The Player Lab | NBA 2K Player Calculator
-  </title>
-
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- Umami Analytics Tracking -->
-
-  <script
-    defer
-    src="https://cloud.umami.is/script.js"
-    data-website-id="5127b925-7c51-4251-848c-05372b45e340"
-  ></script>
-
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="5127b925-7c51-4251-848c-05372b45e340"></script>
 </head>
 
-
 <body>
-
 
   <!-- ========================================
        APP HEADER
   ========================================= -->
-
   <header class="app-header">
+  <div class="container">
 
-    <div class="container">
+    <div class="brand">
+      <div class="brand-lockup">
 
-      <div class="brand">
-
-        <div class="brand-lockup">
-
-          <div
-            class="brand-icon"
-            aria-hidden="true"
+        <div class="brand-icon" aria-hidden="true">
+          <img
+            src="assets/icons/TPL Logo.svg"
+            alt=""
           >
+        </div>
 
-            <img
-              src="assets/icons/TPL Logo.svg"
-              alt=""
-            >
+        <div class="brand-wordmark">
 
+          <div class="brand-eyebrow">
+            <span class="brand-the">THE</span>
+            <span class="brand-top-rule" aria-hidden="true"></span>
           </div>
 
-
-          <div class="brand-wordmark">
-
-            <div class="brand-eyebrow">
-
-              <span class="brand-the">
-                THE
-              </span>
-
-              <span
-                class="brand-top-rule"
-                aria-hidden="true"
-              ></span>
-
-            </div>
-
-
-            <div class="brand-title">
-
-              <span class="brand-player">
-                PLAYER
-              </span>
-
-              <span class="brand-lab">
-                LAB
-              </span>
-
-            </div>
-
-
-            <div
-              class="brand-bottom-rule"
-              aria-hidden="true"
-            ></div>
-
-
-            <p class="brand-subtitle">
-              MyNBA Player Generator &amp; Badge Analyzer
-            </p>
-
+          <div class="brand-title">
+            <span class="brand-player">PLAYER</span>
+            <span class="brand-lab">LAB</span>
           </div>
+
+          <div class="brand-bottom-rule" aria-hidden="true"></div>
+
+          <p class="brand-subtitle">
+            MyNBA Player Generator &amp; Badge Analyzer
+          </p>
 
         </div>
 
       </div>
-
     </div>
 
-  </header>
-
+  </div>
+</header>
 
   <!-- ========================================
        MAIN APPLICATION
   ========================================= -->
-
   <main class="container">
-
 
     <!-- ======================================
          PLAYER INFORMATION
     ======================================= -->
-
-    <section
-      class="panel"
-      id="playerInfoSection"
-    >
+    <section class="panel" id="playerInfoSection">
 
       <div class="section-header">
-
-        <h2>
-          Player Information
-        </h2>
-
-        <p>
-          Enter the vitals for the player you want to analyze.
-        </p>
-
+        <h2>Player Information</h2>
+        <p>Enter the vitals for the player you want to analyze.</p>
         <p class="attribute-helper">
-
-          <span
-            class="attribute-helper-icon"
-            aria-hidden="true"
-          >
-            i
-          </span>
-
-          Choose the league type that matches your MyNBA scenario.
-          For example, select High School when creating players for
-          a high school scenario. League type only guides randomized
-          attributes; all ratings remain editable.
-
-        </p>
-
+  <span class="attribute-helper-icon" aria-hidden="true">i</span>
+  Choose the league type that matches your MyNBA scenario. For example, select High School when creating players for a high school scenario. League type only guides randomized attributes; all ratings remain editable.
+</p>
       </div>
-
 
       <div class="form-grid">
 
-
-        <!-- PLAYER NAME -->
-
         <div class="form-group">
-
-          <label for="playerName">
-            Player Name
-          </label>
-
+          <label for="playerName">Player Name</label>
           <input
             type="text"
             id="playerName"
             name="playerName"
             placeholder="Enter player name"
           >
-
         </div>
 
+        <div class="form-group">
+  <label for="competitionLevel">League Type</label>
 
-        <!-- LEAGUE TYPE -->
+  <select
+    id="competitionLevel"
+    name="competitionLevel"
+  >
+    <option value="nba">NBA</option>
+    <option value="ncaa">NCAA</option>
+    <option value="high-school">High School</option>
+  </select>
+</div>
 
         <div class="form-group">
+  <label for="position">Position</label>
+  <select id="position" name="position">
+    <option value="">Select Position</option>
+    <option value="PG">PG</option>
+    <option value="SG">SG</option>
+    <option value="SF">SF</option>
+    <option value="PF">PF</option>
+    <option value="C">C</option>
+  </select>
+</div>
 
-          <label for="competitionLevel">
-            League Type
-          </label>
+<div class="form-group">
+  <label>Height</label>
 
-          <select
-            id="competitionLevel"
-            name="competitionLevel"
-          >
+  <div class="measurement-group">
+    <input
+      type="number"
+      id="heightFeet"
+      inputmode="numeric"
+      name="heightFeet"
+      min="5"
+      max="8"
+      placeholder="Feet"
+    >
 
-            <option value="nba">
-              NBA
-            </option>
+    <span>ft</span>
 
-            <option value="ncaa">
-              NCAA
-            </option>
+    <input
+      type="number"
+      id="heightInches"
+      inputmode="numeric"
+      name="heightInches"
+      min="0"
+      max="11"
+      placeholder="Inches"
+    >
 
-            <option value="high-school">
-              High School
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- POSITION -->
-
-        <div class="form-group">
-
-          <label for="position">
-            Position
-          </label>
-
-          <select
-            id="position"
-            name="position"
-          >
-
-            <option value="">
-              Select Position
-            </option>
-
-            <option value="PG">
-              PG
-            </option>
-
-            <option value="SG">
-              SG
-            </option>
-
-            <option value="SF">
-              SF
-            </option>
-
-            <option value="PF">
-              PF
-            </option>
-
-            <option value="C">
-              C
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- HEIGHT -->
+    <span>in</span>
+  </div>
+</div>
 
         <div class="form-group">
-
-          <label>
-            Height
-          </label>
-
-          <div class="measurement-group">
-
-            <input
-              type="number"
-              id="heightFeet"
-              inputmode="numeric"
-              name="heightFeet"
-              min="5"
-              max="8"
-              placeholder="Feet"
-            >
-
-            <span>
-              ft
-            </span>
-
-            <input
-              type="number"
-              id="heightInches"
-              inputmode="numeric"
-              name="heightInches"
-              min="0"
-              max="11"
-              placeholder="Inches"
-            >
-
-            <span>
-              in
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <!-- WEIGHT -->
-
-        <div class="form-group">
-
-          <label for="weight">
-            Weight
-          </label>
-
+          <label for="weight">Weight</label>
           <input
             type="number"
             id="weight"
@@ -366,769 +206,475 @@
             placeholder="lbs"
             min="0"
           >
-
         </div>
 
+       <div class="form-group">
+  <label>Wingspan</label>
 
-        <!-- WINGSPAN -->
+  <div class="measurement-group">
+    <input
+      type="number"
+      id="wingspanFeet"
+      inputmode="numeric"
+      name="wingspanFeet"
+      min="4"
+      max="8"
+      placeholder="Feet"
+    >
 
-        <div class="form-group">
+    <span>ft</span>
 
-          <label>
-            Wingspan
-          </label>
+    <input
+      type="number"
+      id="wingspanInches"
+      inputmode="numeric"
+      name="wingspanInches"
+      min="0"
+      max="11"
+      placeholder="Inches"
+    >
 
-          <div class="measurement-group">
+    <span>in</span>
+  </div>
+</div>
+      </div>
+    </section>
 
+    <div class="player-builder-layout">
+
+  <div class="player-builder-main">
+
+    <!-- ======================================
+         PLAYER ATTRIBUTES
+    ======================================= -->
+    <section class="panel" id="attributesSection">
+
+      <div class="section-header">
+        <h2>Player Attributes</h2>
+        <p>
+          Enter the player's attributes first. Badge qualifications will be
+          calculated from these values.
+         <p class="attribute-helper">
+  <span class="attribute-helper-icon" aria-hidden="true">i</span>
+  Attributes left unchanged will remain at the default value of 25.
+</p>
+        </p>
+      </div>
+
+<div class="attribute-category-grid">
+
+  <div class="attribute-category-column">
+      
+<!-- FINISHING -->
+<div class="attribute-category attribute-category-finishing">
+
+  <h3>Finishing</h3>
+
+  <div class="attribute-grid">
+
+    <div class="attribute-field">
+      <label for="closeShot">Close Shot</label>
+      <input
+        type="number"
+        id="closeShot"
+        data-attribute="closeShot"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="drivingLayup">Driving Layup</label>
+      <input
+        type="number"
+        id="drivingLayup"
+        data-attribute="drivingLayup"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="drivingDunk">Driving Dunk</label>
+      <input
+        type="number"
+        id="drivingDunk"
+        data-attribute="drivingDunk"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="standingDunk">Standing Dunk</label>
+      <input
+        type="number"
+        id="standingDunk"
+        data-attribute="standingDunk"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="postControl">Post Control</label>
+      <input
+        type="number"
+        id="postControl"
+        data-attribute="postControl"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- SHOOTING -->
+      <div class="attribute-category attribute-category-shooting">
+
+        <h3>Shooting</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="midRangeShot">Mid-Range Shot</label>
             <input
               type="number"
-              id="wingspanFeet"
+              id="midRangeShot"
+              data-attribute="midRangeShot"
+              min="25"
+              max="99"
+              value="25"
               inputmode="numeric"
-              name="wingspanFeet"
-              min="4"
-              max="8"
-              placeholder="Feet"
             >
+          </div>
 
-            <span>
-              ft
-            </span>
-
+          <div class="attribute-field">
+            <label for="threePointShot">Three-Point Shot</label>
             <input
               type="number"
-              id="wingspanInches"
+              id="threePointShot"
+              data-attribute="threePointShot"
+              min="25"
+              max="99"
+              value="25"
               inputmode="numeric"
-              name="wingspanInches"
-              min="0"
-              max="11"
-              placeholder="Inches"
             >
+          </div>
 
-            <span>
-              in
-            </span>
-
+          <div class="attribute-field">
+            <label for="freeThrow">Free Throw</label>
+            <input
+              type="number"
+              id="freeThrow"
+              data-attribute="freeThrow"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
           </div>
 
         </div>
+      </div>
 
+
+      <!-- PLAYMAKING -->
+      <div class="attribute-category attribute-category-playmaking">
+
+        <h3>Playmaking</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="passAccuracy">Pass Accuracy</label>
+            <input
+              type="number"
+              id="passAccuracy"
+              data-attribute="passAccuracy"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="ballHandle">Ball Handle</label>
+            <input
+              type="number"
+              id="ballHandle"
+              data-attribute="ballHandle"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="speedWithBall">Speed With Ball</label>
+            <input
+              type="number"
+              id="speedWithBall"
+              data-attribute="speedWithBall"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+        </div>
+      </div>
+
+      </div>
+
+  <div class="attribute-category-column">
+
+      <!-- DEFENSE -->
+<div class="attribute-category attribute-category-defense">
+
+  <h3>Defense</h3>
+
+  <div class="attribute-grid">
+
+    <div class="attribute-field">
+      <label for="interiorDefense">Interior Defense</label>
+      <input
+        type="number"
+        id="interiorDefense"
+        data-attribute="interiorDefense"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="perimeterDefense">Perimeter Defense</label>
+      <input
+        type="number"
+        id="perimeterDefense"
+        data-attribute="perimeterDefense"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="steal">Steal</label>
+      <input
+        type="number"
+        id="steal"
+        data-attribute="steal"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="block">Block</label>
+      <input
+        type="number"
+        id="block"
+        data-attribute="block"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+  </div>
+</div>
+
+
+<!-- REBOUNDING -->
+<div class="attribute-category attribute-category-rebounding">
+
+  <h3>Rebounding</h3>
+
+  <div class="attribute-grid">
+
+    <div class="attribute-field">
+      <label for="offensiveRebound">Offensive Rebound</label>
+      <input
+        type="number"
+        id="offensiveRebound"
+        data-attribute="offensiveRebound"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+    <div class="attribute-field">
+      <label for="defensiveRebound">Defensive Rebound</label>
+      <input
+        type="number"
+        id="defensiveRebound"
+        data-attribute="defensiveRebound"
+        min="25"
+        max="99"
+        value="25"
+        inputmode="numeric"
+      >
+    </div>
+
+  </div>
+</div>
+
+      <!-- PHYSICALS -->
+      <div class="attribute-category attribute-category-physicals">
+
+        <h3>Physicals</h3>
+
+        <div class="attribute-grid">
+
+          <div class="attribute-field">
+            <label for="speed">Speed</label>
+            <input
+              type="number"
+              id="speed"
+              data-attribute="speed"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="agility">Agility</label>
+            <input
+              type="number"
+              id="agility"
+              data-attribute="agility"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="strength">Strength</label>
+            <input
+              type="number"
+              id="strength"
+              data-attribute="strength"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+          <div class="attribute-field">
+            <label for="vertical">Vertical</label>
+            <input
+              type="number"
+              id="vertical"
+              data-attribute="vertical"
+              min="25"
+              max="99"
+              value="25"
+              inputmode="numeric"
+            >
+          </div>
+
+        </div>
+      </div>
+</div>
+</div>  
+
+
+     <!-- CALCULATOR ACTIONS -->
+<div class="calculator-actions">
+  <button
+    type="button"
+    id="randomizePlayerButton"
+    class="secondary-button randomize-button"
+  >
+    Randomize Player
+  </button>
+
+  <button
+    type="button"
+    id="resetPlayerButton"
+    class="secondary-button"
+    data-umami-event="reset-player"
+  >
+    Reset Player
+  </button>
+
+</div>
+    </section>
+
+      </div>
+
+  <aside class="player-builder-sidebar">
+
+    <!-- ======================================
+         BADGE RESULTS
+    ======================================= -->
+    <section class="panel results-panel" id="badgeResultsSection">
+
+      <div class="section-header">
+        <h2>Qualified Badges</h2>
+        <p>
+          <p>
+  Eligible badges will appear here after the player's
+  attributes are analyzed.
+</p>
+        </p>
+      </div>
+
+
+      <!-- Badge level legend -->
+      <div class="badge-level-legend">
+
+        <span class="badge-level bronze">Bronze</span>
+        <span class="badge-level silver">Silver</span>
+        <span class="badge-level gold">Gold</span>
+        <span class="badge-level hall-of-fame">Hall of Fame</span>
+      
+      </div>
+
+
+      <!-- JavaScript will populate this area later -->
+      <div id="badgeResults">
+
+        <div class="empty-results">
+          <p>Adjust the player attributes to see qualified badges.</p>
+        </div>
 
       </div>
 
     </section>
 
-
-    <!-- ======================================
-         BUILDER LAYOUT
-    ======================================= -->
-
-    <div class="player-builder-layout">
-
-
-      <!-- ====================================
-           LEFT SIDE
-      ===================================== -->
-
-      <div class="player-builder-main">
-
-
-        <!-- ==================================
-             PLAYER ATTRIBUTES
-        =================================== -->
-
-        <section
-          class="panel"
-          id="attributesSection"
-        >
-
-          <div class="section-header">
-
-            <h2>
-              Player Attributes
-            </h2>
-
-            <p>
-              Enter the player's attributes first.
-              Badge qualifications will be calculated
-              from these values.
-            </p>
-
-            <p class="attribute-helper">
-
-              <span
-                class="attribute-helper-icon"
-                aria-hidden="true"
-              >
-                i
-              </span>
-
-              Attributes left unchanged will remain
-              at the default value of 25.
-
-            </p>
-
-          </div>
-
-
-          <!-- ATTRIBUTE CATEGORY GRID -->
-
-          <div class="attribute-category-grid">
-
-
-            <!-- ==============================
-                 LEFT ATTRIBUTE COLUMN
-            =============================== -->
-
-            <div class="attribute-category-column">
-
-
-              <!-- FINISHING -->
-
-              <div
-                class="attribute-category
-                       attribute-category-finishing"
-              >
-
-                <h3>
-                  Finishing
-                </h3>
-
-                <div class="attribute-grid">
-
-
-                  <div class="attribute-field">
-
-                    <label for="closeShot">
-                      Close Shot
-                    </label>
-
-                    <input
-                      type="number"
-                      id="closeShot"
-                      data-attribute="closeShot"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="drivingLayup">
-                      Driving Layup
-                    </label>
-
-                    <input
-                      type="number"
-                      id="drivingLayup"
-                      data-attribute="drivingLayup"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="drivingDunk">
-                      Driving Dunk
-                    </label>
-
-                    <input
-                      type="number"
-                      id="drivingDunk"
-                      data-attribute="drivingDunk"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="standingDunk">
-                      Standing Dunk
-                    </label>
-
-                    <input
-                      type="number"
-                      id="standingDunk"
-                      data-attribute="standingDunk"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="postControl">
-                      Post Control
-                    </label>
-
-                    <input
-                      type="number"
-                      id="postControl"
-                      data-attribute="postControl"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-              <!-- SHOOTING -->
-
-              <div
-                class="attribute-category
-                       attribute-category-shooting"
-              >
-
-                <h3>
-                  Shooting
-                </h3>
-
-                <div class="attribute-grid">
-
-
-                  <div class="attribute-field">
-
-                    <label for="midRangeShot">
-                      Mid-Range Shot
-                    </label>
-
-                    <input
-                      type="number"
-                      id="midRangeShot"
-                      data-attribute="midRangeShot"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="threePointShot">
-                      Three-Point Shot
-                    </label>
-
-                    <input
-                      type="number"
-                      id="threePointShot"
-                      data-attribute="threePointShot"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="freeThrow">
-                      Free Throw
-                    </label>
-
-                    <input
-                      type="number"
-                      id="freeThrow"
-                      data-attribute="freeThrow"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-              <!-- PLAYMAKING -->
-
-              <div
-                class="attribute-category
-                       attribute-category-playmaking"
-              >
-
-                <h3>
-                  Playmaking
-                </h3>
-
-                <div class="attribute-grid">
-
-
-                  <div class="attribute-field">
-
-                    <label for="passAccuracy">
-                      Pass Accuracy
-                    </label>
-
-                    <input
-                      type="number"
-                      id="passAccuracy"
-                      data-attribute="passAccuracy"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="ballHandle">
-                      Ball Handle
-                    </label>
-
-                    <input
-                      type="number"
-                      id="ballHandle"
-                      data-attribute="ballHandle"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="speedWithBall">
-                      Speed With Ball
-                    </label>
-
-                    <input
-                      type="number"
-                      id="speedWithBall"
-                      data-attribute="speedWithBall"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-            <!-- ==============================
-                 RIGHT ATTRIBUTE COLUMN
-            =============================== -->
-
-            <div class="attribute-category-column">
-
-
-              <!-- DEFENSE -->
-
-              <div
-                class="attribute-category
-                       attribute-category-defense"
-              >
-
-                <h3>
-                  Defense
-                </h3>
-
-                <div class="attribute-grid">
-
-
-                  <div class="attribute-field">
-
-                    <label for="interiorDefense">
-                      Interior Defense
-                    </label>
-
-                    <input
-                      type="number"
-                      id="interiorDefense"
-                      data-attribute="interiorDefense"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="perimeterDefense">
-                      Perimeter Defense
-                    </label>
-
-                    <input
-                      type="number"
-                      id="perimeterDefense"
-                      data-attribute="perimeterDefense"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="steal">
-                      Steal
-                    </label>
-
-                    <input
-                      type="number"
-                      id="steal"
-                      data-attribute="steal"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="block">
-                      Block
-                    </label>
-
-                    <input
-                      type="number"
-                      id="block"
-                      data-attribute="block"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-              <!-- REBOUNDING -->
-
-              <div
-                class="attribute-category
-                       attribute-category-rebounding"
-              >
-
-                <h3>
-                  Rebounding
-                </h3>
-
-                <div class="attribute-grid">
-
-
-                  <div class="attribute-field">
-
-                    <label for="offensiveRebound">
-                      Offensive Rebound
-                    </label>
-
-                    <input
-                      type="number"
-                      id="offensiveRebound"
-                      data-attribute="offensiveRebound"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="defensiveRebound">
-                      Defensive Rebound
-                    </label>
-
-                    <input
-                      type="number"
-                      id="defensiveRebound"
-                      data-attribute="defensiveRebound"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-              <!-- PHYSICALS -->
-
-              <div
-                class="attribute-category
-                       attribute-category-physicals"
-              >
-
-                <h3>
-                  Physicals
-                </h3>
-
-                <div class="attribute-grid">
-
-
-                  <div class="attribute-field">
-
-                    <label for="speed">
-                      Speed
-                    </label>
-
-                    <input
-                      type="number"
-                      id="speed"
-                      data-attribute="speed"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="agility">
-                      Agility
-                    </label>
-
-                    <input
-                      type="number"
-                      id="agility"
-                      data-attribute="agility"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="strength">
-                      Strength
-                    </label>
-
-                    <input
-                      type="number"
-                      id="strength"
-                      data-attribute="strength"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                  <div class="attribute-field">
-
-                    <label for="vertical">
-                      Vertical
-                    </label>
-
-                    <input
-                      type="number"
-                      id="vertical"
-                      data-attribute="vertical"
-                      min="25"
-                      max="99"
-                      value="25"
-                      inputmode="numeric"
-                    >
-
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-            </div>
-
-
-          </div>
-
-
-          <!-- ==================================
-               CALCULATOR ACTIONS
-          =================================== -->
-
-          <div class="calculator-actions">
-
-            <button
-              type="button"
-              id="calculateBadgesButton"
-              class="primary-button"
-            >
-              Calculate Badges
-            </button>
-
-
-            <button
-              type="button"
-              id="randomizePlayerButton"
-              class="secondary-button randomize-button"
-            >
-              Randomize Player
-            </button>
-
-
-            <button
-              type="button"
-              id="resetPlayerButton"
-              class="secondary-button"
-              data-umami-event="reset-player"
-            >
-              Reset Player
-            </button>
-
-          </div>
-
-
-        </section>
-
-
-      </div>
-
-
-      <!-- ====================================
-           RIGHT SIDEBAR
-      ===================================== -->
-
-      <aside class="player-builder-sidebar">
-
-
-        <!-- ==================================
-             BADGE RESULTS
-        =================================== -->
-
-        <section
-          class="panel results-panel"
-          id="badgeResultsSection"
-        >
-
-          <div class="section-header">
-
-            <h2>
-              Qualified Badges
-            </h2>
-
-            <p>
-              Eligible badges will appear here after
-              the player's attributes are analyzed.
-            </p>
-
-          </div>
-
-
-          <!-- BADGE LEVEL LEGEND -->
-
-          <div class="badge-level-legend">
-
-            <span class="badge-level bronze">
-              Bronze
-            </span>
-
-            <span class="badge-level silver">
-              Silver
-            </span>
-
-            <span class="badge-level gold">
-              Gold
-            </span>
-
-            <span class="badge-level hall-of-fame">
-              Hall of Fame
-            </span>
-
-          </div>
-
-
-          <!-- JAVASCRIPT POPULATES RESULTS -->
-
-          <div id="badgeResults">
-
-            <div class="empty-results">
-
-              <p>
-                No badge calculations have been run yet.
-              </p>
-
-            </div>
-
-          </div>
-
-
-        </section>
-
-
       </aside>
 
-
-    </div>
-
+</div>
 
   </main>
 
@@ -1136,63 +682,43 @@
   <!-- ========================================
        FOOTER
   ========================================= -->
-
   <footer class="app-footer">
+  <div class="container">
 
-    <div class="container">
-
-      <div class="footer-brand">
-
-        <strong>
-          The Player Lab
-        </strong>
-
-        <span>
-          &mdash; A Sole Lab Project
-        </span>
-
-      </div>
-
-
-      <p class="footer-description">
-        Basketball Player Creation, Analysis &amp; Simulation Tools
-      </p>
-
-
-      <p class="footer-disclaimer">
-
-        <i>
-          The Player Lab is an independent project and is not
-          affiliated with, endorsed by, or sponsored by NBA2K,
-          Take 2 Interactive, or the NBA.
-        </i>
-
-      </p>
-
+    <div class="footer-brand">
+      <strong>The Player Lab</strong>
+      <span>&mdash; A Sole Lab Project</span>
     </div>
 
-  </footer>
+    <p class="footer-description">
+      Basketball Player Creation, Analysis &amp; Simulation Tools
+   </p>
+
+    <p class="footer-disclaimer">
+      <i>The Player Lab is an independent project and is not affiliated with,
+      endorsed by, or sponsored by NBA2K, Take 2 Interactive, or the NBA.</i>
+    </p>
+
+  </div>
+</footer>
 
 
   <!-- ========================================
-       GAME DATA
+     GAME DATA
 
-       Version-specific data stays separate
-       from the application calculation logic.
-  ========================================= -->
+     Version-specific data stays separate
+     from the application calculation logic.
+========================================= -->
 
-  <script src="data/badges-2k27.js"></script>
+<script src="data/badges-2k27.js"></script>
+<script src="data/randomizer-profiles.js"></script>
 
-  <script src="data/randomizer-profiles.js"></script>
 
+<!-- ========================================
+     APPLICATION LOGIC
+========================================= -->
 
-  <!-- ========================================
-       APPLICATION LOGIC
-  ========================================= -->
-
-  <script src="js/app.js"></script>
-
+<script src="js/app.js"></script>
 
 </body>
-
 </html>
