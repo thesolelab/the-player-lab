@@ -620,20 +620,71 @@ select {
 }
 
 /* ======================================================
+   ATTRIBUTE CATEGORY LAYOUT
+====================================================== */
+
+.attribute-category-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  grid-template-areas:
+    "finishing defense"
+    "shooting rebounding"
+    "playmaking physicals";
+
+  align-items: start;
+
+  gap: 16px;
+}
+
+
+.attribute-category-finishing {
+  grid-area: finishing;
+}
+
+.attribute-category-shooting {
+  grid-area: shooting;
+}
+
+.attribute-category-playmaking {
+  grid-area: playmaking;
+}
+
+.attribute-category-defense {
+  grid-area: defense;
+}
+
+.attribute-category-rebounding {
+  grid-area: rebounding;
+}
+
+.attribute-category-physicals {
+  grid-area: physicals;
+}
+
+/* ======================================================
    ATTRIBUTE CATEGORIES
 ====================================================== */
 
 .attribute-category {
-  padding-top: 6px;
-  padding-bottom: 24px;
+  min-width: 0;
 
-  margin-bottom: 18px;
+  margin: 0;
 
-  border-bottom: 1px solid var(--border-primary);
-}
+  padding: 18px;
 
-.attribute-category:last-of-type {
-  border-bottom: 0;
+  border: 1px solid var(--border-primary);
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.012),
+      transparent
+    ),
+    rgba(16, 21, 28, 0.7);
 }
 
 .attribute-category h3 {
@@ -667,10 +718,9 @@ select {
 .attribute-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 
-  gap: 14px;
+  gap: 16px;
 }
 
 .attribute-field {
@@ -1606,6 +1656,20 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @media (max-width: 700px) {
 
+.attribute-category-grid {
+  grid-template-columns: 1fr;
+
+  grid-template-areas:
+    "finishing"
+    "shooting"
+    "playmaking"
+    "defense"
+    "rebounding"
+    "physicals";
+
+  gap: 14px;
+}
+  
   .container {
     width: min(
       calc(100% - 24px),
