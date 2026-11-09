@@ -28,3 +28,12 @@ The uploaded brief is appended verbatim to the existing root `AGENTS.md`, the re
 - Chromium/Playwright comparison against the original script: initial state, all-99 attributes with populated vitals, reset, and deterministic randomization produced matching attribute values, badge text, and summary text.
 - No horizontal overflow at 320, 390, 768, 1024, or 1440 pixels; no browser JavaScript errors in the checked flow.
 - Inspected desktop and fresh mobile screenshots. Verified 21 decorative gauges with 20 segments each. External analytics was blocked in the automated comparison to isolate app behavior.
+
+
+## Header branding follow-up — November 9, 2026
+
+The latest main branch already includes the HUD restyle and the full uploaded design brief in `AGENTS.md`. The owner subsequently requested that the header logo match that aesthetic, overriding the brief's original logo-preservation instruction. This update replaces the detailed legacy SVG with a compact angular flask emblem in the existing lime accent, adds explicit image dimensions, and aligns the wordmark with the HUD's display type and segmented seams.
+
+Rechecked the source: the player-name refresh omission, DOM-derived badge counts, redundant summary scheduling, mixed responsibilities in `app.js`, and external font requests described above remain relevant follow-up work. This branding update leaves qualification rules, randomization, validation, and versioned data untouched.
+
+Checked the rendered logo at 320, 390, and 1440 pixels: it loads correctly and the page has no horizontal overflow. Randomize changes the ratings and Reset restores every attribute to 25. Browser smoke checks found no uncaught JavaScript errors. The logo is decorative beside the readable product name, and the tagline and non-affiliation disclaimer remain unchanged.

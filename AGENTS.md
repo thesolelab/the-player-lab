@@ -307,3 +307,12 @@ Finishing (--sys-finishing), Shooting (--sys-shooting), Playmaking
 8. Verify everything still works: attribute entry, randomize,
    reset, league type, position, height/weight/wingspan, badge
    qualification results unchanged.
+
+
+## Header logo update (November 9, 2026)
+
+The owner explicitly requested a new logo after the HUD restyle. This supersedes
+the earlier instruction to preserve the logo artwork. Keep the updated angular
+flask emblem at `assets/icons/TPL Logo.svg`, the lime brand accent, and the
+Chakra Petch wordmark with its segmented rule. Preserve the accessible text
+identity, tagline, page title, and application behavior.

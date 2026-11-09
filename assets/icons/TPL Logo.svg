@@ -1,71 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="411.75668"
-   height="501.1875"
-   viewBox="0 0 108.94395 132.60586"
-   version="1.1"
-   id="svg1"
-   inkscape:export-filename="TPL Logo.svg"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="px"
-     showguides="false">
-    <sodipodi:guide
-       position="67.882603,66.302936"
-       orientation="-1,0"
-       id="guide1"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <sodipodi:guide
-       position="67.882603,66.302936"
-       orientation="0,1"
-       id="guide2"
-       inkscape:locked="false"
-       inkscape:label=""
-       inkscape:color="rgb(0,134,229)" />
-    <inkscape:page
-       x="0"
-       y="-5.9999553e-24"
-       width="108.94395"
-       height="132.60587"
-       id="page2"
-       margin="0"
-       bleed="0" />
-  </sodipodi:namedview>
-  <defs
-     id="defs1" />
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(0.14927202,-1.4304031)">
-    <path
-       style="opacity:0.5;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 85.212529,76.687142 -0.68709,30.264688"
-       id="path80" />
-    <path
-       style="opacity:0.5;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="M 85.510239,74.211249 93.977811,108.94806 33.709472,125.44179 15.574295,109.58443 -0.14927202,56.78895 10.337201,43.117359 61.354286,34.887068 Z"
-       id="path81" />
-    <path
-       id="path72"
-       style="baseline-shift:baseline;display:inline;overflow:visible;fill:#b8e532;fill-opacity:1;stroke-width:0;stroke-linejoin:round;stroke-dasharray:none;enable-background:accumulate;stop-color:#000000"
-       d="m 5.5053104,112.17553 4.9887476,3.03327 c 6.020795,-9.90226 16.920975,-15.67667 30.088049,-16.88109 14.581303,-1.33379 27.41734,-7.94159 34.54453,-19.663502 6.31874,-10.392275 7.00344,-22.919118 3.22694,-35.075953 -1.95081,0.32473 -3.91499,0.575563 -5.87738,0.782964 1.91731,5.739432 2.69719,11.449884 2.2564,16.871377 L 55.960247,49.828593 c -1.245492,0.748641 -2.443508,1.570821 -3.580601,2.467675 l 21.737731,13.21703 c -0.74536,3.564483 -2.06337,6.96404 -3.98046,10.117044 C 64.116121,85.532605 53.219841,91.30938 40.052763,92.5138 25.471464,93.84759 12.632494,100.45362 5.5053104,112.17553 Z M 39.17278,56.803455 c -6.312702,10.382347 -7.000373,22.895163 -3.235345,35.041485 1.461784,-0.2376 2.929762,-0.41643 4.395972,-0.53885 0.501857,-0.0473 1.004589,-0.10235 1.50715,-0.16576 -1.92798,-5.754178 -2.713245,-11.47998 -2.272166,-16.915663 l 18.784031,11.421122 c 1.247028,-0.748605 2.44206,-1.57228 3.571838,-2.473004 L 40.181661,69.952787 c 0.744788,-3.564411 2.062976,-6.963405 3.979864,-10.11607 C 50.182323,49.934458 61.0825,44.160053 74.249577,42.955632 88.830867,41.62184 101.6675,35.013061 108.79468,23.291154 l -4.98972,-3.033858 C 97.784163,30.159555 86.887307,35.937302 73.720237,37.141728 59.138935,38.475513 46.299966,45.081545 39.17278,56.803455 Z M 72.840837,1.430403 c -6.31775,10.390646 -7.00227,22.9164 -3.22711,35.071848 1.95179,-0.328304 3.91877,-0.577498 5.88298,-0.770227 -1.73417,-5.188305 -2.53916,-10.3531 -2.35361,-15.302616 l 17.483509,10.630369 c 1.30778,-0.708157 2.56882,-1.492226 3.76862,-2.353356 L 73.577127,16.048539 c 0.66925,-4.100451 2.07396,-8.001921 4.25247,-11.584865 z M 45.530733,59.85396 c -0.490646,0.75297 -0.941665,1.525058 -1.354554,2.313386 l 23.874098,14.515992 c 0.75702,-1.087063 1.44419,-2.222824 2.05699,-3.394066 L 46.240969,58.778024 c -0.244162,0.352218 -0.481112,0.710798 -0.710236,1.075936 z m -25.621088,46.90927 20.813239,12.6549 c -0.669907,4.10006 -2.074927,8.00133 -4.253438,11.5843 l 4.989718,3.03383 c 6.320965,-10.39591 7.004853,-22.92762 3.223892,-35.08847 -1.950618,0.30698 -3.91526,0.54882 -5.873564,0.798642 1.73162,5.184798 2.534605,10.345638 2.348385,15.291438 L 23.675344,104.4081 c -1.305381,0.70883 -2.565651,1.49374 -3.765699,2.35513 z" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+  <title>The Player Lab — hangar flask emblem</title>
+  <style>:root{--primary:#b8e532;--text:#eef3ff;--seam:#33425f;--inset:#0a0e18}</style>
+  <path d="M19 3H69L85 19V69L69 85H19L3 69V19Z" fill="var(--inset)" stroke="var(--seam)" stroke-width="2"/>
+  <path d="M3 31V19L19 3H39M85 57V69L69 85H49" stroke="var(--primary)" stroke-width="3"/>
+  <path d="M32 21H56M36 21V38L22 62V68H66V62L52 38V21" stroke="var(--text)" stroke-width="3" stroke-linejoin="bevel"/>
+  <path d="M32 49H56L62 60V64H26V60Z" fill="var(--primary)"/>
+  <path d="M37 55V64M44 51V64M51 55V64" stroke="var(--inset)" stroke-width="3"/>
+  <path d="M13 40V48M75 40V48" stroke="var(--primary)" stroke-width="2"/>
 </svg>
