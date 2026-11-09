@@ -677,7 +677,9 @@ button:disabled {
   color: var(--tier);
   border: 1px solid var(--tier);
   background: var(--panel-inset);
-  padding: 4px 7px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--tier) 22%, transparent);
   font: 700 10px var(--font-mono);
   white-space: nowrap;
 }
