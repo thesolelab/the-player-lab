@@ -60,6 +60,9 @@
 
   <title>The Player Lab | NBA 2K Player Calculator</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Umami Analytics Tracking -->
@@ -106,6 +109,7 @@
 
       </div>
     </div>
+    <div class="system-status"><span aria-hidden="true"></span> SYSTEM ONLINE</div>
 
   </div>
 </header>
@@ -172,7 +176,7 @@
   <div class="measurement-group">
     <input
       type="number"
-      id="heightFeet"
+      id="heightFeet" aria-label="Height in feet"
       inputmode="numeric"
       name="heightFeet"
       min="5"
@@ -184,7 +188,7 @@
 
     <input
       type="number"
-      id="heightInches"
+      id="heightInches" aria-label="Height in inches"
       inputmode="numeric"
       name="heightInches"
       min="0"
@@ -214,7 +218,7 @@
   <div class="measurement-group">
     <input
       type="number"
-      id="wingspanFeet"
+      id="wingspanFeet" aria-label="Wingspan in feet"
       inputmode="numeric"
       name="wingspanFeet"
       min="4"
@@ -226,7 +230,7 @@
 
     <input
       type="number"
-      id="wingspanInches"
+      id="wingspanInches" aria-label="Wingspan in inches"
       inputmode="numeric"
       name="wingspanInches"
       min="0"
@@ -254,11 +258,11 @@
         <p>
           Enter the player's attributes first. Badge qualifications will be
           calculated from these values.
+        </p>
          <p class="attribute-helper">
   <span class="attribute-helper-icon" aria-hidden="true">i</span>
   Attributes left unchanged will remain at the default value of 25.
 </p>
-        </p>
       </div>
 
 <div class="attribute-category-grid">
