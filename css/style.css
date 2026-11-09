@@ -416,22 +416,31 @@ select:active {
 }
 .attribute-gauge {
   position: absolute;
-  inset: 8px 3px;
-  display: flex;
-  gap: 3px;
+  /* Native thumbs are 10px wide: their centers travel between these insets. */
+  inset: 8px 5px;
   pointer-events: none;
+  background: repeating-linear-gradient(
+    110deg,
+    var(--panel-inset) 0 4%,
+    transparent 4% 5%
+  );
 }
-.attribute-gauge span {
-  flex: 1;
-  background: var(--panel-inset);
-  transform: skew(-20deg);
-  transition: background 0.12s ease-out;
+.attribute-gauge-fill {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    110deg,
+    var(--attribute-accent) 0 4%,
+    transparent 4% 5%
+  );
+  clip-path: inset(0 calc(100% - var(--fill, 0%)) 0 0);
 }
-.attribute-gauge .is-filled {
-  background: var(--attribute-accent);
-}
-.attribute-gauge .is-leading {
-  box-shadow: 0 0 8px var(--attribute-accent);
+/* General input hover/press styles must never cover the decorative gauge. */
+.attribute-slider,
+.attribute-slider:hover,
+.attribute-slider:active,
+.attribute-slider:focus-visible {
+  background: transparent;
 }
 .attribute-slider {
   position: absolute;
@@ -454,8 +463,8 @@ select:active {
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
 .attribute-slider::-moz-range-thumb {
-  width: 8px;
-  height: 18px;
+  width: 10px;
+  height: 20px;
   border: 0;
   border-radius: 0;
   background: var(--text);
@@ -505,13 +514,23 @@ button:active {
   background: var(--primary-hover);
 }
 #resetPlayerButton {
-  border-top: 5px solid var(--warn);
-  border-image: repeating-linear-gradient(
-      135deg,
-      var(--warn) 0 5px,
-      var(--panel-inset) 5px 10px
-    )
-    5;
+  position: relative;
+  border: 1px solid var(--secondary);
+  padding-top: 18px;
+}
+#resetPlayerButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--warn) 0 5px,
+    var(--panel-inset) 5px 10px
+  );
+  pointer-events: none;
 }
 button:disabled {
   opacity: 0.4;

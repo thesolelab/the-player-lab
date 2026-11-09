@@ -819,9 +819,9 @@ function initializeAttributeSliders() {
       const gauge = document.createElement("div");
       gauge.className = "attribute-gauge";
       gauge.setAttribute("aria-hidden", "true");
-      for (let index = 0; index < 20; index += 1) {
-        gauge.appendChild(document.createElement("span"));
-      }
+      const gaugeFill = document.createElement("div");
+      gaugeFill.className = "attribute-gauge-fill";
+      gauge.appendChild(gaugeFill);
       sliderWrap.appendChild(gauge);
       sliderWrap.appendChild(slider);
       field.appendChild(sliderWrap);
@@ -891,15 +891,14 @@ function updateAttributeSliderFill(slider) {
   }
 
   const value = Number(slider.value);
-  const filled = Math.round((value / 99) * 20);
+  // Use the native range's scale so the fill ends at the thumb center.
+  const progress = (value - Number(slider.min)) /
+    (Number(slider.max) - Number(slider.min));
   const field = slider.closest(".attribute-field");
   field.classList.toggle("is-high", value >= 90);
   field.classList.toggle("is-max", value === 99);
-  slider.previousElementSibling.querySelectorAll("span").forEach(
-    function (segment, index) {
-      segment.classList.toggle("is-filled", index < filled);
-      segment.classList.toggle("is-leading", index === filled - 1);
-    }
+  slider.previousElementSibling.style.setProperty(
+    "--fill", `${progress * 100}%`
   );
 }
 
