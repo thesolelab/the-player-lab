@@ -749,11 +749,21 @@ function createBadgeResultCard(badge) {
     card.appendChild(toggle);
     card.appendChild(description);
     card.classList.add("has-description");
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-expanded", "false");
+    card.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        card.click();
+      }
+    });
 
     card.addEventListener(
       "click",
       function () {
         card.classList.toggle("is-expanded");
+        card.setAttribute("aria-expanded", String(card.classList.contains("is-expanded")));
 
         toggle.textContent =
           card.classList.contains("is-expanded")
@@ -805,6 +815,14 @@ function initializeAttributeSliders() {
       slider.step = "1";
       slider.value = input.value || "25";
 
+      slider.setAttribute("aria-label", input.labels[0].textContent.trim());
+      const gauge = document.createElement("div");
+      gauge.className = "attribute-gauge";
+      gauge.setAttribute("aria-hidden", "true");
+      for (let index = 0; index < 20; index += 1) {
+        gauge.appendChild(document.createElement("span"));
+      }
+      sliderWrap.appendChild(gauge);
       sliderWrap.appendChild(slider);
       field.appendChild(sliderWrap);
 
@@ -872,21 +890,17 @@ function updateAttributeSliderFill(slider) {
     return;
   }
 
-  const min = Number(slider.min);
-  const max = Number(slider.max);
   const value = Number(slider.value);
-
-  const percentage =
-    ((value - min) / (max - min)) * 100;
-
-  slider.style.background =
-    `linear-gradient(
-      to right,
-      var(--attribute-accent) 0%,
-      var(--attribute-accent) ${percentage}%,
-      #242d3b ${percentage}%,
-      #242d3b 100%
-    )`;
+  const filled = Math.round((value / 99) * 20);
+  const field = slider.closest(".attribute-field");
+  field.classList.toggle("is-high", value >= 90);
+  field.classList.toggle("is-max", value === 99);
+  slider.previousElementSibling.querySelectorAll("span").forEach(
+    function (segment, index) {
+      segment.classList.toggle("is-filled", index < filled);
+      segment.classList.toggle("is-leading", index === filled - 1);
+    }
+  );
 }
 
 // ======================================================
